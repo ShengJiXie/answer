@@ -1,0 +1,114 @@
+page {
+  background: white;
+}
+.user_family .user_family_center {
+  padding: 20px 0;
+  width: 100%;
+}
+.user_family .user_family_center .user_family_center_item {
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 10px;
+  background: #f3f8ff;
+  height: 80px;
+}
+.user_family .user_family_center .user_family_center_item .user_family_center_item_text {
+  width: 40%;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  text-align: center;
+  font-size: 18px;
+  line-height: 70px;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+}
+.user_family .user_family_header {
+  width: 80%;
+  margin: 20px auto;
+}
+.user_family .user_family_header .van-button__icon {
+  padding-top: 2px;
+}
+.user_family .van-field__icon-root {
+  color: #1569E4 !important;
+}
+.user_family .user_family_form {
+  padding: 0 2.5%;
+  width: 95%;
+  background: white;
+}
+.user_family .user_family_form .user_family_form_text {
+  display: grid;
+  background: white !important;
+  border-radius: 1px;
+  color: #9A9A9A;
+  padding: 10px;
+}
+.user_family .user_family_form .user_family_form_text text {
+  padding-bottom: 10px;
+}
+.user_family .user_family_form .user_family_form_text .textarea {
+  padding: 10px;
+  width: 95%;
+  margin: 0 auto;
+  font-size: 13px;
+  border: 1px solid #EDEDED;
+}
+.user_family .user_family_form .user_family_form_text .textarea textarea {
+  width: 100%;
+}
+.user_family .user_family_form .user_family_form_text .textarea .textarea_footer {
+  padding: 10px 10px;
+  border-top: 1px solid #EDEDED;
+}
+.user_family .user_family_form .user_family_form_text .textarea .textarea_footer .textarea_footer_imgupload {
+  display: grid;
+  margin: 10px 20px 5px 20px;
+  float: left;
+  color: #070707;
+}
+.user_family .user_family_form .user_family_form_text .textarea .textarea_footer .textarea_footer_imgupload text {
+  padding: 1px 0;
+  text-align: center;
+}
+.user_family .user_family_button {
+  width: 80%;
+  margin: 20px auto;
+  color: white !important;
+  background: #5480FF !important;
+  border-radius: 20px !important;
+}
+.user_family .user_family_form_radio {
+  padding: 10px 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  background: white;
+  border-bottom: 1px solid #EDEDED;
+  border-radius: 5px;
+}
+.user_family .user_family_form_radio .user_family_form_radio_item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding-left: 30px;
+}
+.user_family .user_family_form_radio .user_family_form_radio_item .user_family_form_radio_item_li {
+  width: 58px;
+  height: 24px;
+  background: #F9F9F9;
+  border-radius: 1px;
+  margin: 0 5px;
+  text-align: center;
+  color: #9A9A9A;
+}
+.user_family .user_family_form_radio .user_family_form_radio_item .user_family_form_radio_item_li text {
+  font-size: 14px;
+}
+.user_family .user_family_form_radio .user_family_form_radio_item .hover {
+  background: #E7F1FF;
+  color: #006CFF;
+}
+

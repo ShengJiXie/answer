@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "家人档案",
+  "usingComponents": {
+    "van-button": "/wxcomponents/vant/dist/button/index",
+    "van-field": "/wxcomponents/vant/dist/field/index",
+    "van-uploader": "/wxcomponents/vant/dist/uploader/index",
+    "van-icon": "/wxcomponents/vant/dist/icon/index"
+  }
+}

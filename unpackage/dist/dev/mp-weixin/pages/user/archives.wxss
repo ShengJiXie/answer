@@ -1,0 +1,41 @@
+.user_archives .van-cell {
+  padding: 23px;
+}
+.user_archives .van-icon--image {
+  padding-bottom: 8px;
+  padding-right: 10px;
+}
+.user_archives .user_archives_header {
+  padding: 30px 30px 20px 20px;
+  border-bottom: 1px solid #C7C7C7;
+  background: white;
+  color: #070707;
+  font-size: 14px;
+}
+.user_archives .user_archives_header .user_archives_header_top {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 10px 0;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.user_archives .user_archives_center {
+  width: 100%;
+  margin-top: 10px;
+  background: white;
+  min-height: 480px;
+}
+.user_archives .user_archives_center .van-icon__image {
+  width: 25px;
+  height: 25px;
+  padding-right: 5px;
+}
+.user_archives .user_archives_center .van-cell {
+  padding: 10px 20px;
+}
+.user_archives .user_archives_center .van-cell__value {
+  color: red !important;
+}
+

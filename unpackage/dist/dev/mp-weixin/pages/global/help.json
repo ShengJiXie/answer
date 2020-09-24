@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "回答问题",
+  "usingComponents": {
+    "van-tab": "/wxcomponents/vant/dist/tab/index",
+    "van-tabs": "/wxcomponents/vant/dist/tabs/index"
+  }
+}

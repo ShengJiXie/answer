@@ -1,0 +1,159 @@
+.user_form {
+  width: 90%;
+  margin: 10px auto;
+}
+.user_form .user_form_main {
+  box-shadow: 33px 57px 188px 0px rgba(21, 21, 21, 0.1);
+  display: block;
+  background: white;
+  width: 90%;
+  height: 95%;
+  border-radius: 5px;
+  padding: 2.5% 5%;
+}
+.user_form .user_form_main .user_form_title {
+  border-bottom: 1px solid #dcdcdc;
+  padding: 10px;
+}
+.user_form .user_form_main .user_form_title input {
+  font-size: 16px;
+  font-weight: bold;
+}
+.user_form .user_form_main .user_form_content {
+  padding: 20px 10px;
+}
+.user_form .user_article_button {
+  width: 80%;
+  margin: 20px auto;
+  color: white !important;
+  background: #5480FF !important;
+  border-radius: 15px !important;
+}
+.user_person_Tab .van-ellipsis {
+  font-size: 18px;
+}
+.user_person_Tab .user_person_Tab_frist_button {
+  width: 95%;
+  background: white;
+  padding: 20px 2.5%;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom: 1px solid white;
+}
+.user_person_Tab .user_person_Tab_frist_button .user_person_Tab_view {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 0 20px;
+}
+.user_person_Tab .user_person_Tab_frist_button .user_person_Tab_view .user_person_Tab_frist_button_item {
+  width: 100px;
+  height: 30px;
+  margin-right: 10px;
+  text-align: center;
+  background: #ECECEC;
+  color: black;
+  border-radius: 15px;
+}
+.user_person_Tab .user_person_Tab_frist_button .user_person_Tab_view .user_person_Tab_frist_button_item text {
+  font-size: 13px;
+  display: block;
+  padding-top: 5px;
+  margin: 0 auto;
+}
+.user_person_Tab .user_person_Tab_frist_button .user_person_Tab_view .user_person_Tab_frist_button_item_hover {
+  background: #0084FF;
+  color: white;
+}
+.user_person_center .user_person_center_item {
+  width: 80%;
+  margin: 10px auto;
+  box-shadow: 0px 7px 19px 0px rgba(215, 215, 215, 0.82);
+  border-radius: 8px;
+  background: white;
+  padding: 10px 20px 20px 20px;
+  display: grid;
+}
+.user_person_center .user_person_center_item .user_person_center_item_header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.user_person_center .user_person_center_item .user_person_center_item_header .h1 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  padding: 0 5px;
+}
+.user_person_center .user_person_center_item .user_person_center_item_header .p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #999999;
+}
+.user_person_center .user_person_center_item .user_person_center_item_h1 {
+  font-size: 17px;
+  font-weight: bolder;
+  margin: 15px 0;
+  display: -webkit-box;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.user_person_center .user_person_center_item .user_person_center_item_p {
+  font-size: 14px !important;
+  color: #999999 !important;
+}
+.user_person_center .user_person_center_item .user_person_center_item_icon {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+}
+.user_person_center .user_person_center_item .user_person_center_item_footer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.user_person_center .user_person_center_item .user_person_center_item_footer .user_person_center_item_footer_p {
+  font-size: 13px;
+  padding: 7px 0;
+  color: #999999;
+}
+.user_person_center .user_person_center_item_footer_icon {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+}
+.user_person_center .user_person_center_item_footer_icon .van-button__icon {
+  margin-bottom: 3px;
+}
+.null_state {
+  position: absolute;
+  left: 50%;
+  margin-left: -80px;
+  margin-top: -82.5px;
+  top: 50%;
+  width: 160px;
+  text-align: center;
+}
+.null_state image {
+  width: 150px;
+  height: 140px;
+}
+.null_state text {
+  font-size: 14px;
+  color: #8BBBFF;
+}
+

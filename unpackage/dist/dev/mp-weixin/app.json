@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/user/login",
+    "pages/user/home",
+    "pages/user/person",
+    "pages/user/put",
+    "pages/user/article",
+    "pages/global/form",
+    "pages/global/help",
+    "pages/user/info",
+    "pages/global/login",
+    "pages/user/archives",
+    "pages/user/family",
+    "pages/user/order"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "健康问答",
+    "navigationBarBackgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3488E4",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/user/home",
+        "iconPath": "static/images/global/home.png",
+        "selectedIconPath": "static/images/global/home_hover.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/global/form",
+        "iconPath": "static/images/global/help.png",
+        "selectedIconPath": "static/images/global/help_hover.png",
+        "text": "帮助"
+      },
+      {
+        "pagePath": "pages/user/person",
+        "iconPath": "static/images/global/user.png",
+        "selectedIconPath": "static/images/global/user_hover.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

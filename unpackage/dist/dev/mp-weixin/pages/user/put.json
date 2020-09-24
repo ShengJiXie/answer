@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "预约",
+  "backgroundColor": "#F4F6F8",
+  "usingComponents": {
+    "van-field": "/wxcomponents/vant/dist/field/index",
+    "van-datetime-picker": "/wxcomponents/vant/dist/datetime-picker/index",
+    "van-popup": "/wxcomponents/vant/dist/popup/index",
+    "van-cell": "/wxcomponents/vant/dist/cell/index",
+    "van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+    "van-picker": "/wxcomponents/vant/dist/picker/index"
+  }
+}

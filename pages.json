@@ -1,0 +1,159 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/user/login",
+			"style": {
+				"navigationBarTitleText": "健康问答"
+			}
+		},
+		{
+			"path": "pages/user/home",
+			"style": {
+				"navigationBarTitleText": "问答社区",
+				"backgroundColor": "#F4F6F8"
+			}
+		},
+		{
+			"path": "pages/user/person",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"backgroundColor": "#F4F6F8",
+				"usingComponents": {
+					"van-tab": "/wxcomponents/vant/dist/tab/index",
+					"van-tabs": "/wxcomponents/vant/dist/tabs/index",
+					"van-row": "/wxcomponents/vant/dist/row/index",
+					"van-col": "/wxcomponents/vant/dist/col/index",
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index"
+				}
+			}
+		},
+		{
+			"path": "pages/user/put",
+			"style": {
+				"navigationBarTitleText": "预约",
+				"backgroundColor": "#F4F6F8",
+				"usingComponents":{
+					"van-field": "/wxcomponents/vant/dist/field/index",
+					"van-datetime-picker": "/wxcomponents/vant/dist/datetime-picker/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index",
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+					"van-picker": "/wxcomponents/vant/dist/picker/index"
+					
+				}
+				
+			
+			}
+		},
+		{
+			"path": "pages/user/article",
+			"style": {
+				"navigationBarTitleText": "",
+				"backgroundColor": "#F4F6F8"
+			}
+		}, {
+			"path": "pages/global/form",
+			"style": {
+				"navigationBarTitleText": "回答",
+				"usingComponents": {
+					"van-uploader": "/wxcomponents/vant/dist/uploader/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-divider": "/wxcomponents/vant/dist/divider/index"
+				}
+			}
+		}, {
+			"path": "pages/global/help",
+			"style": {
+				"navigationBarTitleText": "回答问题",
+				"usingComponents":{
+					"van-tab": "/wxcomponents/vant/dist/tab/index",
+					"van-tabs": "/wxcomponents/vant/dist/tabs/index"
+				}
+			}
+		}, {
+			"path": "pages/user/info",
+			"style": {
+				"navigationBarTitleText": "个人信息",
+				"usingComponents": {
+					"van-uploader": "/wxcomponents/vant/dist/uploader/index",
+					"van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index"
+				}
+			}
+		}, {
+			"path": "pages/global/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"usingComponents": {
+					"van-button": "/wxcomponents/vant/dist/button/index"
+				}
+			}
+		}, {
+			"path": "pages/user/archives",
+			"style": {
+				"navigationBarTitleText": "档案详情",
+				"usingComponents": {
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index"
+				}
+			}
+		}, {
+			"path": "pages/user/family",
+			"style": {
+				"navigationBarTitleText": "家人档案",
+				"usingComponents": {
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-field": "/wxcomponents/vant/dist/field/index",
+					"van-uploader": "/wxcomponents/vant/dist/uploader/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+
+			}
+		}, {
+			"path": "pages/user/order",
+			"style": {
+				"navigationBarTitleText": "预约列表",
+				"usingComponents": {
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
+				}
+			}
+		}
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "健康问答",
+		"navigationBarBackgroundColor": "#ffffff"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#3488E4",
+		"borderStyle": "white",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/user/home",
+				"iconPath": "static/images/global/home.png",
+				"selectedIconPath": "static/images/global/home_hover.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/global/form",
+				"iconPath": "static/images/global/help.png",
+				"selectedIconPath": "static/images/global/help_hover.png",
+				"text": "帮助"
+
+			},
+			{
+				"pagePath": "pages/user/person",
+				"iconPath": "static/images/global/user.png",
+				"selectedIconPath": "static/images/global/user_hover.png",
+				"text": "我的"
+			}
+		]
+	}
+}

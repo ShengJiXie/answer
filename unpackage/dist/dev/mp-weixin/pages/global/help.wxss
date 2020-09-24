@@ -1,0 +1,32 @@
+.user_form {
+  width: 90%;
+  margin: 10px auto;
+}
+.user_form .user_form_main {
+  box-shadow: 33px 57px 188px 0px rgba(21, 21, 21, 0.1);
+  display: block;
+  background: white;
+  width: 90%;
+  height: 95%;
+  border-radius: 5px;
+  padding: 2.5% 5%;
+}
+.user_form .user_form_main .user_form_title {
+  border-bottom: 1px solid #dcdcdc;
+  padding: 10px;
+}
+.user_form .user_form_main .user_form_title input {
+  font-size: 16px;
+  font-weight: bold;
+}
+.user_form .user_form_main .user_form_content {
+  padding: 20px 10px;
+}
+.user_form .user_article_button {
+  width: 80%;
+  margin: 20px auto;
+  color: white !important;
+  background: #5480FF !important;
+  border-radius: 15px !important;
+}
+
