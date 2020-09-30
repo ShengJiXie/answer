@@ -4,9 +4,9 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
-    "enhance": false,
+    "enhance": true,
     "postcss": true,
     "preloadBackgroundData": false,
     "minified": true,
@@ -36,8 +36,10 @@
   },
   "compileType": "miniprogram",
   "libVersion": "",
-  "appid": "wxd23cc7300c138a25",
+  "appid": "wxacb5ec94b767707b",
   "projectname": "健康问答",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
   "condition": {
     "search": {
       "current": -1,
@@ -47,28 +49,13 @@
       "current": -1,
       "list": []
     },
-    "plugin": {
-      "current": -1,
-      "list": []
-    },
     "game": {
-      "current": -1,
-      "list": []
-    },
-    "gamePlugin": {
       "current": -1,
       "list": []
     },
     "miniprogram": {
       "current": -1,
-      "list": [
-        {
-          "id": -1,
-          "name": "pages/global/help",
-          "pathName": "pages/global/help",
-          "scene": null
-        }
-      ]
+      "list": []
     }
   }
 }

@@ -6,8 +6,8 @@
 				<view class="form_text">
 					<van-cell-group>
 						<van-cell title="预约类型" :value="type" size="large" @click="typeAlert" />
-						<van-field :value="name" label="预约姓名" placeholder="请输入姓名" input-align="right" />
-						<van-field :value="phone" label="联系电话" placeholder="请输入联系电话" input-align="right" />
+						<van-field label="预约姓名" id='name' placeholder="请输入姓名" input-align="right" @change="onChanges" />
+						<van-field label="联系电话" id='phone' type='number' placeholder="请输入联系电话" @change="onChanges" input-align="right" />
 						<van-cell title="预约时间" :value="time" size="large" @click="showAlert" />
 					</van-cell-group>
 				</view>
@@ -15,7 +15,7 @@
 					<van-picker :columns="columns" default-index="2" @change="onChange" />
 				</van-popup>
 				<van-popup :show="show" position="bottom">
-					<van-datetime-picker type="datetime" title="选择年份" @cancel="showAlert" @confirm="onTure" :value="currentDate"
+					<van-datetime-picker type="datetime" title="选择预约时间" @cancel="showAlert" @confirm="onTure" :value="currentDate"
 					 :min-date="minDate " @input="onInput" :formatter="formatter" />
 				</van-popup>
 			</view>
@@ -23,10 +23,10 @@
 				<view class="form_center_header">
 					<text>预约内容:</text>
 				</view>
-				<textarea placeholder="请输入预约内容..." maxlength="200" :value="desc"></textarea>
+				<textarea placeholder="请输入预约内容..." maxlength="200" id="desc" @input="onChanges"></textarea>
 				<text style="display: block;text-align: right;font-size: 11px;color:#2C2C2C;padding: 5px 0;">200字以内</text>
 			</view>
-			<button type="default" class="user_put_button" form-type="submit">提交</button>
+			<button type="default" class="user_put_button" form-type="submit" @click="formSubmit">提交</button>
 		</view>
 	</view>
 </template>
@@ -35,16 +35,16 @@
 	export default {
 		data() {
 			return {
-				name: null,
-				phone: null,
+				name: '',
+				phone: '',
 				currentDate: new Date().getTime(),
 				minDate: new Date().getTime(),
 				time: this.happenTimeFun(new Date().getTime()), //预约时间
 				show: false,
-				desc: null,
+				desc: '',
 				typeshow: false,
-				columns: ['1', '2'],
-				type: '1',
+				columns: ['体检预约', '挂号预约'],
+				type: '体检预约',
 			}
 		},
 		methods: {
@@ -66,6 +66,18 @@
 				this.time = this.happenTimeFun(e.detail)
 
 			},
+			onChanges(event) {
+				console.log(event)
+				if (event.target.id == "name") {
+					this.name = event.detail
+				} else
+				if (event.target.id == "phone") {
+					this.phone = event.detail
+				} else
+				if (event.target.id == "desc") {
+					this.desc = event.detail.value
+				}
+			},
 			formatter(type, value) {
 				if (type === 'year') {
 					return `${value}年`;
@@ -82,32 +94,68 @@
 			},
 			happenTimeFun(num) { //时间戳处理
 				let date = new Date(num);
-
 				//时间戳为10位需*1000，时间戳为13位的话不需乘1000
-
 				let y = date.getFullYear();
-
 				let MM = date.getMonth() + 1;
-
 				MM = MM < 10 ? ('0' + MM) : MM; //月补0
-
 				let d = date.getDate();
-
 				d = d < 10 ? ('0' + d) : d; //天补0
-
 				let h = date.getHours();
-
 				h = h < 10 ? ('0' + h) : h; //小时补0
-
 				let m = date.getMinutes();
-
 				m = m < 10 ? ('0' + m) : m; //分钟补0
-
-
-
 				return y + '-' + MM + '-' + d + ' ' + h + ':' + m;
 
 			},
+			// 表单提交
+			formSubmit() {
+				if (this.name && this.phone && this.desc) {
+					uni.showLoading({
+						title: '正在拼命预约'
+					})
+					this.$api.ApiPost({
+						type: 21,
+						date: {
+							member_id: this.$store.state.member_id,
+							sub_type: this.type == "体检预约" ? 0 : 1,
+							name: this.name,
+							tel: this.phone,
+							sub_time: this.time,
+							sub_text: this.desc
+						}
+					}).then(res => {
+						if (res.code == 0) {
+							uni.showToast({
+								title: res.msg,
+								duration: 2000
+							})
+							// 再次获取预约列表
+							this.$api.ApiPost({
+								type: 20,
+								date: {
+									member_id: this.$store.state.member_id
+								}
+							})
+							setTimeout(() => {
+								uni.navigateTo({
+									url: '/pages/user/order'
+								})
+							}, 2000)
+						} else {
+							uni.showToast({
+								title: res.msg,
+								duration: 2000
+							})
+						}
+					})
+				} else {
+					uni.showToast({
+						title: '请填写完整!',
+						icon: 'none',
+						desc: 3000
+					})
+				}
+			}
 		}
 	}
 </script>

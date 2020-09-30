@@ -24,7 +24,7 @@
 }
 .user_login_button {
 	width: 90%;
-	margin-top: 50px;
+	margin-top: 30px;
 	background: #547FFF !important;
 	color: white !important;
 }
@@ -35,18 +35,18 @@
 	position: relative;
 	top: 3px;
 }
-.user_login_footer{
+.user_login_footer {
 	position: absolute;
 	bottom: 20px;
 	width: 100%;
 	text-align: center;
 	left: 0;
 }
-.user_login_footer text{
+.user_login_footer text {
 	color: #B8C4CE;
 	font-size: 12px;
 }
-.user_login_footer .user_login_footer_span{
+.user_login_footer .user_login_footer_span {
 	color: black;
 }
 

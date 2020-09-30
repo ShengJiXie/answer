@@ -3,11 +3,10 @@
 	export default {
 
 		onLoad: function() {
-
+			
 		},
 		onShow: function() {
-			console.log(1)
-
+		
 		}
 
 

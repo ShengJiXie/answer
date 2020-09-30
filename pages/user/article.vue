@@ -1,34 +1,28 @@
 <template>
-	<view class="user_article">
+	<view class="user_article" v-if="state">
 		<view class="user_article_h1_main">
 
 			<text class="user_article_h1">
-				如何看待宠物狗跑下楼被保安当无证犬 虐杀？
+				{{arr.newsInfo.news_title}}
 			</text>
 		</view>
 		<!-- 发布人 -->
 		<view class="user_article_avatar">
-			<view class="user_article_avatar_img">
-				<image src="../../static/images/user/avater.png"></image>
-			</view>
 			<view class="user_article_avatar_center">
-				<text class="user_article_avatar_center_h1">不知名网友</text>
-				<text class="user_article_avatar_center_p">阅读13.1万</text>
+				<text class="user_article_avatar_center_p">阅读{{arr.newsInfo.views}}万</text>
 			</view>
 
 			<view class="user_article_avatar_right">
-				<image src="../../static/images/user/start.png"></image>
+				<image @click="statrClick" :src="arr.isCollect===0?'../../static/images/user/start.png':'../../static/images/user/start_hover.png'"></image>
 			</view>
 		</view>
 		<!-- 内容 -->
 		<view class="user_article_center">
-			<text>
-				先上观点: 养犬人为他的不负责任付出了代价。 保安做的不合法，需要依法赔偿，并交纳罚款。
-			</text>
+			<rich-text :nodes="arr.newsInfo.news_content"></rich-text>
 		</view>
 		<!-- 底部 -->
 		<view class="user_article_footer">
-			<text>编辑于09-09</text>
+			<text>编辑于{{arr.newsInfo.create_at}}</text>
 		</view>
 	</view>
 </template>
@@ -37,11 +31,59 @@
 	export default {
 		data() {
 			return {
-
+				arr: [],
+				state: false,
+				textId: 0
 			};
 		},
+		onShow() {
+			uni.showLoading({
+				title: '加载中...'
+			})
+		},
+		methods: {
+			async init(option) {
+				let _this = this
+				await this.$api.ApiPost({
+					type: 12,
+					date: {
+						news_id: option.id,
+						member_id: _this.$store.state.member_id //临时用户id
+					}
+				});
+				this.arr = uni.getStorageSync('HomeContent').data;
+
+				this.state = true
+
+			},
+			// 收藏事件
+			statrClick() {
+				let _this = this
+				this.$api.ApiPost({
+					type: 13,
+					date: {
+						news_id: _this.textId,
+						member_id: _this.$store.state.member_id
+					}
+				}).then(res => {
+					console.log(res)
+					_this.arr.isCollect = Number(res.data)
+					uni.setStorageSync('HomeContent', {
+						data: _this.arr
+					});
+					if (res.data === 1) {
+						uni.showToast({
+							title: '收藏成功',
+							icon: 'success',
+							duration: 2000
+						})
+					}
+				})
+			}
+		},
 		onLoad(option) {
-			console.log(option)
+			this.textId = option.id
+			this.init(option)
 		}
 	}
 </script>
@@ -78,27 +120,16 @@
 		.user_article_avatar {
 			display: flex;
 
-			.user_article_avatar_img {
-				width: 15%;
 
-				image {
-					width: 40px;
-					height: 40px;
-					border-radius: 50%;
-				}
-			}
 
 			.user_article_avatar_center {
-				width: 75%;
+				width: 90%;
 				display: grid;
-
-				.user_article_avatar_center_h1 {
-					font-weight: 600;
-				}
 
 				.user_article_avatar_center_p {
 					color: #6B6969;
-					font-size: 12px;
+					font-size: 15px;
+					line-height: 45px;
 				}
 			}
 

@@ -26,24 +26,14 @@ page {
   display: -webkit-flex;
   display: flex;
 }
-.user_article .user_article_avatar .user_article_avatar_img {
-  width: 15%;
-}
-.user_article .user_article_avatar .user_article_avatar_img image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
 .user_article .user_article_avatar .user_article_avatar_center {
-  width: 75%;
+  width: 90%;
   display: grid;
-}
-.user_article .user_article_avatar .user_article_avatar_center .user_article_avatar_center_h1 {
-  font-weight: 600;
 }
 .user_article .user_article_avatar .user_article_avatar_center .user_article_avatar_center_p {
   color: #6B6969;
-  font-size: 12px;
+  font-size: 15px;
+  line-height: 45px;
 }
 .user_article .user_article_avatar .user_article_avatar_right {
   width: 10%;

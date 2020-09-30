@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/user/login",
     "pages/user/home",
+    "pages/user/login",
     "pages/user/person",
     "pages/user/put",
     "pages/user/article",
@@ -11,7 +11,8 @@
     "pages/global/login",
     "pages/user/archives",
     "pages/user/family",
-    "pages/user/order"
+    "pages/user/order",
+    "pages/user/helpArticle"
   ],
   "subPackages": [],
   "window": {
@@ -45,5 +46,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap17.json"
 }

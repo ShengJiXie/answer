@@ -3,7 +3,7 @@
   padding: 10px 0;
 }
 .user_home_header swiper {
-  height: 200px;
+  height: 170px;
 }
 .user_home_header swiper image {
   width: 100%;
@@ -21,7 +21,7 @@
 }
 .user_home_noticeMain .user_home_notice image {
   width: 50px;
-  height: 35px;
+  height: 30px;
   padding-right: 10px;
 }
 .user_home_noticeMain .user_home_notice swiper {
@@ -38,7 +38,7 @@
 }
 .user_home_noticeMain .user_home_notice swiper .user_home_notice_swiper .user_home_notice_item ._li {
   list-style: inherit;
-  max-width: 180px;
+  max-width: 280px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -63,7 +63,8 @@
   margin-top: 3px;
   height: 9px;
   background: red;
-  border-radius: 20px;
+  -webkit-border-radius: 20px;
+          border-radius: 20px;
 }
 .user_home_noticeMain .user_home_notice .user_home_notice_icon image {
   width: 20px;
@@ -79,8 +80,8 @@
 .user_home_classification .user_home_classification_item {
   width: 20%;
   height: 40px;
-  font-size: 13px;
-  padding: 2px 5px;
+  font-size: 12px;
+  padding: 0px 5px;
   text-align: center;
 }
 .user_home_classification .user_home_classification_item_hover {
@@ -130,24 +131,28 @@
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  padding: 20px 10px;
-  border-radius: 10px;
+  padding: 10px;
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
+  padding-left: 15px;
   background: white;
 }
 .user_home_content .user_home_content_main .user_home_content_main_item .user_home_content_main_item_img {
   width: 20%;
 }
 .user_home_content .user_home_content_main .user_home_content_main_item .user_home_content_main_item_img image {
-  width: 60px;
-  height: 60px;
+  width: 85px;
+  height: 75px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
 }
 .user_home_content .user_home_content_main .user_home_content_main_item .user_home_content_main_item_text {
-  width: 60%;
-  padding-left: 10%;
+  width: 50%;
+  padding-left: 20%;
 }
 .user_home_content .user_home_content_main .user_home_content_main_item .user_home_content_main_item_text .user_home_content_main_item_text_one {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 13px;
   display: -webkit-box;
   margin-top: -25px;
   width: 100%;
@@ -159,11 +164,11 @@
   -webkit-box-orient: vertical;
 }
 .user_home_content .user_home_content_main .user_home_content_main_item .user_home_content_main_item_text .user_home_content_main_item_text_footer {
-  padding: 10px 0;
+  padding-top: 5px;
 }
 .user_home_content .user_home_content_main .user_home_content_main_item .user_home_content_main_item_text .user_home_content_main_item_text_footer text {
   padding-right: 20px;
-  font-size: 12px !important;
+  font-size: 11px !important;
   font-weight: 100 !important;
   color: #999999;
 }
@@ -178,6 +183,7 @@
   width: 15px;
   height: 15px;
   padding: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
 }
 

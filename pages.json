@@ -1,16 +1,16 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/user/login",
-			"style": {
-				"navigationBarTitleText": "健康问答"
-			}
-		},
-		{
 			"path": "pages/user/home",
 			"style": {
 				"navigationBarTitleText": "问答社区",
 				"backgroundColor": "#F4F6F8"
+			}
+		},
+		{
+			"path": "pages/user/login",
+			"style": {
+				"navigationBarTitleText": "登录"
 			}
 		},
 		{
@@ -35,17 +35,17 @@
 			"style": {
 				"navigationBarTitleText": "预约",
 				"backgroundColor": "#F4F6F8",
-				"usingComponents":{
+				"usingComponents": {
 					"van-field": "/wxcomponents/vant/dist/field/index",
 					"van-datetime-picker": "/wxcomponents/vant/dist/datetime-picker/index",
 					"van-popup": "/wxcomponents/vant/dist/popup/index",
 					"van-cell": "/wxcomponents/vant/dist/cell/index",
 					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
 					"van-picker": "/wxcomponents/vant/dist/picker/index"
-					
+
 				}
-				
-			
+
+
 			}
 		},
 		{
@@ -59,16 +59,26 @@
 			"style": {
 				"navigationBarTitleText": "回答",
 				"usingComponents": {
+					"van-tab": "/wxcomponents/vant/dist/tab/index",
+					"van-tabs": "/wxcomponents/vant/dist/tabs/index",
+					"van-row": "/wxcomponents/vant/dist/row/index",
+					"van-col": "/wxcomponents/vant/dist/col/index",
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index",
 					"van-uploader": "/wxcomponents/vant/dist/uploader/index",
 					"van-icon": "/wxcomponents/vant/dist/icon/index",
-					"van-divider": "/wxcomponents/vant/dist/divider/index"
+					"van-divider": "/wxcomponents/vant/dist/divider/index",
+					"van-tag": "/wxcomponents/vant/dist/tag/index"
+					
 				}
 			}
 		}, {
 			"path": "pages/global/help",
 			"style": {
 				"navigationBarTitleText": "回答问题",
-				"usingComponents":{
+				"usingComponents": {
 					"van-tab": "/wxcomponents/vant/dist/tab/index",
 					"van-tabs": "/wxcomponents/vant/dist/tabs/index"
 				}
@@ -98,7 +108,11 @@
 				"navigationBarTitleText": "档案详情",
 				"usingComponents": {
 					"van-cell": "/wxcomponents/vant/dist/cell/index",
-					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index"
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+					"van-collapse": "/wxcomponents/vant/dist/collapse/index",
+					"van-collapse-item": "/wxcomponents/vant/dist/collapse-item/index",
+					"van-field": "/wxcomponents/vant/dist/field/index"
+
 				}
 			}
 		}, {
@@ -124,6 +138,14 @@
 				}
 			}
 		}
+	    ,{
+            "path" : "pages/user/helpArticle",
+            "style" : {
+				"usingComponents":{
+					"van-divider": "/wxcomponents/vant/dist/divider/index"
+				}
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

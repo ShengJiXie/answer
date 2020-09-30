@@ -1,5 +1,8 @@
 .user_archives .van-cell {
-  padding: 23px;
+  padding: 10px 20px;
+}
+.user_archives .openAlert {
+  width: 100%;
 }
 .user_archives .van-icon--image {
   padding-bottom: 8px;

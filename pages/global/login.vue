@@ -14,10 +14,10 @@
 				</view>
 				<view class="form_center">
 					<view class="form_center_item">
-						<input type="text" value="" placeholder="输入账号" />
+						<input type="text" v-model="username" placeholder="输入账号" />
 					</view>
 					<view class="form_center_item" style="display: flex;">
-						<input :type="passwordType?'password':'text'" value="" placeholder="输入密码" style="width: 90%;" />
+						<input :type="passwordType?'password':'text'" v-model="password" placeholder="输入密码" style="width: 90%;" />
 						<view style="width:10%;padding-top: 20px;">
 							<image :src="passwordType?'../../static/images/global/close.png':'../../static/images/user/look_true.png'"
 							 @click="typeClick" style="width: 25px;height: 15px;"></image>
@@ -25,7 +25,7 @@
 					</view>
 				</view>
 				<view class="form_footer">
-					<van-button type='primary' size="large" block color="#547FFF" custom-style="color:#FFFFFF;width:80%;margin:50px auto;border-radius:30px">确定</van-button>
+					<van-button type='primary' size="large" block color="#547FFF" @click='formSubmit' custom-style="color:#FFFFFF;width:80%;margin:50px auto;border-radius:30px">确定</van-button>
 				</view>
 			</form>
 		</view>
@@ -38,12 +38,57 @@
 	export default {
 		data() {
 			return {
+				username: null,
+				password: null,
 				passwordType: true
 			};
 		},
 		methods: {
 			typeClick() {
 				this.passwordType ? this.passwordType = false : this.passwordType = true
+			},
+			formSubmit() {
+				this.$api.ApiPost({
+					type: 62,
+					date: {
+						username: this.username,
+						password: this.password
+					}
+				}).then(res => {
+					console.log(res)
+					uni.showToast({
+						title: res.msg,
+						duration: 3000
+					})
+					if (res.code === 0) {
+						uni.setStorageSync('PersonInfo', res);
+						// 获取未回答问题
+						this.$api.ApiPost({
+							type: 22,
+							date: {
+								member_id: this.$store.state.member_id,
+								question_status: 0,
+								role: this.$store.state.type,
+								page: 1
+							}
+						})
+						// 获取未回答问题
+						this.$api.ApiPost({
+							type: 22,
+							date: {
+								member_id: this.$store.state.member_id,
+								question_status: 1,
+								role: this.$store.state.type,
+								page: 1
+							}
+						})
+						setTimeout(() => {
+							uni.switchTab({
+								url: '/pages/user/person',
+							})
+						}, 2000)
+					}
+				})
 			}
 		},
 		onLoad(obj) {
@@ -62,8 +107,9 @@
 			height: 100%;
 			background: url('https://www.kuadh.com/frist3.png') no-repeat;
 			background-size: 150% 20%;
-			background-position-y:105%;
+			background-position-y: 105%;
 			background-position-x: 3%;
+
 			.global_login_main {
 				width: 100%;
 				position: relative;
@@ -90,7 +136,7 @@
 					background-size: 100% 100%;
 				}
 
-				
+
 
 				.form {
 					display: block;
@@ -136,6 +182,6 @@
 				}
 			}
 		}
-		
+
 	}
 </style>

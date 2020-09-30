@@ -4,14 +4,8 @@
 		<view class="user_home_header">
 			<swiper class="swiper" :indicator-dots="indicatorDots" indicator-color="#ADB7D0" indicator-active-color="#3C74FD"
 			 :autoplay="autoplay" :interval="interval" :duration="duration">
-				<swiper-item>
-					<image src="../../static/images/user/user_home_banner.png"></image>
-				</swiper-item>
-				<swiper-item>
-					<image src="../../static/images/user/user_home_banner.png"></image>
-				</swiper-item>
-				<swiper-item>
-					<image src="../../static/images/user/user_home_banner.png"></image>
+				<swiper-item v-for="item in bannerList" :key="item[0]">
+					<image :src="item.banner_url"></image>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -19,36 +13,14 @@
 		<!-- 公告 -->
 		<view class="user_home_noticeMain">
 			<view class="user_home_notice">
-				<image src="../../static/images/user/组%203(3).png" mode=""></image>
+				<image src="../../static/images/user/notices.png" mode=""></image>
 				<swiper class="swiper" indicator-color="#ADB7D0" indicator-active-color="#3C74FD" :autoplay="autoplay" :interval="interval"
 				 vertical="true" :duration="duration">
 					<swiper-item>
-						<view class="user_home_notice_swiper">
+						<view class="user_home_notice_swiper" v-for="item in noticeList" :key="item[0]">
 							<view class="user_home_notice_item">
-								<li>2020年失业了怎么办？ ...</li>
-								<text>11小时前</text>
-							</view>
-							<view class="user_home_notice_item">
-								<li>2020年失业了怎么办？ ...</li>
-								<text>11小时前</text>
-							</view>
-
-
-						</view>
-					</swiper-item>
-					<swiper-item>
-						<view class="user_home_notice_swiper">
-							<view class="user_home_notice_item">
-								<li>2020年失业了怎么办？...</li>
-								<text>11小时前</text>
-							</view>
-						</view>
-					</swiper-item>
-					<swiper-item>
-						<view class="user_home_notice_swiper">
-							<view class="user_home_notice_item">
-								<li>2020年失业了怎么办？...</li>
-								<text>11小时前</text>
+								<li @click="$store.commit('GlobalUrl','/pages/user/article?id='+item.news_id)">{{item.news_title}}</li>
+								<!-- <text>11小时前</text> -->
 							</view>
 						</view>
 					</swiper-item>
@@ -62,9 +34,9 @@
 		<!-- 公告结束 -->
 		<!-- 分类栏 -->
 		<view class="user_home_classification">
-			<view v-for="(item,key) in  tab" :key="item[0]" :class="key==index?'user_home_classification_item user_home_classification_item_hover':'user_home_classification_item'"
+			<view v-for="(item,key) in  tab" :key="item[0]" :class="key===index?'user_home_classification_item user_home_classification_item_hover':'user_home_classification_item'"
 			 @click="home_Tabclick(key)">
-				<text>{{item}}</text>
+				<text>{{item.news_type}}</text>
 			</view>
 		</view>
 		<!-- 分类栏结束 -->
@@ -75,15 +47,15 @@
 				<text class="user_home_content_header_right">更多 ></text>
 			</view>
 			<view class="user_home_content_main">
-				<view class="user_home_content_main_item" v-for="(item,key) in 10" @click="href(key)">
+				<view class="user_home_content_main_item" v-for="(item,key) in textList" @click="href(key)">
 					<view class="user_home_content_main_item_img">
-						<image src="../../static/images/user/图层%206.png" mode=""></image>
+						<image :src="item.pic_url" mode=""></image>
 					</view>
 					<view class="user_home_content_main_item_text">
-						<text class="user_home_content_main_item_text_one">开学后如何才能寻思脱单？开学后如何才能寻思脱单</text>
+						<text class="user_home_content_main_item_text_one">{{item.news_title}}</text>
 						<view class="user_home_content_main_item_text_footer">
-							<text>浏览 17.9w</text>
-							<text>回答 563</text>
+							<text>浏览 {{item.views}}w</text>
+							<text> {{item.create_at}}</text>
 						</view>
 					</view>
 					<view class="user_home_content_main_item_right">
@@ -108,25 +80,66 @@
 				duration: 500,
 				// 走马灯配置结束
 				index: 0, //导航栏索引
-				tab: ['全站', '科学', '数码', '体育', '时尚'],
+				tab: [],
+				bannerList: [], //幻灯片数组
+				noticeList: [], //公告数组
+				textList: [], //文章数组
+				datsd: []
 			}
 		},
 		methods: {
 			home_Tabclick(key) { //导航栏切换
-				this.index = key
+				this.$scope.setData({
+					index: key
+				})
+
+				// 首页分类切换查询
+				this.$api.ApiPost({
+					type: 11,
+					date: {
+						news_type: uni.getStorageSync('HomeType').data[key].id,
+						page: 1
+					}
+				}).then(res => {
+					this.$scope.setData({
+						textList: uni.getStorageSync('HomeText').data.data
+					})
+				})
 			},
 			href(key) {
 				uni.navigateTo({
-					url: 'article?id=' + key
+					url: 'article?id=' + this.$scope.data.textList[key].news_id
+				})
+			},
+
+			async init() {
+				// 加载全局数据
+				uni.showLoading({
+					title: "加载数据中..."
+				})
+				// 公共首页函数
+				let obj = await this.$api.ApiPost({
+					type: 10
+				})
+				// 默认执行一次分类文章选择
+				let typeobj = await this.$api.ApiPost({
+					type: 11,
+					date: {
+						news_type: obj,
+						page: 1
+					}
+				})
+				// 公共首页函数
+				await this.$scope.setData({
+					bannerList: uni.getStorageSync('HomeBanner').data,
+					noticeList: uni.getStorageSync('HomeNotice').data,
+					tab: uni.getStorageSync('HomeType').data,
+					textList: uni.getStorageSync('HomeText').data.data
 				})
 			}
 		},
 		mounted() {
-			this.$request('/api/getBannerInfoByType', {
-				type: 0
-			}).then(respone=>{
-				console.log(respone)
-			})
+			this.init();
 		}
 	}
 </script>
@@ -137,7 +150,7 @@
 		padding: 10px 0;
 
 		swiper {
-			height: 200px;
+			height: 170px;
 
 			image {
 				width: 100%;
@@ -156,7 +169,7 @@
 
 			image {
 				width: 50px;
-				height: 35px;
+				height: 30px;
 				padding-right: 10px;
 			}
 
@@ -174,7 +187,7 @@
 
 						li {
 							list-style: inherit;
-							max-width: 180px;
+							max-width: 280px;
 							text-overflow: ellipsis;
 							overflow: hidden;
 							white-space: nowrap;
@@ -224,8 +237,8 @@
 		.user_home_classification_item {
 			width: 20%;
 			height: 40px;
-			font-size: 13px;
-			padding: 2px 5px;
+			font-size: 12px;
+			padding: 0px 5px;
 			text-align: center;
 		}
 
@@ -277,26 +290,28 @@
 				margin: 10px auto;
 				margin-right: 7%;
 				display: flex;
-				padding: 20px 10px;
+				padding: 10px;
 				border-radius: 10px;
+				padding-left: 15px;
 				background: white;
 
 				.user_home_content_main_item_img {
 					width: 20%;
 
 					image {
-						width: 60px;
-						height: 60px;
+						width: 85px;
+						height: 75px;
+						border-radius: 5px;
 					}
 				}
 
 				.user_home_content_main_item_text {
-					width: 60%;
-					padding-left: 10%;
+					width: 50%;
+					padding-left: 20%;
 
 					.user_home_content_main_item_text_one {
 						font-weight: bold;
-						font-size: 14px;
+						font-size: 13px;
 						display: -webkit-box;
 						margin-top: -25px;
 						width: 100%;
@@ -309,11 +324,11 @@
 					}
 
 					.user_home_content_main_item_text_footer {
-						padding: 10px 0;
+						padding-top: 5px;
 
 						text {
 							padding-right: 20px;
-							font-size: 12px !important;
+							font-size: 11px !important;
 							font-weight: 100 !important;
 							color: #999999;
 						}
