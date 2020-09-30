@@ -114,6 +114,9 @@
 .user_person_Tab .van-ellipsis {
   font-size: 18px;
 }
+.user_person_Tab .user_person_center_main {
+  min-height: 480px;
+}
 .user_person_Tab .user_person_Tab_frist_button {
   width: 95%;
   background: white;

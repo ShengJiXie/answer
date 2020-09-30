@@ -52,7 +52,7 @@
 							</view>
 						</view>
 						<!-- 文章列表 -->
-						<view v-if="person_store.type===2||person_store.type===1">
+						<view class="user_person_center_main" v-if="person_store.type===2||person_store.type===1">
 							<view class="user_person_center" v-for="(item,key) in list" :key='item[0]'>
 								<view class="user_person_center_item">
 									<view class="user_person_center_item_header">
@@ -87,18 +87,19 @@
 									<text class="user_person_center_item_p">{{item.create_at}}</text>
 								</view>
 							</view>
-							<view class="null_state" v-if="list.length==0">
-								<image src="../../static/images/global/null.png"></image>
-								<text>目前还没有任何问题...</text>
-							</view>
+						</view>
+						<view class="null_state" v-if="list.length==0">
+							<image src="../../static/images/global/null.png"></image>
+							<text>目前还没有任何问题...</text>
 						</view>
 						<!-- 文章列表结束 -->
+
 					</van-tab>
-			
+
 					<van-tab :title=" person_store.type===2?'已回答('+lists.length+')':'收藏夹'">
 						<view class="user_person_Tab_frist_button"></view>
 						<!-- 文章列表 -->
-			
+
 						<view v-if="person_store.type===2">
 							<view class="user_person_center" v-for="(item,key) in lists" :key='item[0]'>
 								<view class="user_person_center_item">
@@ -125,10 +126,10 @@
 									<text class="user_person_center_item_p">2020年9月9日</text>
 								</view>
 							</view>
-							<view class="null_state" v-if="lists.length==0">
-								<image src="../../static/images/global/null.png"></image>
-								<text>目前还没有任何问题...</text>
-							</view>
+						</view>
+						<view class="null_state" v-if="lists.length==0">
+							<image src="../../static/images/global/null.png"></image>
+							<text>目前还没有任何问题...</text>
 						</view>
 						<!-- 文章列表结束 -->
 					</van-tab>
@@ -222,7 +223,7 @@
 					this.api()
 				})
 			},
-			api(){
+			api() {
 				// 获取未回答问题
 				this.$api.ApiPost({
 					type: 22,
@@ -383,104 +384,110 @@
 			border-radius: 15px !important;
 		}
 	}
+
 	// 转接专家窗口
-		.user_person_zj {
-			width: 95%;
-			margin: 10px auto;
-			background: url(../../static/images/user/upimg.png) no-repeat;
-			background-position-x: -10px;
-			background-size: 100% 100%;
-			height: 200px;
+	.user_person_zj {
+		width: 95%;
+		margin: 10px auto;
+		background: url(../../static/images/user/upimg.png) no-repeat;
+		background-position-x: -10px;
+		background-size: 100% 100%;
+		height: 200px;
 
-			.user_person_zj_header {
-				display: block;
+		.user_person_zj_header {
+			display: block;
 
-				text {
-					font-size: 11px;
-					color: white;
-					position: relative;
-					left: 15px;
-					top: 7px;
-				}
-
-				height: 40px;
+			text {
+				font-size: 11px;
+				color: white;
+				position: relative;
+				left: 15px;
+				top: 7px;
 			}
 
-			.user_person_zj_center {
-				width: 90%;
-				padding-left: 30px;
-				margin: 0 auto;
-				display: flex;
+			height: 40px;
+		}
 
-				.img {
-					width: 15%;
+		.user_person_zj_center {
+			width: 90%;
+			padding-left: 30px;
+			margin: 0 auto;
+			display: flex;
 
-					image {
-						border-radius: 50%;
-						width: 50px;
-						height: 50px;
-					}
+			.img {
+				width: 15%;
+
+				image {
+					border-radius: 50%;
+					width: 50px;
+					height: 50px;
 				}
+			}
 
-				.text {
-					width: 85%;
-					padding-left: 5px;
-					text-align: left;
+			.text {
+				width: 85%;
+				padding-left: 5px;
+				text-align: left;
 
-					.text_header {
-						color: #333333;
+				.text_header {
+					color: #333333;
 
-						.h1 {
-							font-size: 19px;
-							letter-spacing: 2px;
-							display: block;
-						}
-
-						.p {
-							display: block;
-							font-size: 14px;
-							padding: 5px 5px 0 5px;
-						}
+					.h1 {
+						font-size: 19px;
+						letter-spacing: 2px;
+						display: block;
 					}
 
 					.p {
+						display: block;
 						font-size: 14px;
-						padding: 5px 5px;
+						padding: 5px 5px 0 5px;
 					}
 				}
 
+				.p {
+					font-size: 14px;
+					padding: 5px 5px;
+				}
 			}
 
-			.user_person_zj_center_footer {
-				font-size: 11px;
-				padding: 10px 0;
-				text-align: center;
+		}
+
+		.user_person_zj_center_footer {
+			font-size: 11px;
+			padding: 10px 0;
+			text-align: center;
+
+			text {
+				color: #999999;
+				padding-right: 5px;
 
 				text {
-					color: #999999;
-					padding-right: 5px;
-
-					text {
-						color: #FF5F0F;
-					}
-				}
-			}
-
-			.user_person_zj_footer {
-				position: relative;
-
-				.user_person_zj_footer_main {
-					width: 100px;
-					position: absolute;
-					top: 10px;
-					right: 40px;
+					color: #FF5F0F;
 				}
 			}
 		}
+
+		.user_person_zj_footer {
+			position: relative;
+
+			.user_person_zj_footer_main {
+				width: 100px;
+				position: absolute;
+				top: 10px;
+				right: 40px;
+			}
+		}
+	}
+
 	// tab 标签页
 	.user_person_Tab {
 		.van-ellipsis {
 			font-size: 18px;
+		}
+
+		.user_person_center_main {
+			min-height: 480px;
 		}
 
 		.user_person_Tab_frist_button {

@@ -48,7 +48,6 @@
 						<textarea id="medical_history" @input="onChanges" placeholder="请填写病史描述:"></textarea>
 						<view class="textarea_footer">
 							<view @click="upload">
-
 								<view class="textarea_footer_imgupload">
 									<van-icon name="photo-o" color="#1569E4" size="30px" />
 									<text>图片</text>
@@ -109,6 +108,10 @@
 								_this.fileList.push(data.url)
 								_this.$scope.setData({
 									fileList:_this.fileList
+								})
+								uni.showToast({
+									title:'上传成功',
+									duration:3000
 								})
 							}
 						})

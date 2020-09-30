@@ -30,7 +30,7 @@
 			<!-- 发布人 -->
 			<view class="user_helpArticle_avatar">
 				<image :src="item.avatar"></image>
-				<text style="color: #808080;">{{iten.name}}</text>
+				<text style="color: #808080;">{{item.name}}</text>
 			</view>
 			<!-- 内容 -->
 			<view class="user_helpArticle_center">

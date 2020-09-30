@@ -477,13 +477,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 var _default =
 {
   data: function data() {
@@ -599,7 +592,7 @@ var _default =
         this.$api.ApiPost({
           type: 24,
           date: {
-            member_id: 1 //临时数据
+            member_id: this.$store.state.member_id //临时数据
           } });
 
       }

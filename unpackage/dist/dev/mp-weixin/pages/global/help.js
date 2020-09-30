@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -153,11 +153,13 @@ var _default =
 {
   data: function data() {
     return {
-      fileList: [],
       store: this.$store.state,
       active: 0,
+      textarea: null,
       type: 0,
       arr: [],
+      id: null,
+      picture: [],
       person_store: this.$store.state };
 
   },
@@ -165,12 +167,70 @@ var _default =
     bindTextAreaBlur: function bindTextAreaBlur(e) {
       console.log(e.detail.value);
     },
-    submitform: function submitform() {
+    imgdelet: function imgdelet(e) {
+      this.picture.splice(e.detail.index, 1);
+    },
+    afterRead: function afterRead(e) {var _this = this;
+      this.$api.ApiPost({
+        type: 666,
+        date: {
+          file: e.target.file.path } }).
 
+      then(function (res) {
+        console.log(res);
+        var data = JSON.parse(res[1].data);
+        if (data.code === 0) {
+          uni.showToast({
+            title: data.msg,
+            duration: 3000 });
+
+        }
+        _this.picture.push({
+          url: data.url,
+          deletable: true });
+
+      });
+    },
+    submitform: function submitform() {
+      if (this.textarea != "" && this.textarea != null) {
+        var arr = [];
+        this.picture.forEach(function (element) {
+          arr.push(element.url);
+        });
+        console.log(arr);
+        this.$api.ApiPost({
+          type: 207,
+          date: {
+            expertId: this.$store.state.member_id,
+            questionId: this.id,
+            answer: this.textarea,
+            picture: arr } }).
+
+        then(function (res) {
+          uni.showToast({
+            title: res.msg,
+            duration: 3000,
+            icon: 'none' });
+
+          if (res.code === 0) {
+            uni.switchTab({
+              url: '/pages/user/person' });
+
+          }
+        });
+      } else {
+        uni.showToast({
+          title: '请填写内容',
+          icon: 'none',
+          duration: 3000 });
+
+      }
     } },
+
   onLoad: function onLoad(v) {
-    console.log(v);
+    this.id = v.id;
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

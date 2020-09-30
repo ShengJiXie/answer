@@ -150,10 +150,10 @@
 									<text class="user_person_center_item_p">{{item.create_at}}</text>
 								</view>
 							</view>
-							<view class="null_state" v-if="list.length==0">
-								<image src="../../static/images/global/null.png"></image>
-								<text>目前还没有任何问题...</text>
-							</view>
+						</view>
+						<view class="null_state" v-if="list.length==0">
+							<image src="../../static/images/global/null.png"></image>
+							<text>目前还没有任何问题...</text>
 						</view>
 						<!-- 文章列表结束 -->
 					</van-tab>
@@ -181,17 +181,9 @@
 								</view>
 							</view>
 						</view>
-						<view v-else>
-							<view class="user_person_center" v-for="item in lists" :key='item[0]'>
-								<view class="user_person_center_item">
-									<text class="user_person_center_item_h1">开学后如何才能迅速脱单开学后如何才能迅速脱单？</text>
-									<text class="user_person_center_item_p">2020年9月9日</text>
-								</view>
-							</view>
-							<view class="null_state" v-if="lists.length==0">
-								<image src="../../static/images/global/null.png"></image>
-								<text>目前还没有任何问题...</text>
-							</view>
+						<view class="null_state" v-if="lists.length==0">
+							<image src="../../static/images/global/null.png"></image>
+							<text>目前还没有任何问题...</text>
 						</view>
 						<!-- 文章列表结束 -->
 					</van-tab>
@@ -210,7 +202,7 @@
 			<!-- 部分文章 -->
 			<view class="user_person_center" v-for="(item,key) in list" :key='item[0]'>
 				<view class="user_person_center_item" v-if="key===0">
-					<text class="user_person_center_item_h1" >
+					<text class="user_person_center_item_h1">
 						{{item.title}}</text>
 					<view class="user_person_center_item_footer">
 						<text class="user_person_center_item_footer_p">{{item.question_status==1?'待解答':item.question_status==0?'待分配专家':item.question_status==2?'已解答':''}}</text>
@@ -225,8 +217,9 @@
 							</van-button>
 						</view>
 						<view class="user_person_center_item_footer_icon" v-else>
-							<van-button size="small" color="#F7F7F7" @click="$store.commit('GlobalUrl','/pages/user/helpArticle?id='+item.id)" custom-style="color:#979797;border-radius: 8px;letter-spacing: 2px;font-size:14px;"
-							 icon="../../../../static/images/user/look_true.png" type="info">
+							<van-button size="small" color="#F7F7F7" @click="$store.commit('GlobalUrl','/pages/user/helpArticle?id='+item.id)"
+							 custom-style="color:#979797;border-radius: 8px;letter-spacing: 2px;font-size:14px;" icon="../../../../static/images/user/look_true.png"
+							 type="info">
 								查看
 							</van-button>
 						</view>
@@ -261,9 +254,9 @@
 					<view class="text">
 						<view class="text_header">
 							<text class="h1">{{item.name}}</text>
-							<text class="p">{{item.tab}}</text>
+							<text class="p">{{item.tab===null?'':item.tab}}</text>
 						</view>
-						<text class="p">{{item.longevity}}</text>
+						<text class="p">{{item.longevity===null?'':item.longevity}}</text>
 					</view>
 				</view>
 				<!-- 				<view class="user_person_zj_center_footer">
@@ -397,7 +390,7 @@
 					this.$api.ApiPost({
 						type: 24,
 						date: {
-							member_id: 1 //临时数据
+							member_id: this.$store.state.member_id //临时数据
 						}
 					})
 				}

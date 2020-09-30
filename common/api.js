@@ -71,7 +71,7 @@ const ApiPost = obj => {
 			} else if (obj.type === 666) {
 				// 图片上传
 				request('api/uploadImage', 'img', obj.date, 'POST').then(respone => {
-				
+
 					resolve(respone)
 				})
 			} else if (obj.type === 20) {
@@ -144,6 +144,11 @@ const ApiPost = obj => {
 			} else if (obj.type === 206) {
 				// 问题详情
 				request('api/getQuestionInfo', 'getQuestionInfo', obj.date, 'GET').then(respone => {
+					resolve(respone)
+				})
+			} else if (obj.type === 207) {
+				// 问题详情
+				request('api/answerQuestion', 'answerQuestion', obj.date, 'POST').then(respone => {
 					resolve(respone)
 				})
 			} else if (obj.type === 24) {

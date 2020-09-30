@@ -142,7 +142,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var _default =
 {
   data: function data() {
@@ -184,6 +183,10 @@ var _default =
               _this.fileList.push(data.url);
               _this.$scope.setData({
                 fileList: _this.fileList });
+
+              uni.showToast({
+                title: '上传成功',
+                duration: 3000 });
 
             }
           });
