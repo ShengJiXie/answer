@@ -40,6 +40,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function($event, item) {
+      var _temp = arguments[arguments.length - 1].currentTarget.dataset,
+        _temp2 = _temp.eventParams || _temp["event-params"],
+        item = _temp2.item
+
+      var _temp, _temp2
+
+      return _vm.$store.commit(
+        "GlobalUrl",
+        "/pages/user/archives?id=" + item.record_id
+      )
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -142,6 +156,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -154,8 +172,9 @@ var _default =
       is_drug: 0, //过敏药物 0 无 1 有
       medical_history: null, //病史描述
       fileList: [],
-      type: 0, //页面进度 0 未为家人列表 1 为新增家人
-      list: [] };
+      type: 0, //页面进度 0 未为家人列表 1 为新增家人 2 新增个人档案 3 修改或新增我的个人档案 
+      list: [],
+      id: uni.getStorageSync('getUserInfo').data.record_id };
 
   },
   methods: {
@@ -210,36 +229,93 @@ var _default =
       }
     },
     formSubmit: function formSubmit() {
-      this.$api.ApiPost({
-        type: 60,
-        date: {
-          "type": 1,
-          "member_id": this.$store.state.member_id,
-          "identity_id": this.key,
-          "name": this.name,
-          "tel": this.phone,
-          "company_id": this.code,
-          "marital_status": this.marital_status,
-          "is_drug": this.is_drug,
-          "medical_history": this.medical_history,
-          "picture": this.fileList } }).
+      if (this.type === 1 || this.type === 2) {
+        this.$api.ApiPost({
+          type: 60,
+          date: {
+            "type": this.type === 2 ? 0 : 1,
+            "member_id": this.$store.state.member_id,
+            "identity_id": this.key,
+            "name": this.name,
+            "gender": "男",
+            "tel": this.phone,
+            "company_id": this.code,
+            "marital_status": this.marital_status,
+            "is_drug": this.is_drug,
+            "medical_history": this.medical_history,
+            "picture": this.fileList } }).
 
-      then(function (res) {
-        uni.showToast({
-          title: res.msg,
-          duration: 3000,
-          icon: 'none' });
+        then(function (res) {
+          uni.showToast({
+            title: res.msg,
+            duration: 3000,
+            icon: 'none' });
 
-        if (res.code === 0) {
-          uni.switchTab({
-            url: '/pages/user/person' });
+          if (res.code === 0) {
+            setTimeout(function () {
+              uni.switchTab({
+                url: '/pages/user/person' });
 
-        }
-      });
+            }, 3000);
+          }
+        });
+      } else if (this.type === 3) {
+        this.$api.ApiPost({
+          type: 61,
+          date: {
+            "record_id": this.id,
+            "identity_id": this.key,
+            "name": this.name,
+            "tel": this.phone,
+            "company_id": this.code,
+            "gender": uni.getStorageSync('getUserInfo').data.gender,
+            "company": "",
+            "marital_status": this.marital_status,
+            "is_drug": this.is_drug,
+            "drug_text": "",
+            "medical_history": this.medical_history,
+            "picture": this.fileList } }).
+
+
+        then(function (res) {
+          uni.showToast({
+            title: res.msg,
+            duration: 3000,
+            icon: 'none' });
+
+          if (res.code === 0) {
+            setTimeout(function () {
+              uni.switchTab({
+                url: '/pages/user/person' });
+
+            }, 3000);
+          }
+        });
+      }
     } },
 
-  mounted: function mounted() {
+  onShow: function onShow() {
     this.list = uni.getStorageSync('PersonArchivesFamily').data;
+  },
+  onLoad: function onLoad(e) {
+    console.log(e);
+    if (e.type == 3) {
+      var data = uni.getStorageSync('PersonArchives').data;
+      this.key = data.identity_id;
+      this.name = data.name;
+      this.phone = data.tel;
+      this.code = data.company_id;
+      this.medical_history = data.medical_history;
+      this.fileList = data.picture;
+      this.radioMarriage(data.marital_status);
+      this.radioAllergy(data.is_drug);
+    }
+    if (e.type) {
+      this.type = Number(e.type);
+    }
+    if (e.id) {
+      this.id = Number(e.id);
+    }
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

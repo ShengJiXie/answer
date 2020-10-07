@@ -38,7 +38,4 @@
 .user_archives .user_archives_center .van-cell {
   padding: 10px 20px;
 }
-.user_archives .user_archives_center .van-cell__value {
-  color: red !important;
-}
 

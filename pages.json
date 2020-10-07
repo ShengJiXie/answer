@@ -112,14 +112,14 @@
 					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
 					"van-collapse": "/wxcomponents/vant/dist/collapse/index",
 					"van-collapse-item": "/wxcomponents/vant/dist/collapse-item/index",
-					"van-field": "/wxcomponents/vant/dist/field/index"
-
+					"van-field": "/wxcomponents/vant/dist/field/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
 				}
 			}
 		}, {
 			"path": "pages/user/family",
 			"style": {
-				"navigationBarTitleText": "家人档案",
+				"navigationBarTitleText": "档案",
 				"usingComponents": {
 					"van-button": "/wxcomponents/vant/dist/button/index",
 					"van-field": "/wxcomponents/vant/dist/field/index",
@@ -144,6 +144,80 @@
             "style" : {
 				"usingComponents":{
 					"van-divider": "/wxcomponents/vant/dist/divider/index"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/global/myhelp",
+            "style" : {
+				"navigationBarTitleText": "我的提问",
+				"usingComponents": {
+					"van-tab": "/wxcomponents/vant/dist/tab/index",
+					"van-tabs": "/wxcomponents/vant/dist/tabs/index",
+					"van-row": "/wxcomponents/vant/dist/row/index",
+					"van-col": "/wxcomponents/vant/dist/col/index",
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index",
+					"van-uploader": "/wxcomponents/vant/dist/uploader/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-divider": "/wxcomponents/vant/dist/divider/index",
+					"van-tag": "/wxcomponents/vant/dist/tag/index"
+					
+				}
+			}
+        }
+        ,{
+            "path" : "pages/global/star",
+            "style" : {
+				"navigationBarTitleText": "我的收藏",
+				"usingComponents": {
+					"van-tab": "/wxcomponents/vant/dist/tab/index",
+					"van-tabs": "/wxcomponents/vant/dist/tabs/index",
+					"van-row": "/wxcomponents/vant/dist/row/index",
+					"van-col": "/wxcomponents/vant/dist/col/index",
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index",
+					"van-uploader": "/wxcomponents/vant/dist/uploader/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-divider": "/wxcomponents/vant/dist/divider/index",
+					"van-tag": "/wxcomponents/vant/dist/tag/index"
+				}
+			}
+        }
+        ,{
+            "path" : "pages/global/souch",
+            "style" : {
+				"navigationBarTitleText": "最近浏览",
+				"usingComponents": {
+					"van-tab": "/wxcomponents/vant/dist/tab/index",
+					"van-tabs": "/wxcomponents/vant/dist/tabs/index",
+					"van-row": "/wxcomponents/vant/dist/row/index",
+					"van-col": "/wxcomponents/vant/dist/col/index",
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-popup": "/wxcomponents/vant/dist/popup/index",
+					"van-uploader": "/wxcomponents/vant/dist/uploader/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index",
+					"van-divider": "/wxcomponents/vant/dist/divider/index",
+					"van-tag": "/wxcomponents/vant/dist/tag/index"
+					
+				}
+			}
+        }
+        ,{
+            "path" : "pages/global/globalForm",
+            "style" : {
+				"navigationBarTitleText": "慢性病史",
+				"usingComponents":{
+					"van-field": "/wxcomponents/vant/dist/field/index",
+					"van-picker": "/wxcomponents/vant/dist/picker/index",
+					"van-cell": "/wxcomponents/vant/dist/cell/index",
+					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index"
 				}
 			}
         }

@@ -188,11 +188,11 @@ var _default =
 
       then(function (res) {
         console.log(res);
-        uni.showToast({
-          title: res.msg,
-          duration: 3000 });
-
         if (res.code === 0) {
+          uni.showToast({
+            title: res.msg,
+            duration: 3000 });
+
           uni.setStorageSync('PersonInfo', res);
           // 获取未回答问题
           _this.$api.ApiPost({
@@ -219,6 +219,12 @@ var _default =
               url: '/pages/user/person' });
 
           }, 2000);
+        } else {
+          uni.showToast({
+            title: res.msg,
+            duration: 3000,
+            icon: 'none' });
+
         }
       });
     } },

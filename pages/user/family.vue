@@ -2,7 +2,7 @@
 	<!-- 家人档案 -->
 	<view class="user_family">
 		<view class="user_family_center" v-if="type===0">
-			<view class="user_family_center_item" v-for="item in list" :key='item[0]'>
+			<view class="user_family_center_item" v-for="item in list" :key='item[0]' @click="$store.commit('GlobalUrl','/pages/user/archives?id='+item.record_id)">
 				<view class="user_family_center_item_text">
 					<text>{{item.name}}</text>
 					<van-icon name="../../../../static/images/user/myuser.png" color="#1569E4" size="20px" />
@@ -15,14 +15,14 @@
 			<van-button plain block icon="add-o" size="large" type="info" @click="AddFamily">添加家人</van-button>
 		</view>
 
-		<view class="user_family_form" v-if="type===1">
+		<view class="user_family_form" v-if="type===1||type===2||type===3">
 			<form @submit="" @reset="">
 				<van-cell-group>
-					<van-field id="key" required label="身份证号码" @input="onChanges" maxlength='18' placeholder="请输入身份证号码"
+					<van-field id="key" :value='key' required label="身份证号码" @input="onChanges" maxlength='18' placeholder="请输入身份证号码"
 					 bind:click-icon="onClickIcon" />
-					<van-field id="name" type="text" label="姓名" @input="onChanges" placeholder="请输入姓名" required />
-					<van-field id="phone" type="text" label="手机号码" @input="onChanges" maxlength='11' placeholder="请输入手机号码" />
-					<van-field id="code" type="text" label="企业编号" @input="onChanges" icon="warning-o" placeholder="请输入企业编号" />
+					<van-field id="name" :value="name" type="text" label="姓名" @input="onChanges" placeholder="请输入姓名" required />
+					<van-field id="phone" :value="phone" type="text" label="手机号码" @input="onChanges" maxlength='11' placeholder="请输入手机号码" />
+					<van-field id="code" :value="code" type="text" label="企业编号" @input="onChanges" icon="warning-o" placeholder="请输入企业编号" />
 				</van-cell-group>
 				<view class="user_family_form_radio">
 					<text style="color: #646566;font-size: 14px;padding-left: 5px;">婚姻情况:</text>
@@ -45,8 +45,11 @@
 				<view class="user_family_form_text">
 					<text style="color: #646566;font-size: 14px;padding-left: 5px;">病史描述:</text>
 					<view class="textarea">
-						<textarea id="medical_history" @input="onChanges" placeholder="请填写病史描述:"></textarea>
+						<textarea id="medical_history" :value='medical_history' @input="onChanges" placeholder="请填写病史描述:"></textarea>
 						<view class="textarea_footer">
+							<view style="width: 100%;">
+								<image :src="item" v-for="item in fileList" style="margin-right: 5px;width:60px;height:60px;" :key='item[0]'></image>
+							</view>
 							<view @click="upload">
 								<view class="textarea_footer_imgupload">
 									<van-icon name="photo-o" color="#1569E4" size="30px" />
@@ -58,6 +61,7 @@
 									<text>拍照</text>
 								</view>
 							</view>
+
 						</view>
 					</view>
 					<button type="default" class="user_family_button" form-type="submit" @click="formSubmit">保存</button>
@@ -79,8 +83,9 @@
 				is_drug: 0, //过敏药物 0 无 1 有
 				medical_history: null, //病史描述
 				fileList: [],
-				type: 0, //页面进度 0 未为家人列表 1 为新增家人
-				list: []
+				type: 0, //页面进度 0 未为家人列表 1 为新增家人 2 新增个人档案 3 修改或新增我的个人档案 
+				list: [],
+				id:uni.getStorageSync('getUserInfo').data.record_id
 			};
 		},
 		methods: {
@@ -92,7 +97,7 @@
 			},
 
 			upload() {
-				let _this=this
+				let _this = this
 				uni.chooseImage({
 					success: (chooseImageRes) => {
 						console.log(chooseImageRes)
@@ -107,11 +112,11 @@
 							if (data.code === 0) {
 								_this.fileList.push(data.url)
 								_this.$scope.setData({
-									fileList:_this.fileList
+									fileList: _this.fileList
 								})
 								uni.showToast({
-									title:'上传成功',
-									duration:3000
+									title: '上传成功',
+									duration: 3000
 								})
 							}
 						})
@@ -135,36 +140,93 @@
 				}
 			},
 			formSubmit() {
-				this.$api.ApiPost({
-					type: 60,
-					date: {
-						"type": 1,
-						"member_id": this.$store.state.member_id,
-						"identity_id": this.key,
-						"name": this.name,
-						"tel": this.phone,
-						"company_id": this.code,
-						"marital_status": this.marital_status,
-						"is_drug": this.is_drug,
-						"medical_history": this.medical_history,
-						"picture": this.fileList
-					}
-				}).then(res=>{
+				if (this.type === 1 || this.type === 2) {
+					this.$api.ApiPost({
+						type: 60,
+						date: {
+							"type": this.type === 2 ? 0 : 1,
+							"member_id": this.$store.state.member_id,
+							"identity_id": this.key,
+							"name": this.name,
+							"gender":"男",
+							"tel": this.phone,
+							"company_id": this.code,
+							"marital_status": this.marital_status,
+							"is_drug": this.is_drug,
+							"medical_history": this.medical_history,
+							"picture": this.fileList
+						}
+					}).then(res => {
 						uni.showToast({
-							title:res.msg,
-							duration:3000,
-							icon:'none'
+							title: res.msg,
+							duration: 3000,
+							icon: 'none'
 						})
-					if(res.code===0){
-						uni.switchTab({
-							url:'/pages/user/person'
+						if (res.code === 0) {
+							setTimeout(() => {
+								uni.switchTab({
+									url: '/pages/user/person'
+								})
+							}, 3000)
+						}
+					})
+				} else if (this.type === 3) {
+					this.$api.ApiPost({
+						type: 61,
+						date: {
+							"record_id": this.id,
+							"identity_id": this.key,
+							"name": this.name,
+							"tel": this.phone,
+							"company_id": this.code,
+							"gender": uni.getStorageSync('getUserInfo').data.gender,
+							"company": "",
+							"marital_status": this.marital_status,
+							"is_drug": this.is_drug,
+							"drug_text": "",
+							"medical_history": this.medical_history,
+							"picture": this.fileList
+						},
+
+					}).then(res => {
+						uni.showToast({
+							title: res.msg,
+							duration: 3000,
+							icon: 'none'
 						})
-					}
-				})
+						if (res.code === 0) {
+							setTimeout(() => {
+								uni.switchTab({
+									url: '/pages/user/person'
+								})
+							}, 3000)
+						}
+					})
+				}
 			}
 		},
-		mounted() {
+		onShow() {
 			this.list = uni.getStorageSync('PersonArchivesFamily').data;
+		},
+		onLoad(e) {
+			console.log(e)
+			if (e.type == 3) {
+				let data = uni.getStorageSync('PersonArchives').data
+				this.key = data.identity_id
+				this.name = data.name
+				this.phone = data.tel
+				this.code = data.company_id
+				this.medical_history = data.medical_history
+				this.fileList = data.picture
+				this.radioMarriage(data.marital_status)
+				this.radioAllergy(data.is_drug)
+			}
+			if (e.type) {
+				this.type = Number(e.type)
+			}
+			if(e.id){
+				this.id=Number(e.id)
+			}
 		}
 	}
 </script>

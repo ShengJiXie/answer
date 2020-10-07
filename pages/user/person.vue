@@ -53,19 +53,19 @@
 							</view>
 						</van-col>
 						<van-col span="5">
-							<view style="background:#FFBF79">
+							<view style="background:#FFBF79" @click="$store.commit('GlobalUrl','/pages/global/myhelp')">
 								<image src="../../static/images/user/edit.png" style="width: 23px;height: 20px;"></image>
 								<text>我的提问</text>
 							</view>
 						</van-col>
 						<van-col span="5">
-							<view style="background:#8DC8FF">
+							<view style="background:#8DC8FF" @click="$store.commit('GlobalUrl','/pages/global/star')">
 								<image src="../../static/images/user/star.png" style="width: 23px;height: 21px;"></image>
 								<text>我的收藏</text>
 							</view>
 						</van-col>
 						<van-col span="5">
-							<view style="background:#28D682">
+							<view style="background:#28D682" @click="$store.commit('GlobalUrl','/pages/global/souch')">
 								<image src="../../static/images/user/souch.png" style="width: 20px;height: 20px;"></image>
 								<text>最近浏览</text>
 							</view>
@@ -75,19 +75,19 @@
 				<view class="user_person_header_footer_two" v-else>
 					<van-row gutter="21">
 						<van-col span="7" style="width:31%">
-							<view style="background:#756BFF">
+							<view style="background:#756BFF" @click='$store.commit("TabUrl","/pages/global/form")'>
 								<image src="../../static/images/user/yyue.png" style="width: 23px;height: 20px;"></image>
 								<text>我的回答</text>
 							</view>
 						</van-col>
 						<van-col span="7" style="width:31%">
-							<view style="background:#FFBF79">
+							<view style="background:#FFBF79" @click="$store.commit('GlobalUrl','/pages/global/star')">
 								<image src="../../static/images/user/edit.png" style="width: 23px;height: 20px;"></image>
 								<text>我的收藏</text>
 							</view>
 						</van-col>
 						<van-col span="7" style="width:31%">
-							<view style="background:#8DC8FF">
+							<view style="background:#8DC8FF" @click="$store.commit('GlobalUrl','/pages/global/souch')">
 								<image src="../../static/images/user/souch.png" style="width: 20px;height: 20px;"></image>
 								<text>最近浏览</text>
 							</view>
@@ -198,7 +198,8 @@
 			<van-cell title="家人档案" url="/pages/user/family" icon="../../../../static/images/user/person_here.png" is-link />
 		</view>
 		<view class="user_person_cell_help" v-if="person_store.type==0||person_store.type==1">
-			<van-cell title="最新问题" icon="../../../../static/images/user/helps.png" value="更多问题" is-link />
+			<van-cell title="最新问题" icon="../../../../static/images/user/helps.png" link-type='switchTab' url="/pages/global/form"
+			 value="更多问题" is-link />
 			<!-- 部分文章 -->
 			<view class="user_person_center" v-for="(item,key) in list" :key='item[0]'>
 				<view class="user_person_center_item" v-if="key===0">
@@ -368,18 +369,12 @@
 							lists: this.lists
 						})
 					})
+
 					// 获取预约列表
 					this.$api.ApiPost({
 						type: 20,
 						date: {
 							member_id: this.$store.state.member_id
-						}
-					})
-					// 获取我的档案详情
-					this.$api.ApiPost({
-						type: 23,
-						date: {
-							record_id: 1 //临时数据
 						}
 					})
 					// 获取提问分类详情

@@ -8050,6 +8050,7 @@ var store = new _vuex.default.Store({
 
     },
     TabUrl: function TabUrl(v, e) {
+      console.log(v);
       uni.switchTab({
         url: e });
 
@@ -9221,6 +9222,12 @@ var request = function request() {var url = arguments.length > 0 && arguments[0]
           if (StorName == 'accountLogin') {var _response2 = _slicedToArray(
             response, 2),_error = _response2[0],_res = _response2[1];
             resolve(_res.data);
+          } else {
+            uni.showToast({
+              title: response[1].data.msg,
+              icon: 'none',
+              duration: 5000 });
+
           }
         }).catch(function (error) {var _error2 = _slicedToArray(
           error, 2),err = _error2[0],res = _error2[1];
@@ -9373,6 +9380,16 @@ var ApiPost = function ApiPost(obj) {
         (0, _request.default)('api/getAllExpert', 'getAllExpert', {}, 'GET').then(function (respone) {
           resolve(respone);
         });
+      } else if (obj.type === 613) {
+        // 删除家人档案
+        (0, _request.default)('api/deleteRecord', 'deleteRecord', obj.date, 'GET').then(function (respone) {
+          resolve(respone);
+        });
+      } else if (obj.type === 406) {
+        // 清空浏览记录
+        (0, _request.default)('api/clearBrowsing', 'clearBrowsing', obj.date, 'GET').then(function (respone) {
+          resolve(respone);
+        });
       } else if (obj.type === 203) {
         // 问题转接列表
         (0, _request.default)('api/transferProblem', 'transferProblem', obj.date, 'GET').then(function (respone) {
@@ -9399,6 +9416,31 @@ var ApiPost = function ApiPost(obj) {
         (0, _request.default)('api/answerQuestion', 'answerQuestion', obj.date, 'POST').then(function (respone) {
           resolve(respone);
         });
+      } else if (obj.type === 208) {
+        // 收藏列表
+        (0, _request.default)('api/getCollectList', 'getCollectList', obj.date, 'GET').then(function (respone) {
+          resolve(respone);
+        });
+      } else if (obj.type === 777) {
+        // 获取慢性病史详情
+        (0, _request.default)('api/getChronicById', 'getChronicById', obj.date, 'GET').then(function (respone) {
+          resolve(respone);
+        });
+      } else if (obj.type === 778) {
+        // 获取生活习惯详情
+        (0, _request.default)('api/getLiveCusById', 'getLiveCusById', obj.date, 'GET').then(function (respone) {
+          resolve(respone);
+        });
+      } else if (obj.type === 209) {
+        // 浏览记录列表
+        (0, _request.default)('api/getBrowsingHistory', 'getBrowsingHistory', obj.date, 'GET').then(function (respone) {
+          resolve(respone);
+        });
+      } else if (obj.type === 300) {
+        // 获取病史数据
+        (0, _request.default)('api/getRecordType', 'getRecordType', obj.date, 'GET').then(function (respone) {
+          resolve(respone);
+        });
       } else if (obj.type === 24) {
         // 获取家人档案
         (0, _request.default)('api/getFamilyRecord', 'PersonArchivesFamily', obj.date, 'GET').then(function (respone) {
@@ -9412,9 +9454,19 @@ var ApiPost = function ApiPost(obj) {
         (0, _request.default)('api/addMyRecordInfo', 'addMyRecordInfo', obj.date, 'POST').then(function (respone) {
           resolve(respone);
         });
-      } else if (obj.type === 40) {
-        // 管理员登录
-        (0, _request.default)('api/addMyRecordInfo', 'AdminInfo', obj.date, 'POST').then(function (respone) {
+      } else if (obj.type === 69) {
+        // 提交慢性病史表单 
+        (0, _request.default)('api/addChronic', 'addChronic', obj.date, 'POST').then(function (respone) {
+          resolve(respone);
+        });
+      } else if (obj.type === 70) {
+        // 提交生活习惯表单 
+        (0, _request.default)('api/addLiveCus', 'addLiveCus', obj.date, 'POST').then(function (respone) {
+          resolve(respone);
+        });
+      } else if (obj.type === 61) {
+        // 提交我的档案表单 
+        (0, _request.default)('api/updateRecordInfo', 'updateRecordInfo', obj.date, 'POST').then(function (respone) {
           resolve(respone);
         });
       } else if (obj.type === 99) {

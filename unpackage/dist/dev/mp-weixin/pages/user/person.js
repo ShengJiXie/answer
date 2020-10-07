@@ -118,7 +118,31 @@ var render = function() {
       return _vm.$store.commit("GlobalUrl", "order")
     }
 
-    _vm.e5 = function($event, item) {
+    _vm.e5 = function($event) {
+      return _vm.$store.commit("GlobalUrl", "/pages/global/myhelp")
+    }
+
+    _vm.e6 = function($event) {
+      return _vm.$store.commit("GlobalUrl", "/pages/global/star")
+    }
+
+    _vm.e7 = function($event) {
+      return _vm.$store.commit("GlobalUrl", "/pages/global/souch")
+    }
+
+    _vm.e8 = function($event) {
+      return _vm.$store.commit("TabUrl", "/pages/global/form")
+    }
+
+    _vm.e9 = function($event) {
+      return _vm.$store.commit("GlobalUrl", "/pages/global/star")
+    }
+
+    _vm.e10 = function($event) {
+      return _vm.$store.commit("GlobalUrl", "/pages/global/souch")
+    }
+
+    _vm.e11 = function($event, item) {
       var _temp = arguments[arguments.length - 1].currentTarget.dataset,
         _temp2 = _temp.eventParams || _temp["event-params"],
         item = _temp2.item
@@ -131,7 +155,7 @@ var render = function() {
       )
     }
 
-    _vm.e6 = function($event, item) {
+    _vm.e12 = function($event, item) {
       var _temp3 = arguments[arguments.length - 1].currentTarget.dataset,
         _temp4 = _temp3.eventParams || _temp3["event-params"],
         item = _temp4.item
@@ -141,7 +165,7 @@ var render = function() {
       return _vm.$store.commit("GlobalUrl", "/pages/global/help?id=" + item.id)
     }
 
-    _vm.e7 = function($event, item) {
+    _vm.e13 = function($event, item) {
       var _temp5 = arguments[arguments.length - 1].currentTarget.dataset,
         _temp6 = _temp5.eventParams || _temp5["event-params"],
         item = _temp6.item
@@ -154,7 +178,7 @@ var render = function() {
       )
     }
 
-    _vm.e8 = function($event, item) {
+    _vm.e14 = function($event, item) {
       var _temp7 = arguments[arguments.length - 1].currentTarget.dataset,
         _temp8 = _temp7.eventParams || _temp7["event-params"],
         item = _temp8.item
@@ -201,6 +225,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
 //
 //
 //
@@ -570,19 +595,13 @@ var _default =
             lists: _this2.lists });
 
         });
+
         // 获取预约列表
         this.$api.ApiPost({
           type: 20,
           date: {
             member_id: this.$store.state.member_id } });
 
-
-        // 获取我的档案详情
-        this.$api.ApiPost({
-          type: 23,
-          date: {
-            record_id: 1 //临时数据
-          } });
 
         // 获取提问分类详情
         this.$api.ApiPost({

@@ -56,11 +56,11 @@
 					}
 				}).then(res => {
 					console.log(res)
-					uni.showToast({
-						title: res.msg,
-						duration: 3000
-					})
 					if (res.code === 0) {
+						uni.showToast({
+							title: res.msg,
+							duration: 3000
+						})
 						uni.setStorageSync('PersonInfo', res);
 						// 获取未回答问题
 						this.$api.ApiPost({
@@ -87,6 +87,12 @@
 								url: '/pages/user/person',
 							})
 						}, 2000)
+					}else{
+						uni.showToast({
+							title: res.msg,
+							duration: 3000,
+							icon:'none'
+						})
 					}
 				})
 			}

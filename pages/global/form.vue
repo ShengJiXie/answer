@@ -96,8 +96,8 @@
 
 					</van-tab>
 
-					<van-tab :title=" person_store.type===2?'已回答('+lists.length+')':'收藏夹'">
-						<view class="user_person_Tab_frist_button"></view>
+					<van-tab :title="person_store.type===2||person_store.type===1?'已回答('+lists.length+')':'收藏夹'">
+						<view class="user_person_Tab_frist_button"  :style="person_store.type===2?'min-height: 0;':''"></view>
 						<!-- 文章列表 -->
 
 						<view v-if="person_store.type===2">
@@ -485,13 +485,9 @@
 		.van-ellipsis {
 			font-size: 18px;
 		}
-
-		.user_person_center_main {
-			min-height: 480px;
-		}
-
 		.user_person_Tab_frist_button {
 			width: 95%;
+			min-height: 480px;
 			background: white;
 			padding: 20px 2.5%;
 			border-bottom-left-radius: 20px;

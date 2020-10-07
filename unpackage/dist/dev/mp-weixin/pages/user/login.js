@@ -210,7 +210,6 @@ var _default =
                   type: 200,
                   date: arr }).
                 then(function (suc) {
-                  console.log(suc);
                   _this.$store.commit('InfoStep');
                   _this.$api.ApiPost({
                     type: 99,
@@ -218,7 +217,6 @@ var _default =
                       member_id: _this.$store.state.member_id } }).
 
                   then(function (res) {
-                    console.log(res);
                     if (res.data == 0) {
                       uni.showToast({
                         title: '您还未绑定手机号',

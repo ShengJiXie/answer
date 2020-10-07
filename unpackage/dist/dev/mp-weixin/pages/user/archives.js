@@ -97,6 +97,14 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function($event) {
+      return _vm.$store.commit(
+        "GlobalUrl",
+        "/pages/user/family?type=3&&id=" + _vm.list.record_id
+      )
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -187,21 +195,92 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
     return {
       list: [],
-      accname: '1',
-      state: false };
+      accname: this.$store.state.member_id,
+      state: false,
+      stateWeb: false,
+      id: 0 };
 
   },
-  mounted: function mounted() {
-    this.list = uni.getStorageSync('PersonArchives').data;
+  onShow: function onShow() {var _this = this;
+    if (this.id === 0) {
+      if (uni.getStorageSync('PersonInfo').data.record_id != -1) {
+        // 获取我的档案详情
+        this.$api.ApiPost({
+          type: 23,
+          date: {
+            record_id: uni.getStorageSync('PersonInfo').data.record_id //临时数据
+          } }).
+        then(function (res) {
+          if (uni.getStorageSync('PersonArchives').data == null) {
+            uni.showToast({
+              title: '请先创建档案',
+              icon: 'none',
+              duration: 2000 });
+
+            setTimeout(function () {
+              uni.navigateTo({
+                url: '/pages/user/family?type=2' });
+
+            }, 2000);
+          } else {
+            _this.stateWeb = true;
+            _this.list = uni.getStorageSync('PersonArchives').data;
+
+          }
+        });
+      }
+    } else {
+      // 获取我的档案详情
+      this.$api.ApiPost({
+        type: 23,
+        date: {
+          record_id: this.id } }).
+
+      then(function (res) {
+        _this.stateWeb = true;
+        _this.list = res.data;
+      });
+    }
+  },
+  onLoad: function onLoad(e) {
+    if (e.id) {
+      this.id = Number(e.id);
+    }
   },
   methods: {
     onOpen: function onOpen(e) {
       this.state ? this.state = false : this.state = true;
+    },
+    removes: function removes() {var _this2 = this;
+      this.$api.ApiPost({
+        type: 613,
+        date: {
+          record_id: this.id } }).
+
+      then(function (res) {
+        uni.showToast({
+          title: res.msg,
+          duration: 3000 });
+
+        // 获取家人的档案详情
+        _this2.$api.ApiPost({
+          type: 24,
+          date: {
+            member_id: _this2.$store.state.member_id //临时数据
+          } });
+
+        setTimeout(function () {
+          uni.navigateBack({
+            url: '/pages/user/family' });
+
+        }, 2000);
+      });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

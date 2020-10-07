@@ -125,6 +125,16 @@ const ApiPost = obj => {
 				request('api/getAllExpert', 'getAllExpert', {}, 'GET').then(respone => {
 					resolve(respone)
 				})
+			} else if (obj.type === 613) {
+				// 删除家人档案
+				request('api/deleteRecord', 'deleteRecord', obj.date, 'GET').then(respone => {
+					resolve(respone)
+				})
+			} else if (obj.type === 406) {
+				// 清空浏览记录
+				request('api/clearBrowsing', 'clearBrowsing', obj.date, 'GET').then(respone => {
+					resolve(respone)
+				})
 			} else if (obj.type === 203) {
 				// 问题转接列表
 				request('api/transferProblem', 'transferProblem', obj.date, 'GET').then(respone => {
@@ -151,6 +161,31 @@ const ApiPost = obj => {
 				request('api/answerQuestion', 'answerQuestion', obj.date, 'POST').then(respone => {
 					resolve(respone)
 				})
+			} else if (obj.type === 208) {
+				// 收藏列表
+				request('api/getCollectList', 'getCollectList', obj.date, 'GET').then(respone => {
+					resolve(respone)
+				})
+			} else if (obj.type === 777) {
+				// 获取慢性病史详情
+				request('api/getChronicById', 'getChronicById', obj.date, 'GET').then(respone => {
+					resolve(respone)
+				})
+			} else if (obj.type === 778) {
+				// 获取生活习惯详情
+				request('api/getLiveCusById', 'getLiveCusById', obj.date, 'GET').then(respone => {
+					resolve(respone)
+				})
+			} else if (obj.type === 209) {
+				// 浏览记录列表
+				request('api/getBrowsingHistory', 'getBrowsingHistory', obj.date, 'GET').then(respone => {
+					resolve(respone)
+				})
+			} else if (obj.type === 300) {
+				// 获取病史数据
+				request('api/getRecordType', 'getRecordType', obj.date, 'GET').then(respone => {
+					resolve(respone)
+				})
 			} else if (obj.type === 24) {
 				// 获取家人档案
 				request('api/getFamilyRecord', 'PersonArchivesFamily', obj.date, 'GET').then(respone => {
@@ -164,9 +199,19 @@ const ApiPost = obj => {
 				request('api/addMyRecordInfo', 'addMyRecordInfo', obj.date, 'POST').then(respone => {
 					resolve(respone)
 				})
-			} else if (obj.type === 40) {
-				// 管理员登录
-				request('api/addMyRecordInfo', 'AdminInfo', obj.date, 'POST').then(respone => {
+			} else if (obj.type === 69) {
+				// 提交慢性病史表单 
+				request('api/addChronic', 'addChronic', obj.date, 'POST').then(respone => {
+					resolve(respone)
+				})
+			} else if (obj.type === 70) {
+				// 提交生活习惯表单 
+				request('api/addLiveCus', 'addLiveCus', obj.date, 'POST').then(respone => {
+					resolve(respone)
+				})
+			} else if (obj.type === 61) {
+				// 提交我的档案表单 
+				request('api/updateRecordInfo', 'updateRecordInfo', obj.date, 'POST').then(respone => {
 					resolve(respone)
 				})
 			} else if (obj.type === 99) {

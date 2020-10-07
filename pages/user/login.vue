@@ -78,7 +78,6 @@
 										type: 200,
 										date: arr
 									}).then((suc) => {
-										console.log(suc)
 										_this.$store.commit('InfoStep')
 										_this.$api.ApiPost({
 											type: 99,
@@ -86,7 +85,6 @@
 												member_id: _this.$store.state.member_id
 											}
 										}).then(res => {
-											console.log(res)
 											if (res.data == 0) {
 												uni.showToast({
 													title: '您还未绑定手机号',

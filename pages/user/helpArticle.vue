@@ -24,9 +24,9 @@
 			<text>编辑于{{arr.questionInfo.create_at}}</text>
 		</view>
 
-		<van-divider contentPosition="center">评论区</van-divider>
+		<van-divider contentPosition="center"></van-divider>
 
-		<view class="user_helpArticle" v-for="item in arr.answerInfo" :key='item[0]'>
+		<view class="user_helpArticle" style="padding: 10px 0;width:100%;" v-for="item in arr.answerInfo" :key='item[0]'>
 			<!-- 发布人 -->
 			<view class="user_helpArticle_avatar">
 				<image :src="item.avatar"></image>
@@ -41,7 +41,7 @@
 			</view>
 			<!-- 底部 -->
 			<view class="user_helpArticle_footer">
-				<text>编辑于{{item.create_time}}</text>
+				<text>回复时间 {{item.create_time}}</text>
 			</view>
 		</view>
 		<view v-if="arr.answerInfo===null" style="text-align: center;">
@@ -82,6 +82,7 @@
 
 		},
 		onLoad(option) {
+			console.log(option)
 			this.init(option.id)
 		}
 	}
@@ -97,8 +98,6 @@
 		width: 90%;
 		margin: 0px auto;
 		padding: 20px 0;
-		border-bottom: 1px solid #E5E5E5;
-
 		.user_helpArticle_avatar {
 			display: flex;
 
@@ -136,7 +135,7 @@
 		// 内容
 		.user_helpArticle_center {
 			width: 100%;
-			margin: 30px 0;
+			margin: 10px 0;
 			line-height: 30px;
 		}
 
@@ -144,7 +143,7 @@
 		.user_helpArticle_footer {
 			width: 100%;
 			color: #9A9A9A;
-
+			margin: 5px 0;
 			text {
 				font-size: 13px;
 			}
@@ -154,6 +153,7 @@
 			image {
 				width: 80px;
 				height: 80px;
+				margin-right: 5px;
 			}
 		}
 	}

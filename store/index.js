@@ -19,6 +19,7 @@ const store = new Vuex.Store({
 			});
 		},
 		TabUrl: function(v, e) {
+			console.log(v)
 			uni.switchTab({
 				url: e
 			});

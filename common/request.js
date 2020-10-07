@@ -28,6 +28,12 @@ const request = (url = '', StorName = '', date = {}, type = 'GET', header = {}) 
 					if (StorName == 'accountLogin') {
 						let [error, res] = response;
 						resolve(res.data);
+					} else {
+						uni.showToast({
+							title: response[1].data.msg,
+							icon: 'none',
+							duration: 5000
+						})
 					}
 				}).catch(error => {
 					let [err, res] = error;

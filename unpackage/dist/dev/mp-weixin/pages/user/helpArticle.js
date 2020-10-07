@@ -214,6 +214,7 @@ var _default =
 
 
   onLoad: function onLoad(option) {
+    console.log(option);
     this.init(option.id);
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
