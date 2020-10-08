@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "慢性病史",
+  "usingComponents": {
+    "van-field": "/wxcomponents/vant/dist/field/index",
+    "van-picker": "/wxcomponents/vant/dist/picker/index",
+    "van-cell": "/wxcomponents/vant/dist/cell/index",
+    "van-cell-group": "/wxcomponents/vant/dist/cell-group/index"
+  }
+}

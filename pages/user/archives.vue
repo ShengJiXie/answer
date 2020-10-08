@@ -49,9 +49,9 @@
 
 		<view class="user_archives_center">
 			<van-cell title="慢性病史" :value="list.Chronic_id!=null?'已完善':'未完善'" icon="../../../../static/images/user/center1.png"
-			 :url='"/pages/global/globalForm?type=1&&id="+list.record_id+"&&ids="+list.Chronic_id' title-style="font-weight:bold" is-link />
+			 :url='"/pages/global/mx?id="+list.record_id+"&&type=1&&ids="+list.Chronic_id' title-style="font-weight:bold" is-link />
 			<van-cell title="生活习惯" :value="list.liveCus_id!=null?'已完善':'未完善'" icon="../../../../static/images/user/center2.png"
-			 :url='"/pages/global/globalForm?type=2&&id="+list.record_id+"&&ids="+list.liveCus_id' title-style="font-weight:bold" is-link />
+			 :url='"/pages/global/xg?type=2&&id="+list.record_id+"&&ids="+list.liveCus_id' title-style="font-weight:bold" is-link />
 		</view>
 	</view>
 </template>

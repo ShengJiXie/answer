@@ -199,6 +199,16 @@ const ApiPost = obj => {
 				request('api/addMyRecordInfo', 'addMyRecordInfo', obj.date, 'POST').then(respone => {
 					resolve(respone)
 				})
+			} else if (obj.type === 81) {
+				// 修改慢性病史 
+				request('api/updateChronic', 'updateChronic', obj.date, 'POST').then(respone => {
+					resolve(respone)
+				})
+			} else if (obj.type === 82) {
+				// 修改生活习惯
+				request('api/updateLiveCus', 'updateLiveCus', obj.date, 'POST').then(respone => {
+					resolve(respone)
+				})
 			} else if (obj.type === 69) {
 				// 提交慢性病史表单 
 				request('api/addChronic', 'addChronic', obj.date, 'POST').then(respone => {

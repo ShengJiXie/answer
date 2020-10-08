@@ -16,7 +16,9 @@
     "pages/global/myhelp",
     "pages/global/star",
     "pages/global/souch",
-    "pages/global/globalForm"
+    "pages/global/globalForm",
+    "pages/global/mx",
+    "pages/global/xg"
   ],
   "subPackages": [],
   "window": {
@@ -50,6 +52,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap30.json"
+  "usingComponents": {}
 }

@@ -66,16 +66,8 @@
       "list": [
         {
           "id": -1,
-          "name": "pages/user/archives",
-          "pathName": "pages/user/archives",
-          "query": "type=2",
-          "scene": null
-        },
-        {
-          "id": -1,
           "name": "pages/user/person",
           "pathName": "pages/user/person",
-          "query": "type=2",
           "scene": null
         }
       ]

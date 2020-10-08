@@ -177,6 +177,100 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -184,37 +278,62 @@ var _default =
       arr: [],
       key: [],
       date: '请选择确诊日期',
+      statetype: false,
       dates: '请选择确诊日期',
-      datas: [],
       type: 1, // 1 慢性病史 2 生活习惯
+      datas: this.type === 1 ? {
+        diabetic_type: {},
+        d_make_date: '2020-12-07',
+        hypertension_Type: {},
+        h_make_date: '2020-12-07',
+        therapy_method: {},
+        blood_status: {},
+        diabetic_syndrome: {} } :
+      null,
       id: uni.getStorageSync('getUserInfo').data.record_id,
       ids: this.type === 1 ? uni.getStorageSync('PersonArchives').data.Chronic_id : uni.getStorageSync('PersonArchives').data.
       liveCus_id };
 
 
   },
-  computed: {
-    diabetic_type: function diabetic_type() {var _this2 = this;
-      this.arr[0].optionList.forEach(function (element) {
-        if (element.id == _this2.datas.diabetic_type) {
-          return element.name;
-        }
-      });
-    } },
-
   methods: {
-    PickerChange: function PickerChange(e) {
+    // 修改
+    PickerChanges: function PickerChanges(e) {
       console.log(e);
-      console.log(this.diabetic_type);
+      switch (Number(e.target.id)) {
+        case 0:
+          this.datas.diabetic_type.name = this.arr[e.target.id].optionList[e.detail.value].name;
+          this.datas.diabetic_type.id = this.arr[e.target.id].optionList[e.detail.value].id;
+          break;
+        case 1:
+          this.datas.hypertension_Type.name = this.arr[e.target.id].optionList[e.detail.value].name;
+          this.datas.hypertension_Type.id = this.arr[e.target.id].optionList[e.detail.value].id;
+          break;
+        case 2:
+          this.datas.therapy_method.name = this.arr[e.target.id].optionList[e.detail.value].name;
+          this.datas.therapy_method.id = this.arr[e.target.id].optionList[e.detail.value].id;
+          break;
+        case 3:
+          this.datas.blood_status.name = this.arr[e.target.id].optionList[e.detail.value].name;
+          this.datas.blood_status.id = this.arr[e.target.id].optionList[e.detail.value].id;
+          break;
+        case 4:
+          this.datas.diabetic_syndrome.name = this.arr[e.target.id].optionList[e.detail.value].name;
+          this.datas.diabetic_syndrome.id = this.arr[e.target.id].optionList[e.detail.value].id;
+          break;}
+
+      this.$scope.setData({
+        datas: this.datas });
+
     },
-    DateChange: function DateChange(e) {//确诊日期
+    DateChanges: function DateChanges(e) {//确诊日期
       if (e.target.id == 0) {
-        this.date = e.detail.value;
+        this.datas.d_make_date = e.detail.value;
       } else {
-        this.dates = e.detail.value;
+        this.datas.h_make_date = e.detail.value;
       }
     },
-    api: function api(type) {var _this3 = this;
+    api: function api(type) {var _this2 = this;
       var _this = this;
       this.$api.ApiPost({
         type: 300,
@@ -223,24 +342,65 @@ var _default =
 
       then(function (res) {
         _this.arr = res.data;
-        if (_this3.type === 1) {
+        if (_this2.type === 1) {
           _this.$api.ApiPost({
             type: 777,
             date: {
-              chronic_id: _this3.ids } }).
+              chronic_id: _this2.ids } }).
 
           then(function (res) {
             console.log(res);
             if (res.data != null) {
               var data = res.data;
-              _this3.datas = res.data;
+              _this2.datas = res.data;
+              _this2.arr[0].optionList.forEach(function (element) {
+                if (_this2.datas.diabetic_type === element.id) {
+                  _this2.datas.diabetic_type = {
+                    name: element.name,
+                    id: element.id };
+
+                }
+              });
+              _this2.arr[1].optionList.forEach(function (element) {
+                if (_this2.datas.hypertension_Type === element.id) {
+                  _this2.datas.hypertension_Type = {
+                    name: element.name,
+                    id: element.id };
+
+                }
+              });
+              _this2.arr[2].optionList.forEach(function (element) {
+                if (_this2.datas.therapy_method === element.id) {
+                  _this2.datas.therapy_method = {
+                    name: element.name,
+                    id: element.id };
+
+                }
+              });
+              _this2.arr[3].optionList.forEach(function (element) {
+                if (_this2.datas.blood_status === element.id) {
+                  _this2.datas.blood_status = {
+                    name: element.name,
+                    id: element.id };
+
+                }
+              });
+              _this2.arr[4].optionList.forEach(function (element) {
+                if (_this2.datas.diabetic_syndrome === element.id) {
+                  _this2.datas.diabetic_syndrome = {
+                    name: element.name,
+                    id: element.id };
+
+                }
+              });
             }
+            _this2.statetype = true;
           });
         } else {
           _this.$api.ApiPost({
             type: 778,
             date: {
-              liveCus_id: _this3.ids } }).
+              liveCus_id: _this2.ids } }).
 
           then(function (res) {
             console.log(res);
@@ -249,40 +409,81 @@ var _default =
 
       });
     },
+    // 新增
     formSubmit: function formSubmit() {
       if (this.type === 1) {
-        if (this.key.indexOf(-1) != -1 || this.date == '请选择确诊日期' || this.dates == '请选择确诊日期') {
+        var data = this.datas;
+        data.record_id = this.id;
+        this.$api.ApiPost({
+          type: 69,
+          date: data }).
+        then(function (res) {
           uni.showToast({
-            title: '请全部填写完整',
-            icon: 'none',
+            title: res.msg,
+            icon: "none",
             duration: 3000 });
 
-        } else {
-          this.$api.ApiPost({
-            type: 69,
-            date: {
-              "record_id": this.id,
-              "diabetic_type": this.arr[0].optionList[this.key[0]].id,
-              "d_make_date": this.date,
-              "hypertension_Type": this.arr[1].optionList[this.key[1]].id,
-              "h_make_date": this.dates,
-              "therapy_method": this.arr[2].optionList[this.key[2]].id,
-              "blood_status": this.arr[3].optionList[this.key[3]].id,
-              "diabetic_syndrome": this.arr[4].optionList[this.key[4]].id } }).
+          setTimeout(function () {
+            uni.navigateBack({
+              url: '/pages/user/article' });
 
-          then(function (res) {
-            uni.showToast({
-              title: res.msg,
-              icon: "none",
-              duration: 3000 });
+          }, 3000);
+        });
+      } else {
+        this.$api.ApiPost({
+          type: 70,
+          date: {
+            "record_id": this.id,
+            "work_grade": this.arr[0].optionList[this.key[0]].id,
+            "sports_grade": this.arr[1].optionList[this.key[1]].id,
+            "sleep_grade": this.arr[2].optionList[this.key[2]].id,
+            "mood_grade": this.arr[3].optionList[this.key[3]].id,
+            "food_like": this.arr[4].optionList[this.key[4]].id,
+            "drink_status": this.arr[5].optionList[this.key[5]].id,
+            "smoke_status": this.arr[6].optionList[this.key[6]].id } }).
 
-            setTimeout(function () {
-              uni.navigateBack({
-                url: '/pages/user/article' });
+        then(function (res) {
+          uni.showToast({
+            title: res.msg,
+            icon: "none",
+            duration: 3000 });
 
-            }, 3000);
-          });
-        }
+          setTimeout(function () {
+            uni.navigateBack({
+              url: '/pages/user/archives' });
+
+          }, 3000);
+        });
+
+      }
+    },
+    formSubmits: function formSubmits() {
+      if (this.type === 1) {
+        this.$api.ApiPost({
+          type: 81,
+          date: {
+            "chronic_id": this.ids,
+            "diabetic_type": this.datas.diabetic_type.id,
+            "d_make_date": this.datas.d_make_date,
+            "hypertension_Type": this.datas.hypertension_Type.id,
+            "h_make_date": this.datas.h_make_date,
+            "therapy_method": this.datas.therapy_method.id,
+            "blood_status": this.datas.blood_status.id,
+            "diabetic_syndrome": this.datas.diabetic_syndrome.id } }).
+
+        then(function (res) {
+          uni.showToast({
+            title: res.msg,
+            icon: "none",
+            duration: 3000 });
+
+          setTimeout(function () {
+            uni.navigateBack({
+              url: '/pages/user/article' });
+
+          }, 3000);
+        });
+
       } else {
         if (this.key.indexOf(-1) != -1) {
           uni.showToast({
@@ -318,6 +519,7 @@ var _default =
           });
         }
       }
+
     } },
 
   onLoad: function onLoad(e) {

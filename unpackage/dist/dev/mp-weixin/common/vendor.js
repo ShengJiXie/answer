@@ -9454,6 +9454,16 @@ var ApiPost = function ApiPost(obj) {
         (0, _request.default)('api/addMyRecordInfo', 'addMyRecordInfo', obj.date, 'POST').then(function (respone) {
           resolve(respone);
         });
+      } else if (obj.type === 81) {
+        // 修改慢性病史 
+        (0, _request.default)('api/updateChronic', 'updateChronic', obj.date, 'POST').then(function (respone) {
+          resolve(respone);
+        });
+      } else if (obj.type === 82) {
+        // 修改生活习惯
+        (0, _request.default)('api/updateLiveCus', 'updateLiveCus', obj.date, 'POST').then(function (respone) {
+          resolve(respone);
+        });
       } else if (obj.type === 69) {
         // 提交慢性病史表单 
         (0, _request.default)('api/addChronic', 'addChronic', obj.date, 'POST').then(function (respone) {
