@@ -39,7 +39,7 @@
 			<view class="user_person_Tab" v-if="person_store.type===2||person_store.type===1">
 				<van-tabs :active="active" color="#0084FF" border="true">
 					<van-tab :title=" person_store.type===2||person_store.type===1?'未回答('+list.length+')':'我的提问'">
-						<view class="user_person_Tab_frist_button">
+						<view class="user_person_Tab_frist_button" :style="list.length!=0?'min-height: 0;':'min-height: 480px;'">
 							<view class="user_person_Tab_view" v-if="person_store.type===-1">
 								<view :class="type===0?'user_person_Tab_frist_button_item user_person_Tab_frist_button_item_hover':'user_person_Tab_frist_button_item'"
 								 @click="tabClick(0)">
@@ -58,7 +58,7 @@
 									<view class="user_person_center_item_header">
 										<image :src="item.avatar==null?'../../static/images/user/avater.png':item.avatar" style="width:20px;height:20px;border-radius: 50%;"
 										 mode="aspectFit"></image>
-										<text class="h1">{{item.name}}</text>
+										<text class="h1" >{{item.name}}</text>
 										<text class="p">提出了问题</text>
 									</view>
 									<text class="user_person_center_item_h1" @click="$store.commit('GlobalUrl','/pages/user/helpArticle?id='+item.id)">{{item.title}}</text>
@@ -83,7 +83,7 @@
 						<view v-else>
 							<view class="user_person_center" v-for="item in list" :key='item[0]'>
 								<view class="user_person_center_item">
-									<text class="user_person_center_item_h1">{{item.title}}</text>
+									<text class="user_person_center_item_h1" @click="$store.commit('GlobalUrl','/pages/user/helpArticle?id='+item.id)">{{item.title}}</text>
 									<text class="user_person_center_item_p">{{item.create_at}}</text>
 								</view>
 							</view>
@@ -97,14 +97,14 @@
 					</van-tab>
 
 					<van-tab :title="person_store.type===2||person_store.type===1?'已回答('+lists.length+')':'收藏夹'">
-						<view class="user_person_Tab_frist_button"  :style="person_store.type===2?'min-height: 0;':''"></view>
+						<view class="user_person_Tab_frist_button"  :style="lists.length!=0?'min-height: 0;':'min-height: 480px;'"></view>
 						<!-- 文章列表 -->
 
 						<view v-if="person_store.type===2">
 							<view class="user_person_center" v-for="(item,key) in lists" :key='item[0]'>
 								<view class="user_person_center_item">
 									<view class="user_person_center_item_header">
-										<image src="../../static/images/user/avater.png" style="width:20px;height:20px;border-radius: 50%;" mode="aspectFit"></image>
+										<image  :src="item.avatar=='null'?'../../static/images/user/avater.png':item.avatar" style="width:20px;height:20px;border-radius: 50%;" mode="aspectFit"></image>
 										<text class="h1">{{item.name}}</text>
 										<text class="p">提出了问题</text>
 									</view>
@@ -122,8 +122,8 @@
 						<view v-else>
 							<view class="user_person_center" v-for="item in lists" :key='item[0]'>
 								<view class="user_person_center_item">
-									<text class="user_person_center_item_h1">开学后如何才能迅速脱单开学后如何才能迅速脱单？</text>
-									<text class="user_person_center_item_p">2020年9月9日</text>
+									<text class="user_person_center_item_h1" @click="$store.commit('GlobalUrl','/pages/user/helpArticle?id='+item.id)">{{item.title}}</text>
+									<text class="user_person_center_item_p">{{item.create_at}}</text>
 								</view>
 							</view>
 						</view>

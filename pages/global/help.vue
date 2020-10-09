@@ -12,7 +12,7 @@
 					<van-uploader :file-list="picture" :deletable="true" @delete="imgdelet" @afterRead="afterRead" upload-icon="plus" />
 				</view>
 			</view>
-			<button type="default" class="user_article_button" form-type="submit" v-if="store.type==2" @click="submitform">提交</button>
+			<button type="default" class="user_article_button" form-type="submit"  @click="submitform">提交</button>
 		</form>
 	</view>
 </template>

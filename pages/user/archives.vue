@@ -49,9 +49,11 @@
 
 		<view class="user_archives_center">
 			<van-cell title="慢性病史" :value="list.Chronic_id!=null?'已完善':'未完善'" icon="../../../../static/images/user/center1.png"
-			 :url='"/pages/global/mx?id="+list.record_id+"&&type=1&&ids="+list.Chronic_id' title-style="font-weight:bold" is-link />
+			 :url='"/pages/global/mx?id="+list.record_id+"&&type=1&&ids="+list.Chronic_id' title-style="font-weight:bold"
+			 is-link />
 			<van-cell title="生活习惯" :value="list.liveCus_id!=null?'已完善':'未完善'" icon="../../../../static/images/user/center2.png"
-			 :url='"/pages/global/xg?type=2&&id="+list.record_id+"&&ids="+list.liveCus_id' title-style="font-weight:bold" is-link />
+			 :url='"/pages/global/xg?type=2&&id="+list.record_id+"&&ids="+list.liveCus_id' title-style="font-weight:bold"
+			 is-link />
 		</view>
 	</view>
 </template>
@@ -77,23 +79,20 @@
 							record_id: uni.getStorageSync('PersonInfo').data.record_id //临时数据
 						}
 					}).then(res => {
-						if (uni.getStorageSync('PersonArchives').data == null) {
-							uni.showToast({
-								title: '请先创建档案',
-								icon: 'none',
-								duration: 2000
-							})
-							setTimeout(() => {
-								uni.navigateTo({
-									url: '/pages/user/family?type=2'
-								})
-							}, 2000)
-						} else {
-							this.stateWeb = true;
-							this.list = uni.getStorageSync('PersonArchives').data
-
-						}
+						this.stateWeb = true;
+						this.list = uni.getStorageSync('PersonArchives').data
 					})
+				} else {
+					uni.showToast({
+						title: '请先创建档案',
+						icon: 'none',
+						duration: 2000
+					})
+					setTimeout(() => {
+						uni.navigateTo({
+							url: '/pages/user/family?type=2'
+						})
+					}, 2000)
 				}
 			} else {
 				// 获取我的档案详情

@@ -54,7 +54,7 @@
 					<view class="user_home_content_main_item_text">
 						<text class="user_home_content_main_item_text_one">{{item.news_title}}</text>
 						<view class="user_home_content_main_item_text_footer">
-							<text>浏览 {{item.views}}w</text>
+							<text>浏览 {{item.views}}次</text>
 							<text> {{item.create_at}}</text>
 						</view>
 					</view>
@@ -138,7 +138,7 @@
 				})
 			}
 		},
-		mounted() {
+		onShow() {
 			this.init();
 		}
 	}

@@ -163,6 +163,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -175,8 +180,10 @@ var _default =
       show: false,
       desc: '',
       typeshow: false,
+      statetype: false,
       columns: ['体检预约', '挂号预约'],
-      type: '体检预约' };
+      type: '体检预约',
+      id: 0 };
 
   },
   methods: {
@@ -197,6 +204,31 @@ var _default =
       this.showAlert();
       this.time = this.happenTimeFun(e.detail);
 
+    },
+    removes: function removes() {var _this = this;
+      this.$api.ApiPost({
+        type: 913,
+        date: {
+          subscribe_id: this.id } }).
+
+      then(function (res) {
+        uni.showToast({
+          title: res.msg,
+          duration: 2000 });
+
+        _this.$api.ApiPost({
+          type: 20,
+          date: {
+            member_id: _this.$store.state.member_id } });
+
+
+        setTimeout(function () {
+          uni.navigateTo({
+            url: '/pages/user/order' });
+
+        }, 2000);
+
+      });
     },
     onChanges: function onChanges(event) {
       console.log(event);
@@ -240,7 +272,7 @@ var _default =
 
     },
     // 表单提交
-    formSubmit: function formSubmit() {var _this = this;
+    formSubmit: function formSubmit() {var _this2 = this;
       if (this.name && this.phone && this.desc) {
         uni.showLoading({
           title: '正在拼命预约' });
@@ -262,10 +294,10 @@ var _default =
               duration: 2000 });
 
             // 再次获取预约列表
-            _this.$api.ApiPost({
+            _this2.$api.ApiPost({
               type: 20,
               date: {
-                member_id: _this.$store.state.member_id } });
+                member_id: _this2.$store.state.member_id } });
 
 
             setTimeout(function () {
@@ -287,7 +319,29 @@ var _default =
           desc: 3000 });
 
       }
-    } } };exports.default = _default;
+    } },
+
+  onLoad: function onLoad(e) {var _this3 = this;
+    if (e.id) {
+      this.id = e.id;
+      this.$api.ApiPost({
+        type: 649,
+        date: {
+          subscribe_id: this.id } }).
+
+      then(function (res) {
+        console.log(res);
+        _this3.name = res.data.name,
+        _this3.phone = res.data.tel,
+        _this3.time = res.data.sub_time,
+        _this3.desc = res.data.sub_text,
+        _this3.type = _this3.columns[res.data.sub_type];
+        _this3.statetype = true;
+      });
+    } else {
+      this.statetype = true;
+    }
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

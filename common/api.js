@@ -125,6 +125,16 @@ const ApiPost = obj => {
 				request('api/getAllExpert', 'getAllExpert', {}, 'GET').then(respone => {
 					resolve(respone)
 				})
+			} else if (obj.type === 913) {
+				// 取消预约表单
+				request('api/deleteSubscribe', 'deleteSubscribe', obj.date, 'GET').then(respone => {
+					resolve(respone)
+				})
+			} else if (obj.type === 649) {
+				// 获取预约详情页面数据
+				request('api/getSubscribeInfoById', 'getSubscribeInfoById', obj.date, 'GET').then(respone => {
+					resolve(respone)
+				})
 			} else if (obj.type === 613) {
 				// 删除家人档案
 				request('api/deleteRecord', 'deleteRecord', obj.date, 'GET').then(respone => {

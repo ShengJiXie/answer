@@ -9,7 +9,7 @@
 		<!-- 发布人 -->
 		<view class="user_article_avatar">
 			<view class="user_article_avatar_center">
-				<text class="user_article_avatar_center_p">阅读{{arr.newsInfo.views}}万</text>
+				<text class="user_article_avatar_center_p">阅读{{arr.newsInfo.views}}次</text>
 			</view>
 
 			<view class="user_article_avatar_right">

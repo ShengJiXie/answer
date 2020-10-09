@@ -5,7 +5,7 @@
 			<view class="user_person_Tab" v-if="person_store.type===0">
 				<van-tabs :active="active" color="#0084FF" border="true">
 					<van-tab :title='"未回答("+list.length+")"'>
-						<view class="user_person_Tab_frist_button">
+						<view class="user_person_Tab_frist_button" :style="list.length!=0?'min-height: 0;':'min-height: 480px;'">
 						</view>
 						<!-- 文章列表 -->
 						<view class="user_person_center_main">

@@ -19,7 +19,7 @@
 				</view>
 				<view class="null_state" v-if="lists.length==0">
 					<image src="../../static/images/global/null.png"></image>
-					<text>目前还没有任何收藏...</text>
+					<text>目前还没有任何浏览记录...</text>
 				</view>
 				<!-- 文章列表结束 -->
 			</view>

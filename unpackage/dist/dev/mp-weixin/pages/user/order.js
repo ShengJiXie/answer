@@ -98,7 +98,20 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   if (!_vm._isMounted) {
-    _vm.e0 = function($event) {
+    _vm.e0 = function($event, item) {
+      var _temp = arguments[arguments.length - 1].currentTarget.dataset,
+        _temp2 = _temp.eventParams || _temp["event-params"],
+        item = _temp2.item
+
+      var _temp, _temp2
+
+      return _vm.$store.commit(
+        "GlobalUrl",
+        "/pages/user/put?id=" + item.subscribe_id
+      )
+    }
+
+    _vm.e1 = function($event) {
       return _vm.$store.commit("GlobalUrl", "put")
     }
   }

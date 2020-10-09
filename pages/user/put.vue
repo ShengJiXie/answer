@@ -1,18 +1,22 @@
 <template>
 	<!-- 预约页面 -->
-	<view class="user_put">
+	<view class="user_put" v-if="statetype">
 		<view class="form">
 			<view class="form_header">
 				<view class="form_text">
 					<van-cell-group>
-						<van-cell title="预约类型" :value="type" size="large" @click="typeAlert" />
-						<van-field label="预约姓名" id='name' placeholder="请输入姓名" input-align="right" @change="onChanges" />
-						<van-field label="联系电话" id='phone' type='number' placeholder="请输入联系电话" @change="onChanges" input-align="right" />
-						<van-cell title="预约时间" :value="time" size="large" @click="showAlert" />
+						<van-cell title="预约类型" v-if="id===0" :value="type" size="large" @click="typeAlert" />
+						<van-field label="预约类型" v-else disabled :value="type" input-align="right" />
+						<van-field label="预约姓名" :disabled="id!=0" :value="name" id='name' placeholder="请输入姓名" input-align="right" @change="onChanges" />
+						<van-field label="联系电话" :disabled="id!=0" :value="phone" id='phone' type='number' placeholder="请输入联系电话" @change="onChanges"
+						 input-align="right" />
+						<van-cell title="预约时间" v-if="id===0" :value="time" size="large" @click="showAlert" />
+						<van-field label="预约时间" v-else disabled :value="time" input-align="right" />
+
 					</van-cell-group>
 				</view>
 				<van-popup :show="typeshow" position="bottom">
-					<van-picker :columns="columns" default-index="2" @change="onChange" />
+					<van-picker :columns="columns" :disabled="id!=0" default-index="2" @change="onChange" />
 				</van-popup>
 				<van-popup :show="show" position="bottom">
 					<van-datetime-picker type="datetime" title="选择预约时间" @cancel="showAlert" @confirm="onTure" :value="currentDate"
@@ -23,10 +27,11 @@
 				<view class="form_center_header">
 					<text>预约内容:</text>
 				</view>
-				<textarea placeholder="请输入预约内容..." maxlength="200" id="desc" @input="onChanges"></textarea>
+				<textarea placeholder="请输入预约内容..." maxlength="200" :disabled="id!=0" id="desc" :value='desc' @input="onChanges"></textarea>
 				<text style="display: block;text-align: right;font-size: 11px;color:#2C2C2C;padding: 5px 0;">200字以内</text>
 			</view>
-			<button type="default" class="user_put_button" form-type="submit" @click="formSubmit">提交</button>
+			<button type="default" class="user_put_button" form-type="submit" v-if='id===0' @click="formSubmit">提交</button>
+			<button type="default" class="user_put_button" form-type="submit" v-else @click="removes">取消预约</button>
 		</view>
 	</view>
 </template>
@@ -43,8 +48,10 @@
 				show: false,
 				desc: '',
 				typeshow: false,
+				statetype: false,
 				columns: ['体检预约', '挂号预约'],
 				type: '体检预约',
+				id: 0
 			}
 		},
 		methods: {
@@ -65,6 +72,31 @@
 				this.showAlert();
 				this.time = this.happenTimeFun(e.detail)
 
+			},
+			removes() {
+				this.$api.ApiPost({
+					type: 913,
+					date: {
+						subscribe_id: this.id
+					}
+				}).then(res => {
+					uni.showToast({
+						title: res.msg,
+						duration: 2000
+					})
+					this.$api.ApiPost({
+						type: 20,
+						date: {
+							member_id: this.$store.state.member_id
+						}
+					})
+					setTimeout(() => {
+						uni.navigateTo({
+							url: '/pages/user/order'
+						})
+					}, 2000)
+
+				})
 			},
 			onChanges(event) {
 				console.log(event)
@@ -155,6 +187,27 @@
 						desc: 3000
 					})
 				}
+			}
+		},
+		onLoad(e) {
+			if (e.id) {
+				this.id = e.id
+				this.$api.ApiPost({
+					type: 649,
+					date: {
+						subscribe_id: this.id
+					}
+				}).then(res => {
+					console.log(res)
+					this.name = res.data.name,
+						this.phone = res.data.tel,
+						this.time = res.data.sub_time,
+						this.desc = res.data.sub_text,
+						this.type = this.columns[res.data.sub_type]
+					this.statetype = true
+				})
+			} else {
+				this.statetype = true
 			}
 		}
 	}

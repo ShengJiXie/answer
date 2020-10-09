@@ -133,6 +133,32 @@ var render = function() {
         "/pages/user/helpArticle?id=" + item.id
       )
     }
+
+    _vm.e3 = function($event, item) {
+      var _temp7 = arguments[arguments.length - 1].currentTarget.dataset,
+        _temp8 = _temp7.eventParams || _temp7["event-params"],
+        item = _temp8.item
+
+      var _temp7, _temp8
+
+      return _vm.$store.commit(
+        "GlobalUrl",
+        "/pages/user/helpArticle?id=" + item.id
+      )
+    }
+
+    _vm.e4 = function($event, item) {
+      var _temp9 = arguments[arguments.length - 1].currentTarget.dataset,
+        _temp10 = _temp9.eventParams || _temp9["event-params"],
+        item = _temp10.item
+
+      var _temp9, _temp10
+
+      return _vm.$store.commit(
+        "GlobalUrl",
+        "/pages/user/helpArticle?id=" + item.id
+      )
+    }
   }
 }
 var recyclableRender = false

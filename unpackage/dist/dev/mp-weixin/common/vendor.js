@@ -9380,6 +9380,16 @@ var ApiPost = function ApiPost(obj) {
         (0, _request.default)('api/getAllExpert', 'getAllExpert', {}, 'GET').then(function (respone) {
           resolve(respone);
         });
+      } else if (obj.type === 913) {
+        // 取消预约表单
+        (0, _request.default)('api/deleteSubscribe', 'deleteSubscribe', obj.date, 'GET').then(function (respone) {
+          resolve(respone);
+        });
+      } else if (obj.type === 649) {
+        // 获取预约详情页面数据
+        (0, _request.default)('api/getSubscribeInfoById', 'getSubscribeInfoById', obj.date, 'GET').then(function (respone) {
+          resolve(respone);
+        });
       } else if (obj.type === 613) {
         // 删除家人档案
         (0, _request.default)('api/deleteRecord', 'deleteRecord', obj.date, 'GET').then(function (respone) {

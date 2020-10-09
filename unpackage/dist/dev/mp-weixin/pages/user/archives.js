@@ -196,6 +196,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var _default =
 {
   data: function data() {
@@ -217,23 +219,20 @@ var _default =
             record_id: uni.getStorageSync('PersonInfo').data.record_id //临时数据
           } }).
         then(function (res) {
-          if (uni.getStorageSync('PersonArchives').data == null) {
-            uni.showToast({
-              title: '请先创建档案',
-              icon: 'none',
-              duration: 2000 });
-
-            setTimeout(function () {
-              uni.navigateTo({
-                url: '/pages/user/family?type=2' });
-
-            }, 2000);
-          } else {
-            _this.stateWeb = true;
-            _this.list = uni.getStorageSync('PersonArchives').data;
-
-          }
+          _this.stateWeb = true;
+          _this.list = uni.getStorageSync('PersonArchives').data;
         });
+      } else {
+        uni.showToast({
+          title: '请先创建档案',
+          icon: 'none',
+          duration: 2000 });
+
+        setTimeout(function () {
+          uni.navigateTo({
+            url: '/pages/user/family?type=2' });
+
+        }, 2000);
       }
     } else {
       // 获取我的档案详情
