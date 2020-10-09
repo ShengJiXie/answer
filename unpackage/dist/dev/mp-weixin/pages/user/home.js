@@ -224,6 +224,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -243,23 +246,37 @@ var _default =
 
   },
   methods: {
-    home_Tabclick: function home_Tabclick(key) {var _this = this; //导航栏切换
+    home_Tabclick: function home_Tabclick(key) {var _this2 = this; //导航栏切换
       this.$scope.setData({
         index: key });
 
+      if (key === 0) {
 
-      // 首页分类切换查询
-      this.$api.ApiPost({
-        type: 11,
-        date: {
-          news_type: uni.getStorageSync('HomeType').data[key].id,
-          page: 1 } }).
+        // 首页分类切换查询
+        this.$api.ApiPost({
+          type: 11,
+          date: {
+            page: 1 } }).
 
-      then(function (res) {
-        _this.$scope.setData({
-          textList: uni.getStorageSync('HomeText').data.data });
+        then(function (res) {
+          _this2.$scope.setData({
+            textList: uni.getStorageSync('HomeText').data.data });
 
-      });
+        });
+      } else {
+        // 首页分类切换查询
+        this.$api.ApiPost({
+          type: 11,
+          date: {
+            news_type: uni.getStorageSync('HomeType').data[key - 1].id,
+            page: 1 } }).
+
+        then(function (res) {
+          _this2.$scope.setData({
+            textList: uni.getStorageSync('HomeText').data.data });
+
+        });
+      }
     },
     href: function href(key) {
       uni.navigateTo({
@@ -267,29 +284,42 @@ var _default =
 
     },
 
-    init: function init() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var obj, typeobj;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+    init: function init() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var obj, typeobj, _this;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
                 // 加载全局数据
                 uni.showLoading({
                   title: "加载数据中..." });
 
                 // 公共首页函数
-                _context.next = 3;return _this2.$api.ApiPost({
+                _context.next = 3;return _this3.$api.ApiPost({
                   type: 10 });case 3:obj = _context.sent;_context.next = 6;return (
 
 
-                  _this2.$api.ApiPost({
+                  _this3.$api.ApiPost({
                     type: 11,
                     date: {
-                      news_type: obj,
                       page: 1 } }));case 6:typeobj = _context.sent;_context.next = 9;return (
 
 
 
-                  _this2.$scope.setData({
+                  _this3.$scope.setData({
                     bannerList: uni.getStorageSync('HomeBanner').data,
                     noticeList: uni.getStorageSync('HomeNotice').data,
                     tab: uni.getStorageSync('HomeType').data,
-                    textList: uni.getStorageSync('HomeText').data.data }));case 9:case "end":return _context.stop();}}}, _callee);}))();
+                    textList: uni.getStorageSync('HomeText').data.data }));case 9:
+
+                _this = _this3;
+                uni.getStorageSync('HomeType').data.forEach(function (element, key) {
+                  if (key === 0) {
+                    _this.tab[0] = {
+                      id: null,
+                      news_type: '全部' };
+
+                  }
+                  _this.tab[key + 1] = element;
+                  console.log(element);
+                });
+                _this3.$scope.setData({
+                  tab: _this.tab });case 12:case "end":return _context.stop();}}}, _callee);}))();
 
     } },
 

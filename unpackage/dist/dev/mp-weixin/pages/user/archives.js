@@ -198,6 +198,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -209,18 +222,18 @@ var _default =
       id: 0 };
 
   },
-  onShow: function onShow() {var _this = this;
+  onShow: function onShow() {var _this2 = this;
     if (this.id === 0) {
-      if (uni.getStorageSync('PersonInfo').data.record_id != -1) {
+      if (uni.getStorageSync('getUserInfo').data.record_id != -1) {
         // 获取我的档案详情
         this.$api.ApiPost({
           type: 23,
           date: {
-            record_id: uni.getStorageSync('PersonInfo').data.record_id //临时数据
+            record_id: uni.getStorageSync('getUserInfo').data.record_id //临时数据
           } }).
         then(function (res) {
-          _this.stateWeb = true;
-          _this.list = uni.getStorageSync('PersonArchives').data;
+          _this2.stateWeb = true;
+          _this2.list = res.data;
         });
       } else {
         uni.showToast({
@@ -229,7 +242,7 @@ var _default =
           duration: 2000 });
 
         setTimeout(function () {
-          uni.navigateTo({
+          uni.redirectTo({
             url: '/pages/user/family?type=2' });
 
         }, 2000);
@@ -242,8 +255,8 @@ var _default =
           record_id: this.id } }).
 
       then(function (res) {
-        _this.stateWeb = true;
-        _this.list = res.data;
+        _this2.stateWeb = true;
+        _this2.list = res.data;
       });
     }
   },
@@ -256,30 +269,40 @@ var _default =
     onOpen: function onOpen(e) {
       this.state ? this.state = false : this.state = true;
     },
-    removes: function removes() {var _this2 = this;
-      this.$api.ApiPost({
-        type: 613,
-        date: {
-          record_id: this.id } }).
+    removes: function removes() {
+      var _this = this;
+      uni.showModal({
+        title: '提示',
+        content: '确定删除该档案?',
+        success: function success(res) {
+          if (res.confirm) {
+            _this.$api.ApiPost({
+              type: 613,
+              date: {
+                record_id: _this.id } }).
 
-      then(function (res) {
-        uni.showToast({
-          title: res.msg,
-          duration: 3000 });
+            then(function (res) {
+              uni.showToast({
+                title: res.msg,
+                duration: 3000 });
 
-        // 获取家人的档案详情
-        _this2.$api.ApiPost({
-          type: 24,
-          date: {
-            member_id: _this2.$store.state.member_id //临时数据
-          } });
+              // 获取家人的档案详情
+              _this.$api.ApiPost({
+                type: 24,
+                date: {
+                  member_id: _this.$store.state.member_id //临时数据
+                } });
 
-        setTimeout(function () {
-          uni.navigateBack({
-            url: '/pages/user/family' });
+              setTimeout(function () {
+                uni.navigateBack({
+                  url: '/pages/user/family' });
 
-        }, 2000);
-      });
+              }, 2000);
+            });
+          }
+        } });
+
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -199,6 +199,7 @@ var _default =
           then(function (res) {
             var data = JSON.parse(res[1].data);
             if (data.code === 0) {
+              if (_this.fileList == null) _this.fileList = [];
               _this.fileList.push(data.url);
               _this.$scope.setData({
                 fileList: _this.fileList });

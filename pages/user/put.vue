@@ -91,7 +91,7 @@
 						}
 					})
 					setTimeout(() => {
-						uni.navigateTo({
+						uni.navigateBack({
 							url: '/pages/user/order'
 						})
 					}, 2000)
@@ -169,7 +169,7 @@
 								}
 							})
 							setTimeout(() => {
-								uni.navigateTo({
+								uni.navigateBack({
 									url: '/pages/user/order'
 								})
 							}, 2000)

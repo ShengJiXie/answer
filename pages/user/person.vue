@@ -166,7 +166,8 @@
 							<view class="user_person_center" v-for="(item,key) in lists" :key='item[0]'>
 								<view class="user_person_center_item">
 									<view class="user_person_center_item_header">
-										<image :src="item.avatar=='null'?'../../static/images/user/avater.png':item.avatar" style="width:20px;height:20px;border-radius: 50%;" mode="aspectFit"></image>
+										<image :src="item.avatar=='null'?'../../static/images/user/avater.png':item.avatar" style="width:20px;height:20px;border-radius: 50%;"
+										 mode="aspectFit"></image>
 										<text class="h1">{{item.name}}</text>
 										<text class="p">提出了问题</text>
 									</view>
@@ -198,10 +199,10 @@
 			<van-cell title="家人档案" url="/pages/user/family" icon="../../../../static/images/user/person_here.png" is-link />
 		</view>
 		<view class="user_person_cell_help" v-if="person_store.type==1||person_store.type==0">
-			<van-cell title="最新问题" icon="../../../../static/images/user/helps.png" v-if='person_store.type==1' link-type='switchTab' url="/pages/global/form"
-			 value="更多问题" is-link />
-			 <van-cell title="最新问题" icon="../../../../static/images/user/helps.png" v-if='person_store.type==0' link-type='navigateTo' url="/pages/global/myhelp"
-			 value="更多问题" is-link />
+			<van-cell title="最新问题" icon="../../../../static/images/user/helps.png" v-if='person_store.type==1' link-type='switchTab'
+			 url="/pages/global/form" value="更多问题" is-link />
+			<van-cell title="最新问题" icon="../../../../static/images/user/helps.png" v-if='person_store.type==0' link-type='navigateTo'
+			 url="/pages/global/myhelp" value="更多问题" is-link />
 			<!-- 部分文章 -->
 			<view class="user_person_center" v-for="(item,key) in list" :key='item[0]'>
 				<view class="user_person_center_item" v-if="key===0">
@@ -221,7 +222,8 @@
 						</view>
 						<view class="user_person_center_item_footer_icon" v-else>
 							<van-button size="small" color="#F7F7F7" @click="$store.commit('GlobalUrl','/pages/user/helpArticle?id='+item.id)"
-							 custom-style="color:#979797;border-radius: 8px;letter-spacing: 2px;font-size:14px;" icon="../../../../static/images/user/look_true.png" type="info">
+							 custom-style="color:#979797;border-radius: 8px;letter-spacing: 2px;font-size:14px;" icon="../../../../static/images/user/look_true.png"
+							 type="info">
 								查看
 							</van-button>
 						</view>
@@ -351,7 +353,6 @@
 						}
 					}).then(res => {
 						this.userInfo = res.data
-
 					})
 					// 获取已回答问题
 					this.$api.ApiPost({
@@ -403,6 +404,13 @@
 		onShow() {
 			if (uni.getStorageSync('PersonInfo')) {
 				this.$store.commit('InfoStep')
+				this.$api.ApiPost({
+					type: 201,
+					date: {
+						member_id: this.$store.state.member_id,
+						role: this.$store.state.type
+					}
+				})
 			}
 			this.api()
 		},

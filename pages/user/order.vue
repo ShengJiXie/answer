@@ -43,6 +43,7 @@
 		</view>
 		<view class="user_order_footer" @click="$store.commit('GlobalUrl','put')">
 			<van-icon name="add-o" color="#1569E4" size="30px" />
+			<text>点我预约</text>
 		</view>
 	</view>
 </template>
@@ -55,7 +56,7 @@
 			};
 		},
 		onShow() {
-				this.list = uni.getStorageSync('SubscrList').data
+			this.list = uni.getStorageSync('SubscrList').data
 		}
 	}
 </script>
@@ -130,11 +131,16 @@
 
 		.user_order_footer {
 			position: fixed;
-			bottom: 20px;
+			bottom: 40px;
 			right: 15px;
-			width: 50px;
+			width: 70px;
 			text-align: center;
 
+			text {
+				display: block;
+				color: #1569E4;
+				font-size: 15px;
+			}
 		}
 	}
 </style>

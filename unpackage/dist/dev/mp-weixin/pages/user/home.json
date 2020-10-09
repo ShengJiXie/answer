@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "问答社区",
   "backgroundColor": "#F4F6F8",
-  "usingComponents": {}
+  "usingComponents": {
+    "van-empty": "/wxcomponents/vant/dist/empty/index"
+  }
 }

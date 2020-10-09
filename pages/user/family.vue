@@ -85,7 +85,7 @@
 				fileList: [],
 				type: 0, //页面进度 0 未为家人列表 1 为新增家人 2 新增个人档案 3 修改或新增我的个人档案 
 				list: [],
-				id:uni.getStorageSync('getUserInfo').data.record_id
+				id: uni.getStorageSync('getUserInfo').data.record_id
 			};
 		},
 		methods: {
@@ -110,6 +110,7 @@
 						}).then(res => {
 							let data = JSON.parse(res[1].data)
 							if (data.code === 0) {
+								if (_this.fileList == null) _this.fileList = []
 								_this.fileList.push(data.url)
 								_this.$scope.setData({
 									fileList: _this.fileList
@@ -148,7 +149,7 @@
 							"member_id": this.$store.state.member_id,
 							"identity_id": this.key,
 							"name": this.name,
-							"gender":"男",
+							"gender": "男",
 							"tel": this.phone,
 							"company_id": this.code,
 							"marital_status": this.marital_status,
@@ -224,8 +225,8 @@
 			if (e.type) {
 				this.type = Number(e.type)
 			}
-			if(e.id){
-				this.id=Number(e.id)
+			if (e.id) {
+				this.id = Number(e.id)
 			}
 		}
 	}

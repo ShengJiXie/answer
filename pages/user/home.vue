@@ -62,6 +62,9 @@
 						<image src="../../static/images/user/user_home_content_main_item_right.png"></image>
 					</view>
 				</view>
+				<view v-if="textList.length===0">
+					<van-empty description="暂无内容" />
+				</view>
 			</view>
 
 		</view>
@@ -89,22 +92,36 @@
 		},
 		methods: {
 			home_Tabclick(key) { //导航栏切换
-				this.$scope.setData({
-					index: key
-				})
-
-				// 首页分类切换查询
-				this.$api.ApiPost({
-					type: 11,
-					date: {
-						news_type: uni.getStorageSync('HomeType').data[key].id,
-						page: 1
-					}
-				}).then(res => {
-					this.$scope.setData({
-						textList: uni.getStorageSync('HomeText').data.data
+			this.$scope.setData({
+				index: key
+			})
+				if (key === 0) {
+				
+					// 首页分类切换查询
+					this.$api.ApiPost({
+						type: 11,
+						date: {
+							page: 1
+						}
+					}).then(res => {
+						this.$scope.setData({
+							textList: uni.getStorageSync('HomeText').data.data
+						})
 					})
-				})
+				} else {
+					// 首页分类切换查询
+					this.$api.ApiPost({
+						type: 11,
+						date: {
+							news_type: uni.getStorageSync('HomeType').data[key-1].id,
+							page: 1
+						}
+					}).then(res => {
+						this.$scope.setData({
+							textList: uni.getStorageSync('HomeText').data.data
+						})
+					})
+				}
 			},
 			href(key) {
 				uni.navigateTo({
@@ -125,7 +142,6 @@
 				let typeobj = await this.$api.ApiPost({
 					type: 11,
 					date: {
-						news_type: obj,
 						page: 1
 					}
 				})
@@ -135,6 +151,20 @@
 					noticeList: uni.getStorageSync('HomeNotice').data,
 					tab: uni.getStorageSync('HomeType').data,
 					textList: uni.getStorageSync('HomeText').data.data
+				})
+				let _this = this
+				uni.getStorageSync('HomeType').data.forEach((element, key) => {
+					if (key === 0) {
+						_this.tab[0] = {
+							id: null,
+							news_type: '全部'
+						}
+					}
+					_this.tab[key + 1] = element
+					console.log(element)
+				})
+				this.$scope.setData({
+					tab: _this.tab
 				})
 			}
 		},
@@ -237,7 +267,7 @@
 		.user_home_classification_item {
 			width: 20%;
 			height: 40px;
-			font-size: 12px;
+			font-size: 10px;
 			padding: 0px 5px;
 			text-align: center;
 		}

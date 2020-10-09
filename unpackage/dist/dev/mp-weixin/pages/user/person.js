@@ -503,6 +503,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var _default =
 {
   data: function data() {
@@ -577,7 +579,6 @@ var _default =
 
         then(function (res) {
           _this2.userInfo = res.data;
-
         });
         // 获取已回答问题
         this.$api.ApiPost({
@@ -629,6 +630,13 @@ var _default =
   onShow: function onShow() {
     if (uni.getStorageSync('PersonInfo')) {
       this.$store.commit('InfoStep');
+      this.$api.ApiPost({
+        type: 201,
+        date: {
+          member_id: this.$store.state.member_id,
+          role: this.$store.state.type } });
+
+
     }
     this.api();
   },

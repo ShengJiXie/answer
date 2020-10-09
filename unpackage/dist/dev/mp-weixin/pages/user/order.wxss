@@ -57,9 +57,14 @@ page {
 }
 .user_order .user_order_footer {
   position: fixed;
-  bottom: 20px;
+  bottom: 40px;
   right: 15px;
-  width: 50px;
+  width: 70px;
   text-align: center;
+}
+.user_order .user_order_footer text {
+  display: block;
+  color: #1569E4;
+  font-size: 15px;
 }
 

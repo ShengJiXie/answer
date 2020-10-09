@@ -223,7 +223,7 @@ var _default =
 
 
         setTimeout(function () {
-          uni.navigateTo({
+          uni.navigateBack({
             url: '/pages/user/order' });
 
         }, 2000);
@@ -301,7 +301,7 @@ var _default =
 
 
             setTimeout(function () {
-              uni.navigateTo({
+              uni.navigateBack({
                 url: '/pages/user/order' });
 
             }, 2000);

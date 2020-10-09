@@ -9,7 +9,6 @@
 			</view>
 			<view class="user_archives_header_two" style="display: flex;justify-content: space-between;">
 				<text>创建时间：{{list.create_at}}</text>
-				<van-icon name="close" size='20px' color='#9e9e9e' style='padding-left:2px;' v-if='id!=0' @click='removes' />
 			</view>
 		</view>
 		<van-cell :title="list.name" icon="../../../../static/images/user/cells.png" title-style="font-weight:bold" is-link
@@ -26,7 +25,7 @@
 					<van-field :value="list.gender" label="性别:" readonly />
 				</van-cell-group>
 				<van-cell-group>
-					<van-field :value="list.name" label="手机号码:" readonly />
+					<van-field :value="list.tel" label="手机号码:" readonly />
 				</van-cell-group>
 				<van-cell-group>
 					<van-field :value="list.company_id" label="企业编号:" readonly />
@@ -43,6 +42,19 @@
 				<van-cell-group>
 					<van-field :value="list.medical_history?list.medical_history:'暂无内容~'" type='textarea' label="病史描述:" readonly />
 				</van-cell-group>
+
+				<van-cell-group>
+					<view style="display: flex;background: white;">
+						<text style="color:var(--field-label-color,#646566);font-size: 13px;padding:10px 5px;margin-left: 15px;">图片:</text>
+						<view style="margin-left: 60px;padding:5px 0">
+							<view v-if="list.picture!=null">
+								<image :src="item" v-for="item in list.picture" style="border-radius:5px;margin-right:5px;width: 60px;height: 60px;" :key='item[0]' mode=""></image>
+							</view>
+							<text v-else style="color:var(--field-label-color,#646566);font-size: 13px;padding:10px 5px;display: block; margin-left: 30px;">暂无图片</text>
+						</view>
+					</view>
+				</van-cell-group>
+
 			</view>
 		</view>
 
@@ -54,6 +66,7 @@
 			<van-cell title="生活习惯" :value="list.liveCus_id!=null?'已完善':'未完善'" icon="../../../../static/images/user/center2.png"
 			 :url='"/pages/global/xg?type=2&&id="+list.record_id+"&&ids="+list.liveCus_id' title-style="font-weight:bold"
 			 is-link />
+			 	<button type="default" class="user_put_button" form-type="submit" v-if='id!=0' @click="removes">删除档案</button>
 		</view>
 	</view>
 </template>
@@ -71,16 +84,16 @@
 		},
 		onShow() {
 			if (this.id === 0) {
-				if (uni.getStorageSync('PersonInfo').data.record_id != -1) {
+				if (uni.getStorageSync('getUserInfo').data.record_id != -1) {
 					// 获取我的档案详情
 					this.$api.ApiPost({
 						type: 23,
 						date: {
-							record_id: uni.getStorageSync('PersonInfo').data.record_id //临时数据
+							record_id: uni.getStorageSync('getUserInfo').data.record_id //临时数据
 						}
 					}).then(res => {
 						this.stateWeb = true;
-						this.list = uni.getStorageSync('PersonArchives').data
+						this.list = res.data
 					})
 				} else {
 					uni.showToast({
@@ -89,7 +102,7 @@
 						duration: 2000
 					})
 					setTimeout(() => {
-						uni.navigateTo({
+						uni.redirectTo({
 							url: '/pages/user/family?type=2'
 						})
 					}, 2000)
@@ -117,29 +130,39 @@
 				this.state ? this.state = false : this.state = true
 			},
 			removes() {
-				this.$api.ApiPost({
-					type: 613,
-					date: {
-						record_id: this.id
-					}
-				}).then(res => {
-					uni.showToast({
-						title: res.msg,
-						duration: 3000
-					})
-					// 获取家人的档案详情
-					this.$api.ApiPost({
-						type: 24,
-						date: {
-							member_id: this.$store.state.member_id //临时数据
-						}
-					})
-					setTimeout(() => {
-						uni.navigateBack({
-							url: '/pages/user/family'
-						})
-					}, 2000)
-				})
+				let _this=this
+				uni.showModal({
+				    title: '提示',
+				    content: '确定删除该档案?',
+				    success: function (res) {
+				        if (res.confirm) {
+				          _this.$api.ApiPost({
+				          	type: 613,
+				          	date: {
+				          		record_id: _this.id
+				          	}
+				          }).then(res => {
+				          	uni.showToast({
+				          		title: res.msg,
+				          		duration: 3000
+				          	})
+				          	// 获取家人的档案详情
+				          	_this.$api.ApiPost({
+				          		type: 24,
+				          		date: {
+				          			member_id: _this.$store.state.member_id //临时数据
+				          		}
+				          	})
+				          	setTimeout(() => {
+				          		uni.navigateBack({
+				          			url: '/pages/user/family'
+				          		})
+				          	}, 2000)
+				          })
+				        }
+				    }
+				});
+			
 			}
 		},
 
@@ -190,6 +213,13 @@
 
 			.van-cell {
 				padding: 10px 20px;
+			}
+			.user_put_button {
+				width: 80%;
+				margin: 20px auto;
+				color: white !important;
+				background: #5480FF !important;
+				border-radius: 20px !important;
 			}
 		}
 

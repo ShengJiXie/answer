@@ -4,7 +4,10 @@
 			"path": "pages/user/home",
 			"style": {
 				"navigationBarTitleText": "问答社区",
-				"backgroundColor": "#F4F6F8"
+				"backgroundColor": "#F4F6F8",
+				"usingComponents":{
+					"van-empty":"/wxcomponents/vant/dist/empty/index"
+				}
 			}
 		},
 		{

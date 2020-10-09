@@ -38,4 +38,12 @@
 .user_archives .user_archives_center .van-cell {
   padding: 10px 20px;
 }
+.user_archives .user_archives_center .user_put_button {
+  width: 80%;
+  margin: 20px auto;
+  color: white !important;
+  background: #5480FF !important;
+  -webkit-border-radius: 20px !important;
+          border-radius: 20px !important;
+}
 
