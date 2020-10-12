@@ -160,6 +160,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var _default =
 {
   data: function data() {
@@ -168,6 +170,8 @@ var _default =
       name: null,
       phone: null,
       code: null,
+      company: null,
+      picture: [], //图片数组	
       marital_status: 2, //婚姻情况  0已婚 1未婚 2未知
       is_drug: 0, //过敏药物 0 无 1 有
       medical_history: null, //病史描述
@@ -184,34 +188,35 @@ var _default =
     radioAllergy: function radioAllergy(v) {
       this.is_drug = v;
     },
+    imgdelet: function imgdelet(e) {
+      this.picture.splice(e.detail.index, 1);
+      this.$scope.setData({
+        picture: this.picture });
 
-    upload: function upload() {var _this2 = this;
-      var _this = this;
-      uni.chooseImage({
-        success: function success(chooseImageRes) {
-          console.log(chooseImageRes);
-          var tempFilePaths = chooseImageRes.tempFilePaths;
-          _this2.$api.ApiPost({
-            type: 666,
-            date: {
-              file: tempFilePaths[0] } }).
+    },
+    afterRead: function afterRead(e) {var _this = this;
+      this.$api.ApiPost({
+        type: 666,
+        date: {
+          file: e.target.file.path } }).
 
-          then(function (res) {
-            var data = JSON.parse(res[1].data);
-            if (data.code === 0) {
-              if (_this.fileList == null) _this.fileList = [];
-              _this.fileList.push(data.url);
-              _this.$scope.setData({
-                fileList: _this.fileList });
+      then(function (res) {
+        console.log(res);
+        var data = JSON.parse(res[1].data);
+        if (data.code === 0) {
+          uni.showToast({
+            title: data.msg,
+            duration: 3000 });
 
-              uni.showToast({
-                title: '上传成功',
-                duration: 3000 });
+        }
+        _this.picture.push({
+          url: data.url,
+          deletable: true });
 
-            }
-          });
-        } });
+        _this.$scope.setData({
+          picture: _this.picture });
 
+      });
     },
     AddFamily: function AddFamily() {
       this.type === 0 ? this.type = 1 : this.type = 0;
@@ -227,10 +232,16 @@ var _default =
         this.phone = event.detail;
       } else if (event.target.id == "code") {
         this.code = event.detail;
+      } else if (event.target.id == "company") {
+        this.company = event.detail;
       }
     },
     formSubmit: function formSubmit() {
       if (this.type === 1 || this.type === 2) {
+        var da = [];
+        this.picture.forEach(function (element, key) {
+          da.push(element.url);
+        });
         this.$api.ApiPost({
           type: 60,
           date: {
@@ -241,10 +252,11 @@ var _default =
             "gender": "男",
             "tel": this.phone,
             "company_id": this.code,
+            "company": this.company,
             "marital_status": this.marital_status,
             "is_drug": this.is_drug,
             "medical_history": this.medical_history,
-            "picture": this.fileList } }).
+            "picture": da } }).
 
         then(function (res) {
           uni.showToast({
@@ -261,6 +273,10 @@ var _default =
           }
         });
       } else if (this.type === 3) {
+        var _da = [];
+        this.picture.forEach(function (element, key) {
+          _da.push(element.url);
+        });
         this.$api.ApiPost({
           type: 61,
           date: {
@@ -270,12 +286,12 @@ var _default =
             "tel": this.phone,
             "company_id": this.code,
             "gender": uni.getStorageSync('getUserInfo').data.gender,
-            "company": "",
+            "company": this.company,
             "marital_status": this.marital_status,
             "is_drug": this.is_drug,
             "drug_text": "",
             "medical_history": this.medical_history,
-            "picture": this.fileList } }).
+            "picture": _da } }).
 
 
         then(function (res) {
@@ -298,7 +314,7 @@ var _default =
   onShow: function onShow() {
     this.list = uni.getStorageSync('PersonArchivesFamily').data;
   },
-  onLoad: function onLoad(e) {
+  onLoad: function onLoad(e) {var _this2 = this;
     console.log(e);
     if (e.type == 3) {
       var data = uni.getStorageSync('PersonArchives').data;
@@ -306,8 +322,22 @@ var _default =
       this.name = data.name;
       this.phone = data.tel;
       this.code = data.company_id;
+      this.company = data.company;
       this.medical_history = data.medical_history;
-      this.fileList = data.picture;
+      if (data.picture != null) {
+
+        data.picture.forEach(function (element) {
+          _this2.picture.push({
+            url: element,
+            deletable: true });
+
+        });
+        this.$scope.setData({
+          picture: this.picture });
+
+      } else {
+        this.picture = [];
+      }
       this.radioMarriage(data.marital_status);
       this.radioAllergy(data.is_drug);
     }

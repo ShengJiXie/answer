@@ -23,11 +23,12 @@
 					<van-field id="name" :value="name" type="text" label="姓名" @input="onChanges" placeholder="请输入姓名" required />
 					<van-field id="phone" :value="phone" type="text" label="手机号码" @input="onChanges" maxlength='11' placeholder="请输入手机号码" />
 					<van-field id="code" :value="code" type="text" label="企业编号" @input="onChanges" icon="warning-o" placeholder="请输入企业编号" />
+					<van-field id="company" :value="company" type="text" label="企业单位" @input="onChanges" icon="warning-o" placeholder="请输入企业单位" />
 				</van-cell-group>
 				<view class="user_family_form_radio">
 					<text style="color: #646566;font-size: 14px;padding-left: 5px;">婚姻情况:</text>
 					<view class="user_family_form_radio_item">
-						<view v-for="(item,key) in ['已婚','未婚','未知']" :class="marital_status===key?'user_family_form_radio_item_li hover':'user_family_form_radio_item_li'"
+						<view v-for="(item,key) in ['未知','已婚','未婚']" :class="marital_status===key?'user_family_form_radio_item_li hover':'user_family_form_radio_item_li'"
 						 @click="radioMarriage(key)">
 							<text>{{item}}</text>
 						</view>
@@ -50,7 +51,8 @@
 							<view style="width: 100%;">
 								<image :src="item" v-for="item in fileList" style="margin-right: 5px;width:60px;height:60px;" :key='item[0]'></image>
 							</view>
-							<view @click="upload">
+							<van-uploader :file-list="picture" @delete="imgdelet" :deletable="true" @afterRead="afterRead" upload-icon="plus" />
+							<!-- <view @click="upload">
 								<view class="textarea_footer_imgupload">
 									<van-icon name="photo-o" color="#1569E4" size="30px" />
 									<text>图片</text>
@@ -60,7 +62,7 @@
 
 									<text>拍照</text>
 								</view>
-							</view>
+							</view> -->
 
 						</view>
 					</view>
@@ -79,6 +81,8 @@
 				name: null,
 				phone: null,
 				code: null,
+				company: null,
+				picture: [], //图片数组	
 				marital_status: 2, //婚姻情况  0已婚 1未婚 2未知
 				is_drug: 0, //过敏药物 0 无 1 有
 				medical_history: null, //病史描述
@@ -95,34 +99,35 @@
 			radioAllergy(v) {
 				this.is_drug = v
 			},
-
-			upload() {
-				let _this = this
-				uni.chooseImage({
-					success: (chooseImageRes) => {
-						console.log(chooseImageRes)
-						const tempFilePaths = chooseImageRes.tempFilePaths;
-						this.$api.ApiPost({
-							type: 666,
-							date: {
-								file: tempFilePaths[0]
-							}
-						}).then(res => {
-							let data = JSON.parse(res[1].data)
-							if (data.code === 0) {
-								if (_this.fileList == null) _this.fileList = []
-								_this.fileList.push(data.url)
-								_this.$scope.setData({
-									fileList: _this.fileList
-								})
-								uni.showToast({
-									title: '上传成功',
-									duration: 3000
-								})
-							}
+			imgdelet(e) {
+				this.picture.splice(e.detail.index, 1)
+				this.$scope.setData({
+					picture: this.picture
+				})
+			},
+			afterRead(e) {
+				this.$api.ApiPost({
+					type: 666,
+					date: {
+						file: e.target.file.path
+					}
+				}).then(res => {
+					console.log(res)
+					let data = JSON.parse(res[1].data);
+					if (data.code === 0) {
+						uni.showToast({
+							title: data.msg,
+							duration: 3000
 						})
 					}
-				});
+					this.picture.push({
+						url: data.url,
+						deletable: true
+					})
+					this.$scope.setData({
+						picture: this.picture
+					})
+				})
 			},
 			AddFamily() {
 				this.type === 0 ? this.type = 1 : this.type = 0
@@ -138,10 +143,16 @@
 					this.phone = event.detail
 				} else if (event.target.id == "code") {
 					this.code = event.detail
+				} else if (event.target.id == "company") {
+					this.company = event.detail
 				}
 			},
 			formSubmit() {
 				if (this.type === 1 || this.type === 2) {
+					let da = [];
+					this.picture.forEach((element, key) => {
+						da.push(element.url)
+					})
 					this.$api.ApiPost({
 						type: 60,
 						date: {
@@ -152,10 +163,11 @@
 							"gender": "男",
 							"tel": this.phone,
 							"company_id": this.code,
+							"company": this.company,
 							"marital_status": this.marital_status,
 							"is_drug": this.is_drug,
 							"medical_history": this.medical_history,
-							"picture": this.fileList
+							"picture": da
 						}
 					}).then(res => {
 						uni.showToast({
@@ -172,6 +184,10 @@
 						}
 					})
 				} else if (this.type === 3) {
+					let da = [];
+					this.picture.forEach((element, key) => {
+						da.push(element.url)
+					})
 					this.$api.ApiPost({
 						type: 61,
 						date: {
@@ -181,12 +197,12 @@
 							"tel": this.phone,
 							"company_id": this.code,
 							"gender": uni.getStorageSync('getUserInfo').data.gender,
-							"company": "",
+							"company": this.company,
 							"marital_status": this.marital_status,
 							"is_drug": this.is_drug,
 							"drug_text": "",
 							"medical_history": this.medical_history,
-							"picture": this.fileList
+							"picture": da
 						},
 
 					}).then(res => {
@@ -217,8 +233,22 @@
 				this.name = data.name
 				this.phone = data.tel
 				this.code = data.company_id
+				this.company = data.company
 				this.medical_history = data.medical_history
-				this.fileList = data.picture
+				if (data.picture != null) {
+
+					data.picture.forEach(element => {
+						this.picture.push({
+							url: element,
+							deletable: true
+						})
+					})
+					this.$scope.setData({
+						picture: this.picture
+					})
+				} else {
+					this.picture = [];
+				}
 				this.radioMarriage(data.marital_status)
 				this.radioAllergy(data.is_drug)
 			}

@@ -37,7 +37,7 @@
 					<van-field :value="list.marital_status==0?'未知':list.marital_status==1?'已婚':'未婚'" label="婚姻状况:" readonly />
 				</van-cell-group>
 				<van-cell-group>
-					<van-field :value="list.is_drug" label="过敏药物:" readonly />
+					<van-field :value="list.is_drug==0?'无':'有'" label="过敏药物:" readonly />
 				</van-cell-group>
 				<van-cell-group>
 					<van-field :value="list.medical_history?list.medical_history:'暂无内容~'" type='textarea' label="病史描述:" readonly />
@@ -48,7 +48,8 @@
 						<text style="color:var(--field-label-color,#646566);font-size: 13px;padding:10px 5px;margin-left: 15px;">图片:</text>
 						<view style="margin-left: 60px;padding:5px 0">
 							<view v-if="list.picture!=null">
-								<image :src="item" v-for="item in list.picture" style="border-radius:5px;margin-right:5px;width: 60px;height: 60px;" :key='item[0]' mode=""></image>
+								<image :src="item" v-for="item in list.picture" style="border-radius:5px;margin-right:5px;width: 60px;height: 60px;"
+								 :key='item[0]' mode=""></image>
 							</view>
 							<text v-else style="color:var(--field-label-color,#646566);font-size: 13px;padding:10px 5px;display: block; margin-left: 30px;">暂无图片</text>
 						</view>
@@ -66,7 +67,7 @@
 			<van-cell title="生活习惯" :value="list.liveCus_id!=null?'已完善':'未完善'" icon="../../../../static/images/user/center2.png"
 			 :url='"/pages/global/xg?type=2&&id="+list.record_id+"&&ids="+list.liveCus_id' title-style="font-weight:bold"
 			 is-link />
-			 	<button type="default" class="user_put_button" form-type="submit" v-if='id!=0' @click="removes">删除档案</button>
+			<button type="default" class="user_put_button" form-type="submit" v-if='id!=0' @click="removes">删除档案</button>
 		</view>
 	</view>
 </template>
@@ -130,39 +131,39 @@
 				this.state ? this.state = false : this.state = true
 			},
 			removes() {
-				let _this=this
+				let _this = this
 				uni.showModal({
-				    title: '提示',
-				    content: '确定删除该档案?',
-				    success: function (res) {
-				        if (res.confirm) {
-				          _this.$api.ApiPost({
-				          	type: 613,
-				          	date: {
-				          		record_id: _this.id
-				          	}
-				          }).then(res => {
-				          	uni.showToast({
-				          		title: res.msg,
-				          		duration: 3000
-				          	})
-				          	// 获取家人的档案详情
-				          	_this.$api.ApiPost({
-				          		type: 24,
-				          		date: {
-				          			member_id: _this.$store.state.member_id //临时数据
-				          		}
-				          	})
-				          	setTimeout(() => {
-				          		uni.navigateBack({
-				          			url: '/pages/user/family'
-				          		})
-				          	}, 2000)
-				          })
-				        }
-				    }
+					title: '提示',
+					content: '确定删除该档案?',
+					success: function(res) {
+						if (res.confirm) {
+							_this.$api.ApiPost({
+								type: 613,
+								date: {
+									record_id: _this.id
+								}
+							}).then(res => {
+								uni.showToast({
+									title: res.msg,
+									duration: 3000
+								})
+								// 获取家人的档案详情
+								_this.$api.ApiPost({
+									type: 24,
+									date: {
+										member_id: _this.$store.state.member_id //临时数据
+									}
+								})
+								setTimeout(() => {
+									uni.navigateBack({
+										url: '/pages/user/family'
+									})
+								}, 2000)
+							})
+						}
+					}
 				});
-			
+
 			}
 		},
 
@@ -214,6 +215,7 @@
 			.van-cell {
 				padding: 10px 20px;
 			}
+
 			.user_put_button {
 				width: 80%;
 				margin: 20px auto;
