@@ -370,6 +370,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -392,8 +402,8 @@ var _default =
     };
   },
   methods: {
-    bindTextAreaBlur: function bindTextAreaBlur(e) {
-      console.log(e.detail.value);
+    textChange: function textChange(e) {
+      this.text = e.detail;
     },
     tabClick: function tabClick() {
       this.type === 0 ? this.type = 1 : this.type = 0;
@@ -479,6 +489,9 @@ var _default =
     },
     submitform: function submitform() {
       if (this.rabclick.length != 0 && this.title != null && this.title != "" && this.text != null && this.text != "") {
+        uni.showLoading({
+          title: '发起支付中' });
+
         this.$api.ApiPost({
           type: 205,
           date: {
@@ -487,10 +500,32 @@ var _default =
               member_id: this.$store.state.member_id,
               title: this.title,
               info: this.text,
-              picture: this.picture } } });
+              picture: this.picture } } }).
 
 
+        then(function (res) {
+          uni.requestPayment({
+            provider: 'wxpay',
+            timeStamp: res.data.timeStamp,
+            nonceStr: res.data.nonceStr,
+            package: res.data.package,
+            signType: 'MD5',
+            paySign: res.data.paySign,
+            success: function success(res) {
+              uni.switchTab({
+                url: '/pages/user/home' });
 
+            },
+            fail: function fail(er) {
+              uni.switchTab({
+                url: '/pages/user/home' });
+
+            },
+            complete: function complete(e) {
+              uni.hideLoading();
+            } });
+
+        });
 
       } else {
         uni.showToast({

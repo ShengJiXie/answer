@@ -14,10 +14,10 @@
 		<view class="user_home_noticeMain">
 			<view class="user_home_notice">
 				<image src="../../static/images/user/notices.png" mode=""></image>
-				<swiper class="swiper" indicator-color="#ADB7D0" indicator-active-color="#3C74FD" :autoplay="autoplay" :interval="interval"
+				<swiper class="swiper" indicator-color="#ADB7D0" indicator-active-color="#3C74FD" :autoplay="autoplay" interval="3000"
 				 vertical="true" :duration="duration">
-					<swiper-item>
-						<view class="user_home_notice_swiper" v-for="item in noticeList" :key="item[0]">
+					<swiper-item v-for="item in noticeList " style="padding-top: 1px;" :key="item[0]">
+						<view class="user_home_notice_swiper">
 							<view class="user_home_notice_item">
 								<li @click="$store.commit('GlobalUrl','/pages/user/article?id='+item.news_id)">{{item.news_title}}</li>
 								<!-- <text>11小时前</text> -->
@@ -34,9 +34,12 @@
 		<!-- 公告结束 -->
 		<!-- 分类栏 -->
 		<view class="user_home_classification">
-			<view v-for="(item,key) in  tab" :key="item[0]" :class="key===index?'user_home_classification_item user_home_classification_item_hover':'user_home_classification_item'"
-			 @click="home_Tabclick(key)">
-				<text>{{item.news_type}}</text>
+			<view class="user_home_classification_main">
+
+				<view v-for="(item,key) in  tab" :key="item[0]" :class="key===index?'user_home_classification_item user_home_classification_item_hover':'user_home_classification_item'"
+				 @click="home_Tabclick(key)">
+					<text>{{item.news_type}}</text>
+				</view>
 			</view>
 		</view>
 		<!-- 分类栏结束 -->
@@ -92,11 +95,11 @@
 		},
 		methods: {
 			home_Tabclick(key) { //导航栏切换
-			this.$scope.setData({
-				index: key
-			})
+				this.$scope.setData({
+					index: key
+				})
 				if (key === 0) {
-				
+
 					// 首页分类切换查询
 					this.$api.ApiPost({
 						type: 11,
@@ -113,7 +116,7 @@
 					this.$api.ApiPost({
 						type: 11,
 						date: {
-							news_type: uni.getStorageSync('HomeType').data[key-1].id,
+							news_type: uni.getStorageSync('HomeType').data[key - 1].id,
 							page: 1
 						}
 					}).then(res => {
@@ -208,7 +211,6 @@
 				height: 50px;
 
 				.user_home_notice_swiper {
-
 					.user_home_notice_item {
 						margin: 5px 0;
 						display: flex;
@@ -261,21 +263,27 @@
 	// 导航栏
 	.user_home_classification {
 		width: 100%;
-		display: flex;
+		overflow-x: scroll;
 		background: white;
 
-		.user_home_classification_item {
-			width: 20%;
-			height: 40px;
-			font-size: 10px;
-			padding: 0px 5px;
-			text-align: center;
-		}
+		.user_home_classification_main {
+			width: 200%;
+			display: flex;
+			overflow: hidden;
 
-		.user_home_classification_item_hover {
-			background: url(../../static/images/user/user_home_classification_item_hover.png) no-repeat;
-			background-size: 100%;
-			color: white;
+			.user_home_classification_item {
+				width: 20%;
+				height: 40px;
+				font-size: 14px;
+				padding: 0px 5px;
+				text-align: center;
+			}
+
+			.user_home_classification_item_hover {
+				background: url(../../static/images/user/user_home_classification_item_hover.png) no-repeat;
+				background-size: 100%;
+				color: white;
+			}
 		}
 	}
 

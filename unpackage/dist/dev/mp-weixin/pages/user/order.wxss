@@ -20,8 +20,7 @@ page {
   border: 1px solid #C7C7C7;
   margin: 20px 0;
   opacity: 0.98;
-  -webkit-border-radius: 5px;
-          border-radius: 5px;
+  border-radius: 5px;
 }
 .user_order .user_order_main .user_order_main_item .user_order_main_item_header .van-cell {
   background: #F3F3F3 !important;

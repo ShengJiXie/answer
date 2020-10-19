@@ -60,11 +60,15 @@
 			login(e) {
 				let _this = this
 				if (this.state === 0) {
+					uni.showLoading({
+						title:'正在登录中'
+					})
 					wx.login({
 						success(loginres) {
 							// 已经授权，可以直接调用 getUserInfo 获取头像昵称
 							wx.getUserInfo({
 								success: function(ress) {
+									uni.hideLoading()
 									_this.code = loginres.code
 
 									let arr = {

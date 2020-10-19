@@ -12,7 +12,7 @@
 							<view class="user_person_center" v-for="(item,key) in list" :key='item[0]'>
 								<view class="user_person_center_item">
 									<view class="user_person_center_item_header">
-										<image :src="item.avatar==null?'../../static/images/user/avater.png':item.avatar" style="width:20px;height:20px;border-radius: 50%;"
+										<image :src="avatar" style="width:20px;height:20px;border-radius: 50%;"
 										 mode="aspectFit"></image>
 										<text class="h1">{{item.name}}</text>
 										<text class="p">提出了问题</text>
@@ -86,6 +86,7 @@
 				text: null,
 				show: false,
 				title: null,
+				avatar:uni.getStorageSync('getUserInfo').data.avatar,
 				expert: [],
 				lists: [],
 				help: null,

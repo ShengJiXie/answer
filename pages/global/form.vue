@@ -19,7 +19,16 @@
 						</view>
 					</van-cell-group>
 					<view class="user_form_content">
-						<textarea @blur="bindTextAreaBlur" v-if="person_store.type==0" v-model="text" placeholder="写输入您的问题,保持文字简练,表达清晰"></textarea>
+						 <van-field
+						    :value="text"
+							@change="textChange"
+						    type="textarea"
+						    placeholder="写输入您的问题,保持文字简练,表达清晰"
+						    :autosize="{minHeight:'100px'}"
+							v-if="person_store.type==0"
+						    :border="false"
+						  />
+						<!-- <textarea  v-if="person_store.type==0" v-model="text" placeholder="写输入您的问题,保持文字简练,表达清晰"></textarea> -->
 						<!-- <textarea @blur="bindTextAreaBlur" v-else placeholder="写输入您的问题,保持文字简练,表达清晰"></textarea> -->
 					</view>
 					<view class="user_form_img">
@@ -28,7 +37,7 @@
 				</view>
 				<van-divider contentPosition="center" customStyle="font-size:13px" v-if="person_store.type==0">问题价值<text style="color:#E3BA3D">￥50.00</text></van-divider>
 				<button type="default" class="user_article_button" form-type="submit" @click="submitform" v-if="person_store.type==0">支付提问</button>
-				<button type="default" class="user_article_button" form-type="submit" v-if="person_store.type==2">提交</button>
+				<button type="default" class="user_article_button" form-type="submit" @click="submitform" v-if="person_store.type==2">提交</button>
 				<van-divider contentPosition="center" customStyle="font-size:11px" v-if="person_store.type==0">成为VIP会员即可<text style="color:#547FFF">免费提问></text></van-divider>
 			</form>
 		</view>
@@ -58,7 +67,7 @@
 									<view class="user_person_center_item_header">
 										<image :src="item.avatar==null?'../../static/images/user/avater.png':item.avatar" style="width:20px;height:20px;border-radius: 50%;"
 										 mode="aspectFit"></image>
-										<text class="h1" >{{item.name}}</text>
+										<text class="h1">{{item.name}}</text>
 										<text class="p">提出了问题</text>
 									</view>
 									<text class="user_person_center_item_h1" @click="$store.commit('GlobalUrl','/pages/user/helpArticle?id='+item.id)">{{item.title}}</text>
@@ -97,14 +106,15 @@
 					</van-tab>
 
 					<van-tab :title="person_store.type===2||person_store.type===1?'已回答('+lists.length+')':'收藏夹'">
-						<view class="user_person_Tab_frist_button"  :style="lists.length!=0?'min-height: 0;':'min-height: 480px;'"></view>
+						<view class="user_person_Tab_frist_button" :style="lists.length!=0?'min-height: 0;':'min-height: 480px;'"></view>
 						<!-- 文章列表 -->
 
 						<view v-if="person_store.type===2">
 							<view class="user_person_center" v-for="(item,key) in lists" :key='item[0]'>
 								<view class="user_person_center_item">
 									<view class="user_person_center_item_header">
-										<image  :src="item.avatar=='null'?'../../static/images/user/avater.png':item.avatar" style="width:20px;height:20px;border-radius: 50%;" mode="aspectFit"></image>
+										<image :src="item.avatar=='null'?'../../static/images/user/avater.png':item.avatar" style="width:20px;height:20px;border-radius: 50%;"
+										 mode="aspectFit"></image>
 										<text class="h1">{{item.name}}</text>
 										<text class="p">提出了问题</text>
 									</view>
@@ -197,8 +207,8 @@
 			};
 		},
 		methods: {
-			bindTextAreaBlur: function(e) {
-				console.log(e.detail.value)
+			textChange(e){
+				this.text=e.detail
 			},
 			tabClick() {
 				this.type === 0 ? this.type = 1 : this.type = 0
@@ -284,6 +294,9 @@
 			},
 			submitform() {
 				if (this.rabclick.length != 0 && this.title != null && this.title != "" && this.text != null && this.text != "") {
+					uni.showLoading({
+						title:'发起支付中'
+					})
 					this.$api.ApiPost({
 						type: 205,
 						date: {
@@ -295,6 +308,28 @@
 								picture: this.picture
 							}
 						}
+					}).then(res => {
+						uni.requestPayment({
+							provider: 'wxpay',
+							timeStamp: res.data.timeStamp,
+							nonceStr: res.data.nonceStr,
+							package: res.data.package,
+							signType: 'MD5',
+							paySign: res.data.paySign,
+							success: function(res) {
+								uni.switchTab({
+									url:'/pages/user/home'
+								})
+							},
+							fail: function(er) {
+								uni.switchTab({
+									url:'/pages/user/home'
+								})
+							},
+							complete:function(e){
+								uni.hideLoading()
+							}
+						});
 					})
 
 				} else {
@@ -371,9 +406,7 @@
 				}
 			}
 
-			.user_form_content {
-				padding: 20px 10px;
-			}
+		
 		}
 
 		.user_article_button {
@@ -485,6 +518,7 @@
 		.van-ellipsis {
 			font-size: 18px;
 		}
+
 		.user_person_Tab_frist_button {
 			width: 95%;
 			min-height: 480px;

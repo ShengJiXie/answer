@@ -1,4 +1,4 @@
-const baseUrl = 'http://demo8.chansnet.cn/'
+const baseUrl = 'https://ask.gzysk.net/'
 const request = (url = '', StorName = '', date = {}, type = 'GET', header = {}) => {
 	if (uni.getStorageSync(StorName).code != 0) {
 		return new Promise((resolve, reject) => {

@@ -3,14 +3,12 @@
   margin: 10px auto;
 }
 .user_form .user_form_main {
-  -webkit-box-shadow: 33px 57px 188px 0px rgba(21, 21, 21, 0.1);
-          box-shadow: 33px 57px 188px 0px rgba(21, 21, 21, 0.1);
+  box-shadow: 33px 57px 188px 0px rgba(21, 21, 21, 0.1);
   display: block;
   background: white;
   width: 90%;
   height: 95%;
-  -webkit-border-radius: 5px;
-          border-radius: 5px;
+  border-radius: 5px;
   padding: 2.5% 5%;
 }
 .user_form .user_form_main .user_form_title {
@@ -21,16 +19,12 @@
   font-size: 16px;
   font-weight: bold;
 }
-.user_form .user_form_main .user_form_content {
-  padding: 20px 10px;
-}
 .user_form .user_article_button {
   width: 80%;
   margin: 20px auto;
   color: white !important;
   background: #5480FF !important;
-  -webkit-border-radius: 15px !important;
-          border-radius: 15px !important;
+  border-radius: 15px !important;
 }
 .user_person_zj {
   width: 95%;
@@ -63,8 +57,7 @@
   width: 15%;
 }
 .user_person_zj .user_person_zj_center .img image {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   width: 50px;
   height: 50px;
 }
@@ -119,10 +112,8 @@
   min-height: 480px;
   background: white;
   padding: 20px 2.5%;
-  -webkit-border-bottom-left-radius: 20px;
-          border-bottom-left-radius: 20px;
-  -webkit-border-bottom-right-radius: 20px;
-          border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   border-bottom: 1px solid white;
 }
 .user_person_Tab .user_person_Tab_frist_button .user_person_Tab_view {
@@ -138,8 +129,7 @@
   text-align: center;
   background: #ECECEC;
   color: black;
-  -webkit-border-radius: 15px;
-          border-radius: 15px;
+  border-radius: 15px;
 }
 .user_person_Tab .user_person_Tab_frist_button .user_person_Tab_view .user_person_Tab_frist_button_item text {
   font-size: 13px;
@@ -154,10 +144,8 @@
 .user_person_center .user_person_center_item {
   width: 80%;
   margin: 10px auto;
-  -webkit-box-shadow: 0px 7px 19px 0px rgba(215, 215, 215, 0.82);
-          box-shadow: 0px 7px 19px 0px rgba(215, 215, 215, 0.82);
-  -webkit-border-radius: 8px;
-          border-radius: 8px;
+  box-shadow: 0px 7px 19px 0px rgba(215, 215, 215, 0.82);
+  border-radius: 8px;
   background: white;
   padding: 10px 20px 20px 20px;
   display: grid;

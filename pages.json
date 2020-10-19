@@ -5,8 +5,8 @@
 			"style": {
 				"navigationBarTitleText": "问答社区",
 				"backgroundColor": "#F4F6F8",
-				"usingComponents":{
-					"van-empty":"/wxcomponents/vant/dist/empty/index"
+				"usingComponents": {
+					"van-empty": "/wxcomponents/vant/dist/empty/index"
 				}
 			}
 		},
@@ -69,12 +69,13 @@
 					"van-cell": "/wxcomponents/vant/dist/cell/index",
 					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
 					"van-button": "/wxcomponents/vant/dist/button/index",
+					"van-field": "/wxcomponents/vant/dist/field/index",
 					"van-popup": "/wxcomponents/vant/dist/popup/index",
 					"van-uploader": "/wxcomponents/vant/dist/uploader/index",
 					"van-icon": "/wxcomponents/vant/dist/icon/index",
 					"van-divider": "/wxcomponents/vant/dist/divider/index",
 					"van-tag": "/wxcomponents/vant/dist/tag/index"
-					
+
 				}
 			}
 		}, {
@@ -141,18 +142,16 @@
 					"van-icon": "/wxcomponents/vant/dist/icon/index"
 				}
 			}
-		}
-	    ,{
-            "path" : "pages/user/helpArticle",
-            "style" : {
-				"usingComponents":{
+		}, {
+			"path": "pages/user/helpArticle",
+			"style": {
+				"usingComponents": {
 					"van-divider": "/wxcomponents/vant/dist/divider/index"
 				}
 			}
-        }
-        ,{
-            "path" : "pages/global/myhelp",
-            "style" : {
+		}, {
+			"path": "pages/global/myhelp",
+			"style": {
 				"navigationBarTitleText": "我的提问",
 				"usingComponents": {
 					"van-tab": "/wxcomponents/vant/dist/tab/index",
@@ -167,13 +166,12 @@
 					"van-icon": "/wxcomponents/vant/dist/icon/index",
 					"van-divider": "/wxcomponents/vant/dist/divider/index",
 					"van-tag": "/wxcomponents/vant/dist/tag/index"
-					
+
 				}
 			}
-        }
-        ,{
-            "path" : "pages/global/star",
-            "style" : {
+		}, {
+			"path": "pages/global/star",
+			"style": {
 				"navigationBarTitleText": "我的收藏",
 				"usingComponents": {
 					"van-tab": "/wxcomponents/vant/dist/tab/index",
@@ -190,10 +188,9 @@
 					"van-tag": "/wxcomponents/vant/dist/tag/index"
 				}
 			}
-        }
-        ,{
-            "path" : "pages/global/souch",
-            "style" : {
+		}, {
+			"path": "pages/global/souch",
+			"style": {
 				"navigationBarTitleText": "最近浏览",
 				"usingComponents": {
 					"van-tab": "/wxcomponents/vant/dist/tab/index",
@@ -208,39 +205,36 @@
 					"van-icon": "/wxcomponents/vant/dist/icon/index",
 					"van-divider": "/wxcomponents/vant/dist/divider/index",
 					"van-tag": "/wxcomponents/vant/dist/tag/index"
-					
+
 				}
 			}
-        }
-        ,{
-            "path" : "pages/global/globalForm",
-            "style" : {
+		}, {
+			"path": "pages/global/globalForm",
+			"style": {
 				"navigationBarTitleText": "慢性病史",
-				"usingComponents":{
+				"usingComponents": {
 					"van-field": "/wxcomponents/vant/dist/field/index",
 					"van-picker": "/wxcomponents/vant/dist/picker/index",
 					"van-cell": "/wxcomponents/vant/dist/cell/index",
 					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index"
 				}
 			}
-        }
-        ,{
-            "path" : "pages/global/mx",
-            "style" : {
+		}, {
+			"path": "pages/global/mx",
+			"style": {
 				"navigationBarTitleText": "慢性病史",
-				"usingComponents":{
+				"usingComponents": {
 					"van-field": "/wxcomponents/vant/dist/field/index",
 					"van-picker": "/wxcomponents/vant/dist/picker/index",
 					"van-cell": "/wxcomponents/vant/dist/cell/index",
 					"van-cell-group": "/wxcomponents/vant/dist/cell-group/index"
 				}
 			}
-        }
-        ,{
-            "path" : "pages/global/xg",
-            "style" : {}
-        }
-    ],
+		}, {
+			"path": "pages/global/xg",
+			"style": {}
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "健康问答",

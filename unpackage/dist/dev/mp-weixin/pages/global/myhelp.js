@@ -255,6 +255,7 @@ var _default =
       text: null,
       show: false,
       title: null,
+      avatar: uni.getStorageSync('getUserInfo').data.avatar,
       expert: [],
       lists: [],
       help: null,

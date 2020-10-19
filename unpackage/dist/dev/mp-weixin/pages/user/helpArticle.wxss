@@ -16,8 +16,7 @@ page {
 .user_helpArticle .user_helpArticle_avatar image {
   width: 30px;
   height: 30px;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   margin-right: 5px;
 }
 .user_helpArticle .user_helpArticle_avatar text {

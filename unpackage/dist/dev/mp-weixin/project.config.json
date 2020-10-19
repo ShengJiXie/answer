@@ -6,7 +6,7 @@
   "setting": {
     "urlCheck": false,
     "es6": true,
-    "enhance": true,
+    "enhance": false,
     "postcss": true,
     "preloadBackgroundData": false,
     "minified": true,
@@ -36,7 +36,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "",
-  "appid": "wxacb5ec94b767707b",
+  "appid": "wxca3214e2fcb1177f",
   "projectname": "健康问答",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},

@@ -242,36 +242,44 @@ var _default =
         this.picture.forEach(function (element, key) {
           da.push(element.url);
         });
-        this.$api.ApiPost({
-          type: 60,
-          date: {
-            "type": this.type === 2 ? 0 : 1,
-            "member_id": this.$store.state.member_id,
-            "identity_id": this.key,
-            "name": this.name,
-            "gender": "男",
-            "tel": this.phone,
-            "company_id": this.code,
-            "company": this.company,
-            "marital_status": this.marital_status,
-            "is_drug": this.is_drug,
-            "medical_history": this.medical_history,
-            "picture": da } }).
+        if (this.phone != null && this.phone != "" && this.name != "" && this.name != null && this.key != null && this.key != "" && this.medical_history != "") {
+          this.$api.ApiPost({
+            type: 60,
+            date: {
+              "type": this.type === 2 ? 0 : 1,
+              "member_id": this.$store.state.member_id,
+              "identity_id": this.key,
+              "name": this.name,
+              "gender": "男",
+              "tel": this.phone,
+              "company_id": this.code,
+              "company": this.company,
+              "marital_status": this.marital_status,
+              "is_drug": this.is_drug,
+              "medical_history": this.medical_history,
+              "picture": da } }).
 
-        then(function (res) {
+          then(function (res) {
+            uni.showToast({
+              title: res.msg,
+              duration: 3000,
+              icon: 'none' });
+
+            if (res.code === 0) {
+              setTimeout(function () {
+                uni.switchTab({
+                  url: '/pages/user/person' });
+
+              }, 3000);
+            }
+          });
+        } else {
           uni.showToast({
-            title: res.msg,
-            duration: 3000,
-            icon: 'none' });
+            title: '请填写真实数据并确保全部填写完整',
+            icon: 'none',
+            duration: 3000 });
 
-          if (res.code === 0) {
-            setTimeout(function () {
-              uni.switchTab({
-                url: '/pages/user/person' });
-
-            }, 3000);
-          }
-        });
+        }
       } else if (this.type === 3) {
         var _da = [];
         this.picture.forEach(function (element, key) {

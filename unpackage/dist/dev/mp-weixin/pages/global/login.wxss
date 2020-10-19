@@ -1,5 +1,4 @@
 page {
-  background: -webkit-gradient(linear, left top, left bottom, from(#1977FF), to(#408DFC));
   background: -webkit-linear-gradient(top, #1977FF, #408DFC);
   background: linear-gradient(180deg, #1977FF, #408DFC);
 }
@@ -42,8 +41,7 @@ page .global_login .global_login_main .form {
   background: white;
   padding: 20px 0;
   margin: 20% auto;
-  -webkit-border-radius: 10px;
-          border-radius: 10px;
+  border-radius: 10px;
 }
 page .global_login .global_login_main .form .form_header {
   padding: 50px 20px;
