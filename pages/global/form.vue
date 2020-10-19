@@ -19,15 +19,8 @@
 						</view>
 					</van-cell-group>
 					<view class="user_form_content">
-						 <van-field
-						    :value="text"
-							@change="textChange"
-						    type="textarea"
-						    placeholder="写输入您的问题,保持文字简练,表达清晰"
-						    :autosize="{minHeight:'100px'}"
-							v-if="person_store.type==0"
-						    :border="false"
-						  />
+						<van-field :value="text" @change="textChange" type="textarea" placeholder="写输入您的问题,保持文字简练,表达清晰" :autosize="{minHeight:'100px'}"
+						 v-if="person_store.type==0" :border="false" />
 						<!-- <textarea  v-if="person_store.type==0" v-model="text" placeholder="写输入您的问题,保持文字简练,表达清晰"></textarea> -->
 						<!-- <textarea @blur="bindTextAreaBlur" v-else placeholder="写输入您的问题,保持文字简练,表达清晰"></textarea> -->
 					</view>
@@ -35,7 +28,7 @@
 						<van-uploader :file-list="picture" @delete="imgdelet" :deletable="true" @afterRead="afterRead" upload-icon="plus" />
 					</view>
 				</view>
-				<van-divider contentPosition="center" customStyle="font-size:13px" v-if="person_store.type==0">问题价值<text style="color:#E3BA3D">￥50.00</text></van-divider>
+				<van-divider contentPosition="center" customStyle="font-size:13px" v-if="person_store.type==0">问题价值<text style="color:#E3BA3D">￥{{scout}}.00</text></van-divider>
 				<button type="default" class="user_article_button" form-type="submit" @click="submitform" v-if="person_store.type==0">支付提问</button>
 				<button type="default" class="user_article_button" form-type="submit" @click="submitform" v-if="person_store.type==2">提交</button>
 				<van-divider contentPosition="center" customStyle="font-size:11px" v-if="person_store.type==0">成为VIP会员即可<text style="color:#547FFF">免费提问></text></van-divider>
@@ -197,6 +190,7 @@
 				text: null,
 				show: false,
 				title: null,
+				scout: 0,
 				expert: [],
 				lists: [],
 				help: null,
@@ -207,8 +201,8 @@
 			};
 		},
 		methods: {
-			textChange(e){
-				this.text=e.detail
+			textChange(e) {
+				this.text = e.detail
 			},
 			tabClick() {
 				this.type === 0 ? this.type = 1 : this.type = 0
@@ -295,7 +289,7 @@
 			submitform() {
 				if (this.rabclick.length != 0 && this.title != null && this.title != "" && this.text != null && this.text != "") {
 					uni.showLoading({
-						title:'发起支付中'
+						title: '发起支付中'
 					})
 					this.$api.ApiPost({
 						type: 205,
@@ -318,15 +312,15 @@
 							paySign: res.data.paySign,
 							success: function(res) {
 								uni.switchTab({
-									url:'/pages/user/home'
+									url: '/pages/user/home'
 								})
 							},
 							fail: function(er) {
 								uni.switchTab({
-									url:'/pages/user/home'
+									url: '/pages/user/home'
 								})
 							},
-							complete:function(e){
+							complete: function(e) {
 								uni.hideLoading()
 							}
 						});
@@ -354,9 +348,19 @@
 			}
 		},
 		onShow() {
+			this.title = null
+			this.text = null
+			this.picture = [];
 			if (uni.getStorageSync('PersonInfo')) {
 				this.$store.commit('InfoStep')
 			}
+			let _this= this
+			// 获取提问价格
+			this.$api.ApiPost({
+				type: 113
+			}).then(res => {
+				_this.scout = res.data.pay_money;
+			})
 			if (this.$store.state.type === -1) {
 				uni.navigateTo({
 					url: '/pages/user/login'
@@ -406,7 +410,7 @@
 				}
 			}
 
-		
+
 		}
 
 		.user_article_button {

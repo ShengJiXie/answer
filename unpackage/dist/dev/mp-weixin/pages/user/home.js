@@ -109,16 +109,16 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   if (!_vm._isMounted) {
-    _vm.e0 = function($event, item) {
+    _vm.e0 = function($event, items) {
       var _temp = arguments[arguments.length - 1].currentTarget.dataset,
         _temp2 = _temp.eventParams || _temp["event-params"],
-        item = _temp2.item
+        items = _temp2.items
 
       var _temp, _temp2
 
       return _vm.$store.commit(
         "GlobalUrl",
-        "/pages/user/article?id=" + item.news_id
+        "/pages/user/article?id=" + items.news_id
       )
     }
   }
@@ -230,6 +230,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
@@ -249,6 +250,13 @@ var _default =
 
   },
   methods: {
+    rightClick: function rightClick() {
+      uni.showToast({
+        title: '右滑查看更多',
+        duration: 3000,
+        icon: 'none' });
+
+    },
     home_Tabclick: function home_Tabclick(key) {var _this2 = this; //导航栏切换
       this.$scope.setData({
         index: key });
@@ -287,7 +295,7 @@ var _default =
 
     },
 
-    init: function init() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var obj, typeobj, _this;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+    init: function init() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var obj, typeobj, _this, noticeLists, index, arr;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
                 // 加载全局数据
                 uni.showLoading({
                   title: "加载数据中..." });
@@ -300,17 +308,32 @@ var _default =
                   _this3.$api.ApiPost({
                     type: 11,
                     date: {
-                      page: 1 } }));case 6:typeobj = _context.sent;_context.next = 9;return (
+                      page: 1 } }));case 6:typeobj = _context.sent;
 
-
-
-                  _this3.$scope.setData({
-                    bannerList: uni.getStorageSync('HomeBanner').data,
-                    noticeList: uni.getStorageSync('HomeNotice').data,
-                    tab: uni.getStorageSync('HomeType').data,
-                    textList: uni.getStorageSync('HomeText').data.data }));case 9:
 
                 _this = _this3;
+                noticeLists = uni.getStorageSync('HomeNotice').data;
+                index = 0;
+                arr = [];
+                console.log(noticeLists);
+                noticeLists.forEach(function (element, key) {
+                  if (index != 0) {
+                    if (noticeLists[index + 1] == undefined && noticeLists[index + 2] == undefined) {
+                      return false;
+                    }
+                    arr[index] = [noticeLists[index + 1], noticeLists[index + 2]];
+                  } else {
+                    arr[index] = [noticeLists[index], noticeLists[index + 1]];
+                  }
+                  index++;
+                });
+                // 公共首页函数
+                _context.next = 15;return _this3.$scope.setData({
+                  bannerList: uni.getStorageSync('HomeBanner').data,
+                  noticeList: arr,
+                  tab: uni.getStorageSync('HomeType').data,
+                  textList: uni.getStorageSync('HomeText').data.data });case 15:
+
                 uni.getStorageSync('HomeType').data.forEach(function (element, key) {
                   if (key === 0) {
                     _this.tab[0] = {
@@ -319,10 +342,9 @@ var _default =
 
                   }
                   _this.tab[key + 1] = element;
-                  console.log(element);
                 });
                 _this3.$scope.setData({
-                  tab: _this.tab });case 12:case "end":return _context.stop();}}}, _callee);}))();
+                  tab: _this.tab });case 17:case "end":return _context.stop();}}}, _callee);}))();
 
     } },
 

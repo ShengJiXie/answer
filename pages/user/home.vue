@@ -16,17 +16,15 @@
 				<image src="../../static/images/user/notices.png" mode=""></image>
 				<swiper class="swiper" indicator-color="#ADB7D0" indicator-active-color="#3C74FD" :autoplay="autoplay" interval="3000"
 				 vertical="true" :duration="duration">
-					<swiper-item v-for="item in noticeList " style="padding-top: 1px;" :key="item[0]">
+					<swiper-item v-for="item in noticeList" :key="item[0]">
 						<view class="user_home_notice_swiper">
-							<view class="user_home_notice_item">
-								<li @click="$store.commit('GlobalUrl','/pages/user/article?id='+item.news_id)">{{item.news_title}}</li>
-								<!-- <text>11小时前</text> -->
+							<view class="user_home_notice_item" v-for="items in item" :key='items'>
+								<li @click="$store.commit('GlobalUrl','/pages/user/article?id='+items.news_id)">{{items.news_title}}</li>
 							</view>
 						</view>
 					</swiper-item>
 				</swiper>
 				<view class="user_home_notice_icon">
-					<view class="user_home_notice_icon_radius"></view>
 					<image src="../../static/images/user/user_home_notice_icon_right.png" mode=""></image>
 				</view>
 			</view>
@@ -41,12 +39,15 @@
 					<text>{{item.news_type}}</text>
 				</view>
 			</view>
+			<view class="user_home_icon" @click="rightClick">
+				<van-icon name="ellipsis" />
+			</view>
 		</view>
 		<!-- 分类栏结束 -->
 		<!-- 文章列表 -->
 		<view class="user_home_content">
 			<view class="user_home_content_header">
-				<text class="user_home_content_header_left">推荐文章</text>
+				<text class="user_home_content_header_left">健康指南</text>
 				<text class="user_home_content_header_right">更多 ></text>
 			</view>
 			<view class="user_home_content_main">
@@ -61,9 +62,9 @@
 							<text> {{item.create_at}}</text>
 						</view>
 					</view>
-					<view class="user_home_content_main_item_right">
+					<!-- <view class="user_home_content_main_item_right">
 						<image src="../../static/images/user/user_home_content_main_item_right.png"></image>
-					</view>
+					</view> -->
 				</view>
 				<view v-if="textList.length===0">
 					<van-empty description="暂无内容" />
@@ -94,6 +95,13 @@
 			}
 		},
 		methods: {
+			rightClick() {
+				uni.showToast({
+					title: '右滑查看更多',
+					duration: 3000,
+					icon: 'none'
+				})
+			},
 			home_Tabclick(key) { //导航栏切换
 				this.$scope.setData({
 					index: key
@@ -148,14 +156,29 @@
 						page: 1
 					}
 				})
+				let _this = this
+				let noticeLists = uni.getStorageSync('HomeNotice').data
+				let index = 0;
+				let arr = [];
+				console.log(noticeLists)
+				noticeLists.forEach((element, key) => {
+					if (index != 0) {
+						if (noticeLists[index + 1] == undefined && noticeLists[index + 2] == undefined) {
+							return false;
+						}
+						arr[index] = [noticeLists[index + 1], noticeLists[index + 2]]
+					} else {
+						arr[index] = [noticeLists[index], noticeLists[index + 1]]
+					}
+					index++;
+				})
 				// 公共首页函数
 				await this.$scope.setData({
 					bannerList: uni.getStorageSync('HomeBanner').data,
-					noticeList: uni.getStorageSync('HomeNotice').data,
+					noticeList: arr,
 					tab: uni.getStorageSync('HomeType').data,
 					textList: uni.getStorageSync('HomeText').data.data
 				})
-				let _this = this
 				uni.getStorageSync('HomeType').data.forEach((element, key) => {
 					if (key === 0) {
 						_this.tab[0] = {
@@ -164,7 +187,6 @@
 						}
 					}
 					_this.tab[key + 1] = element
-					console.log(element)
 				})
 				this.$scope.setData({
 					tab: _this.tab
@@ -207,9 +229,10 @@
 			}
 
 			swiper {
+				position: relative;
+				top: -5px;
 				width: 250px;
 				height: 50px;
-
 				.user_home_notice_swiper {
 					.user_home_notice_item {
 						margin: 5px 0;
@@ -243,14 +266,7 @@
 				display: flex;
 				padding-top: 8px;
 
-				.user_home_notice_icon_radius {
-					width: 9px;
-					margin-top: 3px;
-					height: 9px;
-					background: red;
-					border-radius: 20px;
 
-				}
 
 				image {
 					width: 20px;
@@ -268,6 +284,7 @@
 
 		.user_home_classification_main {
 			width: 200%;
+			padding-right: 32px;
 			display: flex;
 			overflow: hidden;
 
@@ -284,6 +301,17 @@
 				background-size: 100%;
 				color: white;
 			}
+		}
+
+		.user_home_icon {
+			position: absolute;
+			top: 240px;
+			width: 40px;
+			right: 0;
+			text-align: center;
+			background: white;
+
+
 		}
 	}
 
@@ -324,7 +352,7 @@
 			}
 
 			.user_home_content_main_item {
-				width: 83%;
+				width: 90%;
 				margin: 10px auto;
 				margin-right: 7%;
 				display: flex;
@@ -344,7 +372,7 @@
 				}
 
 				.user_home_content_main_item_text {
-					width: 50%;
+					width: 60%;
 					padding-left: 20%;
 
 					.user_home_content_main_item_text_one {
@@ -362,7 +390,7 @@
 					}
 
 					.user_home_content_main_item_text_footer {
-						padding-top: 5px;
+						padding-top: 20px;
 
 						text {
 							padding-right: 20px;
@@ -373,20 +401,7 @@
 					}
 				}
 
-				.user_home_content_main_item_right {
-					width: 10%;
 
-					image {
-						position: relative;
-						top: 20px;
-						left: 30px;
-						background: #1246FF;
-						width: 15px;
-						height: 15px;
-						padding: 5px;
-						border-radius: 5px;
-					}
-				}
 
 
 			}

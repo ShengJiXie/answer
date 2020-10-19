@@ -3,10 +3,11 @@
 		{
 			"path": "pages/user/home",
 			"style": {
-				"navigationBarTitleText": "问答社区",
+				"navigationBarTitleText": "健康社区",
 				"backgroundColor": "#F4F6F8",
 				"usingComponents": {
-					"van-empty": "/wxcomponents/vant/dist/empty/index"
+					"van-empty": "/wxcomponents/vant/dist/empty/index",
+					"van-icon": "/wxcomponents/vant/dist/icon/index"
 				}
 			}
 		},

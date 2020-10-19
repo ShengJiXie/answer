@@ -130,6 +130,11 @@ const ApiPost = obj => {
 				request('api/deleteSubscribe', 'deleteSubscribe', obj.date, 'GET').then(respone => {
 					resolve(respone)
 				})
+			} else if (obj.type === 113) {
+				// 获取提问价格
+				request('api/getQuePrice', 'getQuePrice', obj.date, 'GET').then(respone => {
+					resolve(respone)
+				})
 			} else if (obj.type === 649) {
 				// 获取预约详情页面数据
 				request('api/getSubscribeInfoById', 'getSubscribeInfoById', obj.date, 'GET').then(respone => {

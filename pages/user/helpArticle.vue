@@ -17,7 +17,7 @@
 			<!-- <rich-text :nodes="arr.questionInfo.info"></rich-text> -->
 		</view>
 		<view class="user_helpArticle_img">
-			<image v-for="item in arr.questionInfo.picture" :key="item[0]" :src="item"></image>
+			<image v-for="item in arr.questionInfo.picture" :key="item[0]" :src="item.url"></image>
 		</view>
 		<!-- 底部 -->
 		<view class="user_helpArticle_footer">

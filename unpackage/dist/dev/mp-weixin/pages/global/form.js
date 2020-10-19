@@ -373,13 +373,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 var _default =
 {
   data: function data() {
@@ -392,6 +385,7 @@ var _default =
       text: null,
       show: false,
       title: null,
+      scout: 0,
       expert: [],
       lists: [],
       help: null,
@@ -548,19 +542,29 @@ var _default =
 
     } },
 
-  onShow: function onShow() {var _this5 = this;
+  onShow: function onShow() {var _this6 = this;
+    this.title = null;
+    this.text = null;
+    this.picture = [];
     if (uni.getStorageSync('PersonInfo')) {
       this.$store.commit('InfoStep');
     }
+    var _this = this;
+    // 获取提问价格
+    this.$api.ApiPost({
+      type: 113 }).
+    then(function (res) {
+      _this.scout = res.data.pay_money;
+    });
     if (this.$store.state.type === -1) {
       uni.navigateTo({
         url: '/pages/user/login' });
 
     } else {
       this.getQuestionTypes = uni.getStorageSync('getQuestionTypes').data;
-      var _this = this;
+      var _this5 = this;
       this.getQuestionTypes.forEach(function (element, key) {
-        _this5.getQuestionTypes[key].hover = false;
+        _this6.getQuestionTypes[key].hover = false;
       });
       this.api();
       this.state = true;
@@ -570,7 +574,7 @@ var _default =
       this.$api.ApiPost({
         type: 202 }).
       then(function (res) {
-        _this5.expert = res.data;
+        _this6.expert = res.data;
       });
     }
   } };exports.default = _default;
