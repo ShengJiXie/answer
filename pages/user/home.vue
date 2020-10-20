@@ -94,6 +94,18 @@
 				datsd: []
 			}
 		},
+		onShow() {
+			this.init();
+			//进入我的页面清空提问的全局变量（标题、详情、图片）
+			getApp().globalData.form_title = ''
+			getApp().globalData.form_text = ''
+			getApp().globalData.form_picture = []
+ 			 
+			
+			
+			
+			
+		},
 		methods: {
 			rightClick() {
 				uni.showToast({
@@ -193,9 +205,6 @@
 				})
 			}
 		},
-		onShow() {
-			this.init();
-		}
 	}
 </script>
 
@@ -357,9 +366,8 @@
 			}
 
 			.user_home_content_main_item {
-				width: 90%;
+				width: 88%;
 				margin: 10px auto;
-				margin-right: 7%;
 				display: flex;
 				padding: 10px;
 				border-radius: 10px;

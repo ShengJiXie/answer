@@ -7,8 +7,14 @@
 		},
 		onShow: function() {
 		
+		},
+		globalData: {
+			form_title:'',
+			form_text:'',
+			form_picture: [],
+		 
 		}
-
+		
 
 	}
 </script>
