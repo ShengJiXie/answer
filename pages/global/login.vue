@@ -48,6 +48,9 @@
 				this.passwordType ? this.passwordType = false : this.passwordType = true
 			},
 			formSubmit() {
+				uni.showLoading({
+					title:'登录中...'
+				})
 				this.$api.ApiPost({
 					type: 62,
 					date: {
@@ -58,8 +61,7 @@
 					console.log(res)
 					if (res.code === 0) {
 						uni.showToast({
-							title: res.msg,
-							duration: 3000
+							title: res.msg
 						})
 						uni.setStorageSync('PersonInfo', res);
 						// 获取未回答问题
@@ -83,15 +85,17 @@
 							}
 						})
 						setTimeout(() => {
+							uni.hideToast();
+							uni.hideLoading();
 							uni.switchTab({
 								url: '/pages/user/person',
 							})
-						}, 2000)
-					}else{
+						}, 1000)
+					} else {
 						uni.showToast({
 							title: res.msg,
 							duration: 3000,
-							icon:'none'
+							icon: 'none'
 						})
 					}
 				})

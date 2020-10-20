@@ -194,6 +194,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var _default =
 {
   data: function data() {
@@ -324,50 +326,68 @@ var _default =
       });
     },
     formSubmit: function formSubmit() {
-      if (this.ids == "null") {
-        // 新增表单
-        var data = this.datas;
-        data.record_id = this.id;
-        data.diabetic_type = data.diabetic_type.id;
-        data.hypertension_Type = data.hypertension_Type.id;
-        data.therapy_method = data.therapy_method.id;
-        data.blood_status = data.blood_status.id;
-        data.diabetic_syndrome = data.diabetic_syndrome.id;
-        this.$api.ApiPost({
-          type: 69,
-          date: data }).
-        then(function (res) {
-          uni.showToast({
-            title: res.msg,
-            icon: "none",
-            duration: 3000 });
+      var data = this.datas;
+      if (
+      data.diabetic_type.id != undefined &&
+      data.hypertension_Type.id != undefined &&
+      data.therapy_method.id != undefined &&
+      data.blood_status.id != undefined &&
+      data.hypertension_Type.id != undefined &&
+      data.therapy_method.id != undefined &&
+      data.blood_status.id != undefined &&
+      data.diabetic_syndrome.id != undefined)
+      {
+        if (this.ids == "null") {
+          // 新增表单
+          data.record_id = this.id;
+          data.diabetic_type = data.diabetic_type.id;
+          data.hypertension_Type = data.hypertension_Type.id;
+          data.therapy_method = data.therapy_method.id;
+          data.blood_status = data.blood_status.id;
+          data.diabetic_syndrome = data.diabetic_syndrome.id;
 
-          uni.navigateBack({
-            url: '/pages/user/article' });
+          this.$api.ApiPost({
+            type: 69,
+            date: data }).
+          then(function (res) {
+            uni.showToast({
+              title: res.msg,
+              icon: "none",
+              duration: 3000 });
 
-        });
+            uni.navigateBack({
+              url: '/pages/user/article' });
+
+          });
+        } else {
+          var _data = this.datas;
+          _data.chronic_id = _data.chronic_id;
+          _data.diabetic_type = _data.diabetic_type.id;
+          _data.hypertension_Type = _data.hypertension_Type.id;
+          _data.therapy_method = _data.therapy_method.id;
+          _data.blood_status = _data.blood_status.id;
+          _data.diabetic_syndrome = _data.diabetic_syndrome.id;
+          // 修改表单
+          this.$api.ApiPost({
+            type: 81,
+            date: _data }).
+          then(function (res) {
+            uni.showToast({
+              title: res.msg,
+              icon: "none",
+              duration: 3000 });
+
+            uni.navigateBack({
+              url: '/pages/user/article' });
+
+          });
+        }
       } else {
-        var _data = this.datas;
-        _data.chronic_id = _data.chronic_id;
-        _data.diabetic_type = _data.diabetic_type.id;
-        _data.hypertension_Type = _data.hypertension_Type.id;
-        _data.therapy_method = _data.therapy_method.id;
-        _data.blood_status = _data.blood_status.id;
-        _data.diabetic_syndrome = _data.diabetic_syndrome.id;
-        // 修改表单
-        this.$api.ApiPost({
-          type: 81,
-          date: _data }).
-        then(function (res) {
-          uni.showToast({
-            title: res.msg,
-            icon: "none",
-            duration: 3000 });
+        uni.showToast({
+          title: '请填写完整',
+          duration: 3000,
+          icon: 'none' });
 
-          uni.navigateBack({
-            url: '/pages/user/article' });
-
-        });
       }
     } },
 

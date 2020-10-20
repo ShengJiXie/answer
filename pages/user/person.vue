@@ -211,12 +211,12 @@
 					<view class="user_person_center_item_footer">
 						<text class="user_person_center_item_footer_p">{{item.question_status==1?'待解答':item.question_status==0?'待分配专家':item.question_status==2?'已解答':''}}</text>
 						<view class="user_person_center_item_footer_icon" v-if="person_store.type==2||person_store.type==1">
-							<van-button size="small" color="#F7F7F7" custom-style="color:#979797;border-radius: 8px;margin-right:5px;font-size:14px;"
+							<!-- <van-button size="small" color="#F7F7F7" custom-style="color:#979797;border-radius: 8px;margin-right:5px;font-size:14px;"
 							 icon="../../../../static/images/user/look_false.png" type="info">
 								忽略
-							</van-button>
+							</van-button> -->
 							<van-button size="small" color="#DBEAFF" custom-style="color:#3A8AFC;border-radius: 8px;font-size:14px;" icon="../../../../static/images/user/edit_true.png"
-							 type="info">
+							 type="info" @click="$store.commit('GlobalUrl','/pages/global/help?id='+item.id)">
 								回答
 							</van-button>
 						</view>

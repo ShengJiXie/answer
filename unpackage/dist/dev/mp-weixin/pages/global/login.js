@@ -180,6 +180,9 @@ var _default =
       this.passwordType ? this.passwordType = false : this.passwordType = true;
     },
     formSubmit: function formSubmit() {var _this = this;
+      uni.showLoading({
+        title: '登录中...' });
+
       this.$api.ApiPost({
         type: 62,
         date: {
@@ -190,8 +193,7 @@ var _default =
         console.log(res);
         if (res.code === 0) {
           uni.showToast({
-            title: res.msg,
-            duration: 3000 });
+            title: res.msg });
 
           uni.setStorageSync('PersonInfo', res);
           // 获取未回答问题
@@ -215,10 +217,12 @@ var _default =
 
 
           setTimeout(function () {
+            uni.hideToast();
+            uni.hideLoading();
             uni.switchTab({
               url: '/pages/user/person' });
 
-          }, 2000);
+          }, 1000);
         } else {
           uni.showToast({
             title: res.msg,

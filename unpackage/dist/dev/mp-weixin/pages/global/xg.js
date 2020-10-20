@@ -338,54 +338,71 @@ var _default =
       });
     },
     formSubmit: function formSubmit() {
-      if (this.ids == "null") {
-        // 新增表单
-        var data = this.datas;
-        data.record_id = this.id;
-        data.work_grade = data.work_grade.id;
-        data.sports_grade = data.sports_grade.id;
-        data.sleep_grade = data.sleep_grade.id;
-        data.mood_grade = data.mood_grade.id;
-        data.food_like = data.food_like.id;
-        data.drink_status = data.drink_status.id;
-        data.smoke_status = data.smoke_status.id;
-        this.$api.ApiPost({
-          type: 70,
-          date: data }).
-        then(function (res) {
-          uni.showToast({
-            title: res.msg,
-            icon: "none",
-            duration: 3000 });
+      var data = this.datas;
+      if (
+      data.work_grade.id != undefined &&
+      data.sports_grade.id != undefined &&
+      data.sleep_grade.id != undefined &&
+      data.mood_grade.id != undefined &&
+      data.food_like.id != undefined &&
+      data.drink_status.id != undefined &&
+      data.smoke_status.id != undefined)
+      {
 
-          uni.navigateBack({
-            url: '/pages/user/article' });
+        if (this.ids == "null") {
+          // 新增表单
+          data.record_id = this.id;
+          data.work_grade = data.work_grade.id;
+          data.sports_grade = data.sports_grade.id;
+          data.sleep_grade = data.sleep_grade.id;
+          data.mood_grade = data.mood_grade.id;
+          data.food_like = data.food_like.id;
+          data.drink_status = data.drink_status.id;
+          data.smoke_status = data.smoke_status.id;
+          this.$api.ApiPost({
+            type: 70,
+            date: data }).
+          then(function (res) {
+            uni.showToast({
+              title: res.msg,
+              icon: "none",
+              duration: 3000 });
 
-        });
+            uni.navigateBack({
+              url: '/pages/user/article' });
+
+          });
+        } else {
+          var _data = this.datas;
+          _data.chronic_id = _data.chronic_id;
+          _data.work_grade = _data.work_grade.id;
+          _data.sports_grade = _data.sports_grade.id;
+          _data.sleep_grade = _data.sleep_grade.id;
+          _data.mood_grade = _data.mood_grade.id;
+          _data.food_like = _data.food_like.id;
+          _data.drink_status = _data.drink_status.id;
+          _data.smoke_status = _data.smoke_status.id;
+          // 修改表单
+          this.$api.ApiPost({
+            type: 82,
+            date: _data }).
+          then(function (res) {
+            uni.showToast({
+              title: res.msg,
+              icon: "none",
+              duration: 3000 });
+
+            uni.navigateBack({
+              url: '/pages/user/article' });
+
+          });
+        }
       } else {
-        var _data = this.datas;
-        _data.chronic_id = _data.chronic_id;
-        _data.work_grade = _data.work_grade.id;
-        _data.sports_grade = _data.sports_grade.id;
-        _data.sleep_grade = _data.sleep_grade.id;
-        _data.mood_grade = _data.mood_grade.id;
-        _data.food_like = _data.food_like.id;
-        _data.drink_status = _data.drink_status.id;
-        _data.smoke_status = _data.smoke_status.id;
-        // 修改表单
-        this.$api.ApiPost({
-          type: 82,
-          date: _data }).
-        then(function (res) {
-          uni.showToast({
-            title: res.msg,
-            icon: "none",
-            duration: 3000 });
+        uni.showToast({
+          title: '请填写完整',
+          duration: 3000,
+          icon: 'none' });
 
-          uni.navigateBack({
-            url: '/pages/user/article' });
-
-        });
       }
     } },
 

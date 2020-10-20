@@ -185,6 +185,16 @@ var render = function() {
 
       var _temp7, _temp8
 
+      return _vm.$store.commit("GlobalUrl", "/pages/global/help?id=" + item.id)
+    }
+
+    _vm.e15 = function($event, item) {
+      var _temp9 = arguments[arguments.length - 1].currentTarget.dataset,
+        _temp10 = _temp9.eventParams || _temp9["event-params"],
+        item = _temp10.item
+
+      var _temp9, _temp10
+
       return _vm.$store.commit(
         "GlobalUrl",
         "/pages/user/helpArticle?id=" + item.id

@@ -10,11 +10,25 @@
 				</picker>
 			</view>
 			<view class="user_family_form_radio">
+				<text>糖尿病确诊日期:</text>
+				<picker @change="DateChanges" id="0" mode="date" style="width: 70%;" :value="datas.d_make_date" start="2010-01-01">
+					<view class="picker">
+						{{ datas.d_make_date!=undefined?datas.d_make_date:'糖尿病确诊日期'}}</view>
+				</picker>
+			</view>
+			<view class="user_family_form_radio">
 				<text>高血压类型</text>
 				<picker @change="PickerChanges" style="width: 70%;" id="1" value="0" range-key="name" :range="arr[1].optionList">
 					<view class="picker">
 						{{ datas.hypertension_Type.name!=undefined?datas.hypertension_Type.name:'请选择高血压类型'}}
 					</view>
+				</picker>
+			</view>
+			<view class="user_family_form_radio">
+				<text>高血压确诊日期:</text>
+				<picker @change="DateChanges" id="1" mode="date" style="width: 70%;" :value="datas.h_make_date" start="2010-01-01">
+					<view class="picker">
+						{{ datas.h_make_date!=undefined?datas.h_make_date:'请选择高血压确诊日期'}}</view>
 				</picker>
 			</view>
 			<view class="user_family_form_radio">
@@ -42,20 +56,8 @@
 				</picker>
 			</view>
 
-			<view class="user_family_form_radio">
-				<text>糖尿病确诊日期:</text>
-				<picker @change="DateChanges" id="0" mode="date" style="width: 70%;" :value="datas.d_make_date" start="2010-01-01">
-					<view class="picker">
-						{{ datas.d_make_date!=undefined?datas.d_make_date:'糖尿病确诊日期'}}</view>
-				</picker>
-			</view>
-			<view class="user_family_form_radio">
-				<text>高血压确诊日期:</text>
-				<picker @change="DateChanges" id="1" mode="date" style="width: 70%;" :value="datas.h_make_date" start="2010-01-01">
-					<view class="picker">
-						{{ datas.h_make_date!=undefined?datas.h_make_date:'请选择高血压确诊日期'}}</view>
-				</picker>
-			</view>
+			
+			
 			<button type="default" class="user_family_button" form-type="submit" @click="formSubmit">保存</button>
 		</view>
 	</view>
@@ -192,49 +194,67 @@
 				})
 			},
 			formSubmit() {
-				if (this.ids == "null") {
-					// 新增表单
-					let data = this.datas
-					data.record_id = this.id
-					data.diabetic_type = data.diabetic_type.id
-					data.hypertension_Type = data.hypertension_Type.id
-					data.therapy_method = data.therapy_method.id
-					data.blood_status = data.blood_status.id
-					data.diabetic_syndrome = data.diabetic_syndrome.id
-					this.$api.ApiPost({
-						type: 69,
-						date: data
-					}).then(res => {
-						uni.showToast({
-							title: res.msg,
-							icon: "none",
-							duration: 3000
+				let data = this.datas
+				if(
+				data.diabetic_type.id!=undefined&&
+				data.hypertension_Type.id!=undefined&&
+				data.therapy_method.id!=undefined&&
+				data.blood_status.id!=undefined&&
+				data.hypertension_Type.id!=undefined&&
+				data.therapy_method.id!=undefined&&
+				data.blood_status.id!=undefined&&
+				data.diabetic_syndrome.id!=undefined
+				){
+					if (this.ids == "null") {
+						// 新增表单
+						data.record_id = this.id
+						data.diabetic_type = data.diabetic_type.id
+						data.hypertension_Type = data.hypertension_Type.id
+						data.therapy_method = data.therapy_method.id
+						data.blood_status = data.blood_status.id
+						data.diabetic_syndrome = data.diabetic_syndrome.id
+					
+						this.$api.ApiPost({
+							type: 69,
+							date: data
+						}).then(res => {
+							uni.showToast({
+								title: res.msg,
+								icon: "none",
+								duration: 3000
+							})
+							uni.navigateBack({
+								url: '/pages/user/article'
+							})
 						})
-						uni.navigateBack({
-							url: '/pages/user/article'
+					} else {
+						let data = this.datas
+						data.chronic_id = data.chronic_id
+						data.diabetic_type = data.diabetic_type.id
+						data.hypertension_Type = data.hypertension_Type.id
+						data.therapy_method = data.therapy_method.id
+						data.blood_status = data.blood_status.id
+						data.diabetic_syndrome = data.diabetic_syndrome.id
+						// 修改表单
+						this.$api.ApiPost({
+							type: 81,
+							date: data
+						}).then(res => {
+							uni.showToast({
+								title: res.msg,
+								icon: "none",
+								duration: 3000
+							})
+							uni.navigateBack({
+								url: '/pages/user/article'
+							})
 						})
-					})
-				} else {
-					let data = this.datas
-					data.chronic_id = data.chronic_id
-					data.diabetic_type = data.diabetic_type.id
-					data.hypertension_Type = data.hypertension_Type.id
-					data.therapy_method = data.therapy_method.id
-					data.blood_status = data.blood_status.id
-					data.diabetic_syndrome = data.diabetic_syndrome.id
-					// 修改表单
-					this.$api.ApiPost({
-						type: 81,
-						date: data
-					}).then(res => {
-						uni.showToast({
-							title: res.msg,
-							icon: "none",
-							duration: 3000
-						})
-						uni.navigateBack({
-							url: '/pages/user/article'
-						})
+					}
+				}else{
+					uni.showToast({
+						title:'请填写完整',
+						duration:3000,
+						icon:'none'
 					})
 				}
 			},

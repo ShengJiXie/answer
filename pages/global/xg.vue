@@ -43,7 +43,7 @@
 			</view>
 			<view class="user_family_form_radio">
 				<text>饮酒情况</text>
-				<picker @change="PickerChanges" style="width: 70%;" id="5" value="0" range-key="name" :range="arr[4].optionList">
+				<picker @change="PickerChanges" style="width: 70%;" id="5" value="0" range-key="name" :range="arr[5].optionList">
 					<view class="picker">
 						{{ datas.drink_status.name!=undefined?datas.drink_status.name:'请选择饮酒情况'}}
 					</view>
@@ -51,7 +51,7 @@
 			</view>
 			<view class="user_family_form_radio">
 				<text>吸烟情况</text>
-				<picker @change="PickerChanges" style="width: 70%;" id="6" value="0" range-key="name" :range="arr[4].optionList">
+				<picker @change="PickerChanges" style="width: 70%;" id="6" value="0" range-key="name" :range="arr[6].optionList">
 					<view class="picker">
 						{{ datas.smoke_status.name!=undefined?datas.smoke_status.name:'请选择吸烟情况'}}
 					</view>
@@ -206,53 +206,70 @@
 				})
 			},
 			formSubmit() {
-				if (this.ids == "null") {
-					// 新增表单
-					let data = this.datas
-					data.record_id = this.id
-					data.work_grade = data.work_grade.id
-					data.sports_grade = data.sports_grade.id
-					data.sleep_grade = data.sleep_grade.id
-					data.mood_grade = data.mood_grade.id
-					data.food_like = data.food_like.id
-					data.drink_status = data.drink_status.id
-					data.smoke_status = data.smoke_status.id
-					this.$api.ApiPost({
-						type: 70,
-						date: data
-					}).then(res => {
-						uni.showToast({
-							title: res.msg,
-							icon: "none",
-							duration: 3000
+				let data = this.datas
+				if (
+					data.work_grade.id != undefined &&
+					data.sports_grade.id != undefined &&
+					data.sleep_grade.id != undefined &&
+					data.mood_grade.id != undefined &&
+					data.food_like.id != undefined &&
+					data.drink_status.id != undefined &&
+					data.smoke_status.id != undefined
+				) {
+
+					if (this.ids == "null") {
+						// 新增表单
+						data.record_id = this.id
+						data.work_grade = data.work_grade.id
+						data.sports_grade = data.sports_grade.id
+						data.sleep_grade = data.sleep_grade.id
+						data.mood_grade = data.mood_grade.id
+						data.food_like = data.food_like.id
+						data.drink_status = data.drink_status.id
+						data.smoke_status = data.smoke_status.id
+						this.$api.ApiPost({
+							type: 70,
+							date: data
+						}).then(res => {
+							uni.showToast({
+								title: res.msg,
+								icon: "none",
+								duration: 3000
+							})
+							uni.navigateBack({
+								url: '/pages/user/article'
+							})
 						})
-						uni.navigateBack({
-							url: '/pages/user/article'
+					} else {
+						let data = this.datas
+						data.chronic_id = data.chronic_id
+						data.work_grade = data.work_grade.id
+						data.sports_grade = data.sports_grade.id
+						data.sleep_grade = data.sleep_grade.id
+						data.mood_grade = data.mood_grade.id
+						data.food_like = data.food_like.id
+						data.drink_status = data.drink_status.id
+						data.smoke_status = data.smoke_status.id
+						// 修改表单
+						this.$api.ApiPost({
+							type: 82,
+							date: data
+						}).then(res => {
+							uni.showToast({
+								title: res.msg,
+								icon: "none",
+								duration: 3000
+							})
+							uni.navigateBack({
+								url: '/pages/user/article'
+							})
 						})
-					})
+					}
 				} else {
-					let data = this.datas
-					data.chronic_id = data.chronic_id
-					data.work_grade = data.work_grade.id
-					data.sports_grade = data.sports_grade.id
-					data.sleep_grade = data.sleep_grade.id
-					data.mood_grade = data.mood_grade.id
-					data.food_like = data.food_like.id
-					data.drink_status = data.drink_status.id
-					data.smoke_status = data.smoke_status.id
-					// 修改表单
-					this.$api.ApiPost({
-						type: 82,
-						date: data
-					}).then(res => {
-						uni.showToast({
-							title: res.msg,
-							icon: "none",
-							duration: 3000
-						})
-						uni.navigateBack({
-							url: '/pages/user/article'
-						})
+					uni.showToast({
+						title: '请填写完整',
+						duration: 3000,
+						icon: 'none'
 					})
 				}
 			},

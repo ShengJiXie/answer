@@ -130,7 +130,34 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -156,6 +183,7 @@ var _default =
       store: this.$store.state,
       active: 0,
       textarea: null,
+      state: false,
       type: 0,
       arr: [],
       id: null,
@@ -170,7 +198,7 @@ var _default =
     imgdelet: function imgdelet(e) {
       this.picture.splice(e.detail.index, 1);
     },
-    afterRead: function afterRead(e) {var _this = this;
+    afterRead: function afterRead(e) {var _this2 = this;
       this.$api.ApiPost({
         type: 666,
         date: {
@@ -185,7 +213,7 @@ var _default =
             duration: 3000 });
 
         }
-        _this.picture.push({
+        _this2.picture.push({
           url: data.url,
           deletable: true });
 
@@ -225,10 +253,24 @@ var _default =
           duration: 3000 });
 
       }
+    },
+    init: function init(option) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _this;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                _this = _this3;_context.next = 3;return (
+                  _this3.$api.ApiPost({
+                    type: 206,
+                    date: {
+                      questionId: option } }).
+
+                  then(function (res) {
+                    console.log(res);
+                    _this3.arr = res.data;
+                    _this3.state = true;
+                  }));case 3:case "end":return _context.stop();}}}, _callee);}))();
     } },
 
   onLoad: function onLoad(v) {
     this.id = v.id;
+    this.init(v.id);
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

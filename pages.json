@@ -86,7 +86,8 @@
 				"usingComponents": {
 					"van-tab": "/wxcomponents/vant/dist/tab/index",
 					"van-tabs": "/wxcomponents/vant/dist/tabs/index",
-					"van-uploader": "/wxcomponents/vant/dist/uploader/index"
+					"van-uploader": "/wxcomponents/vant/dist/uploader/index",
+					"van-divider": "/wxcomponents/vant/dist/divider/index"
 				}
 			}
 		}, {

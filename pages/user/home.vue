@@ -203,13 +203,17 @@
 	.user_home_header {
 		background: white;
 		padding: 10px 0;
-
 		swiper {
 			height: 170px;
-
-			image {
-				width: 100%;
-				height: 100%;
+			margin: 5px 0;
+			swiper-item {
+				image {
+					width: 90%;
+					border-radius: 20px;
+					height: 100%;
+					position: relative;
+					left: 5%;
+				}
 			}
 		}
 	}
@@ -233,6 +237,7 @@
 				top: -5px;
 				width: 250px;
 				height: 50px;
+
 				.user_home_notice_swiper {
 					.user_home_notice_item {
 						margin: 5px 0;
@@ -305,7 +310,7 @@
 
 		.user_home_icon {
 			position: absolute;
-			top: 240px;
+			top: 250px;
 			width: 40px;
 			right: 0;
 			text-align: center;

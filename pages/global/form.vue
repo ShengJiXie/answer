@@ -39,7 +39,7 @@
 			<!-- Tab标签页 -->
 			<!-- Tab标签页 -->
 			<view class="user_person_Tab" v-if="person_store.type===2||person_store.type===1">
-				<van-tabs :active="active" color="#0084FF" border="true">
+				<van-tabs :active="active" duration="0.1"  :lazy-render="false"  color="#0084FF" border="true">
 					<van-tab :title=" person_store.type===2||person_store.type===1?'未回答('+list.length+')':'我的提问'">
 						<view class="user_person_Tab_frist_button" :style="list.length!=0?'min-height: 0;':'min-height: 480px;'">
 							<view class="user_person_Tab_view" v-if="person_store.type===-1">
