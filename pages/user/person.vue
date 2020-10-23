@@ -423,6 +423,15 @@
 			}
 			this.api()
 		},
+		onShareAppMessage(){
+			console.log()
+			
+			return{
+				title:'',
+				imageUrl:'',
+				url:'/pages/user/person'
+			}
+		},
 		mounted() {
 
 			this.stats = true

@@ -236,7 +236,15 @@
 			"path": "pages/global/xg",
 			"style": {}
 		}
-	],
+	    ,{
+            "path" : "pages/userYinsi/userYinsi",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/userAgreement/userAgreement",
+            "style" : {}
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "健康问答",

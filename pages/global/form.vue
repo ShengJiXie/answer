@@ -31,7 +31,7 @@
 				<van-divider contentPosition="center" customStyle="font-size:13px" v-if="person_store.type==0">问题价值<text style="color:#E3BA3D">￥{{scout}}.00</text></van-divider>
 				<button type="default" class="user_article_button" form-type="submit" @click="submitform" v-if="person_store.type==0">支付提问</button>
 				<button type="default" class="user_article_button" form-type="submit" @click="submitform" v-if="person_store.type==2">提交</button>
-				<van-divider contentPosition="center" customStyle="font-size:11px" v-if="person_store.type==0">成为VIP会员即可<text style="color:#547FFF">免费提问></text></van-divider>
+				<van-divider contentPosition="center" customStyle="font-size:11px" v-if="person_store.type==0"><text style="color:#547FFF"></text></van-divider>
 			</form>
 		</view>
 
@@ -365,6 +365,15 @@
 				getApp().globalData.form_picture = v
 			},
 			 
+		},
+		onShareAppMessage(){
+			console.log()
+			
+			return{
+				title:'',
+				imageUrl:'',
+				url:'/pages/global/form'
+			}
 		},
 		onShow() {
 			

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "预约列表",
+  "usingComponents": {
+    "van-cell": "/wxcomponents/vant/dist/cell/index",
+    "van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+    "van-icon": "/wxcomponents/vant/dist/icon/index"
+  }
+}

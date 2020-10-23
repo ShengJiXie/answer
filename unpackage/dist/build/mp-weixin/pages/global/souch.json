@@ -1,0 +1,17 @@
+{
+  "navigationBarTitleText": "最近浏览",
+  "usingComponents": {
+    "van-tab": "/wxcomponents/vant/dist/tab/index",
+    "van-tabs": "/wxcomponents/vant/dist/tabs/index",
+    "van-row": "/wxcomponents/vant/dist/row/index",
+    "van-col": "/wxcomponents/vant/dist/col/index",
+    "van-cell": "/wxcomponents/vant/dist/cell/index",
+    "van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+    "van-button": "/wxcomponents/vant/dist/button/index",
+    "van-popup": "/wxcomponents/vant/dist/popup/index",
+    "van-uploader": "/wxcomponents/vant/dist/uploader/index",
+    "van-icon": "/wxcomponents/vant/dist/icon/index",
+    "van-divider": "/wxcomponents/vant/dist/divider/index",
+    "van-tag": "/wxcomponents/vant/dist/tag/index"
+  }
+}

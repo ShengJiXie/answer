@@ -18,7 +18,9 @@
     "pages/global/souch",
     "pages/global/globalForm",
     "pages/global/mx",
-    "pages/global/xg"
+    "pages/global/xg",
+    "pages/userYinsi/userYinsi",
+    "pages/userAgreement/userAgreement"
   ],
   "subPackages": [],
   "window": {
@@ -53,5 +55,5 @@
     ]
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap88.json"
+  "sitemapLocation": "sitemap24.json"
 }

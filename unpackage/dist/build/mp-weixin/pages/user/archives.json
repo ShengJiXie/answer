@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "档案详情",
+  "usingComponents": {
+    "van-cell": "/wxcomponents/vant/dist/cell/index",
+    "van-cell-group": "/wxcomponents/vant/dist/cell-group/index",
+    "van-collapse": "/wxcomponents/vant/dist/collapse/index",
+    "van-collapse-item": "/wxcomponents/vant/dist/collapse-item/index",
+    "van-field": "/wxcomponents/vant/dist/field/index",
+    "van-icon": "/wxcomponents/vant/dist/icon/index"
+  }
+}
