@@ -373,7 +373,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var _default =
+
+//将全局变量赋给表单
+var _data = getApp().globalData;var _default =
+
 {
   data: function data() {
     return {
@@ -382,14 +385,14 @@ var _default =
       type: 0,
       state: false,
       list: [],
-      text: null,
+      text: _data.form_text,
       show: false,
-      title: null,
+      title: _data.form_title,
       scout: 0,
       expert: [],
       lists: [],
       help: null,
-      picture: [], //图片数组	
+      picture: _data.form_picture, //图片数组	
       getQuestionTypes: [], //分类列表
       person_store: this.$store.state,
       rabclick: [] //点击的标签合集
@@ -482,9 +485,10 @@ var _default =
       });
     },
     submitform: function submitform() {
-      if (this.rabclick.length != 0 && this.title != null && this.title != "" && this.text != null && this.text != "") {
+      if (this.title != null && this.title != "" && this.text != null && this.text != "") {
         uni.showLoading({
           title: '发起支付中' });
+
 
         this.$api.ApiPost({
           type: 205,
@@ -523,7 +527,7 @@ var _default =
 
       } else {
         uni.showToast({
-          title: '请填写问题，标题，选择分类!',
+          title: '请填写问题标题和内容!',
           duration: 3000,
           icon: 'none' });
 
@@ -535,17 +539,45 @@ var _default =
         this.rabclick.splice(this.rabclick.lastIndexOf(this.getQuestionTypes[v].id), 1);
       } else {
         this.getQuestionTypes[v].hover = true;
+
         this.rabclick.push(this.getQuestionTypes[v].id);
+
       }
       this.$scope.setData({
         getQuestionTypes: this.getQuestionTypes });
 
     } },
 
+
+  watch: {
+    text: function text(v) {
+      getApp().globalData.form_text = v;
+    },
+    title: function title(v) {
+      getApp().globalData.form_title = v;
+    },
+    picture: function picture(v) {
+      getApp().globalData.form_picture = v;
+    } },
+
+
+  onShareAppMessage: function onShareAppMessage() {
+    console.log();
+
+    return {
+      title: '',
+      imageUrl: '',
+      url: '/pages/global/form' };
+
+  },
   onShow: function onShow() {var _this6 = this;
-    this.title = null;
-    this.text = null;
-    this.picture = [];
+
+    var data = getApp().globalData;
+    this.title = data.form_title;
+    this.text = data.form_text;
+    this.picture = data.form_picture;
+
+
     if (uni.getStorageSync('PersonInfo')) {
       this.$store.commit('InfoStep');
     }
@@ -562,6 +594,8 @@ var _default =
 
     } else {
       this.getQuestionTypes = uni.getStorageSync('getQuestionTypes').data;
+      // getApp().globalData.form_ids = uni.getStorageSync('getQuestionTypes').data
+      // this.getQuestionTypes =getApp().globalData.form_ids
       var _this5 = this;
       this.getQuestionTypes.forEach(function (element, key) {
         _this6.getQuestionTypes[key].hover = false;

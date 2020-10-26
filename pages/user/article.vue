@@ -41,6 +41,15 @@
 				title: '加载中...'
 			})
 		},
+		onShareAppMessage(){
+			console.log()
+			
+			return{
+				title:'',
+				imageUrl:'',
+				url:'/pages/user/article'
+			}
+		},
 		methods: {
 			async init(option) {
 				let _this = this

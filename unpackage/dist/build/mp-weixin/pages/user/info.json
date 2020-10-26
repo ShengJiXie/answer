@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "个人信息",
+  "usingComponents": {
+    "van-uploader": "/wxcomponents/vant/dist/uploader/index",
+    "van-action-sheet": "/wxcomponents/vant/dist/action-sheet/index",
+    "van-cell": "/wxcomponents/vant/dist/cell/index",
+    "van-cell-group": "/wxcomponents/vant/dist/cell-group/index"
+  }
+}

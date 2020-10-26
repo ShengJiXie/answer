@@ -6,7 +6,7 @@
 					<view class="user_form_title">
 						<input type="text" v-model="title" placeholder="请输入问题" />
 					</view>
-					<van-cell-group>
+					<!-- <van-cell-group>
 						<view style="width: 100%;padding: 10px 0;display: flex;">
 							<view style="width: 30%;">
 								<text>分类</text>
@@ -17,7 +17,7 @@
 								</view>
 							</view>
 						</view>
-					</van-cell-group>
+					</van-cell-group> -->
 					<view class="user_form_content">
 						<van-field :value="text" @change="textChange" type="textarea" placeholder="写输入您的问题,保持文字简练,表达清晰" :autosize="{minHeight:'100px'}"
 						 v-if="person_store.type==0" :border="false" />
@@ -31,7 +31,7 @@
 				<van-divider contentPosition="center" customStyle="font-size:13px" v-if="person_store.type==0">问题价值<text style="color:#E3BA3D">￥{{scout}}.00</text></van-divider>
 				<button type="default" class="user_article_button" form-type="submit" @click="submitform" v-if="person_store.type==0">支付提问</button>
 				<button type="default" class="user_article_button" form-type="submit" @click="submitform" v-if="person_store.type==2">提交</button>
-				<van-divider contentPosition="center" customStyle="font-size:11px" v-if="person_store.type==0">成为VIP会员即可<text style="color:#547FFF">免费提问></text></van-divider>
+				<van-divider contentPosition="center" customStyle="font-size:11px" v-if="person_store.type==0"><text style="color:#547FFF"></text></van-divider>
 			</form>
 		</view>
 
@@ -179,6 +179,9 @@
 </template>
 
 <script>
+	//将全局变量赋给表单
+	let data = getApp().globalData
+ 
 	export default {
 		data() {
 			return {
@@ -187,14 +190,14 @@
 				type: 0,
 				state: false,
 				list: [],
-				text: null,
+				text: data.form_text,
 				show: false,
-				title: null,
+				title: data.form_title,
 				scout: 0,
 				expert: [],
 				lists: [],
 				help: null,
-				picture: [], //图片数组	
+				picture: data.form_picture, //图片数组	
 				getQuestionTypes: [], //分类列表
 				person_store: this.$store.state,
 				rabclick: [], //点击的标签合集
@@ -287,10 +290,11 @@
 				})
 			},
 			submitform() {
-				if (this.rabclick.length != 0 && this.title != null && this.title != "" && this.text != null && this.text != "") {
+				if ( this.title != null && this.title != "" && this.text != null && this.text != "") {
 					uni.showLoading({
 						title: '发起支付中'
 					})
+					 
 					this.$api.ApiPost({
 						type: 205,
 						date: {
@@ -328,7 +332,7 @@
 
 				} else {
 					uni.showToast({
-						title: '请填写问题，标题，选择分类!',
+						title: '请填写问题标题和内容!',
 						duration: 3000,
 						icon: 'none'
 					})
@@ -340,17 +344,45 @@
 					this.rabclick.splice(this.rabclick.lastIndexOf(this.getQuestionTypes[v].id), 1)
 				} else {
 					this.getQuestionTypes[v].hover = true
+					
 					this.rabclick.push(this.getQuestionTypes[v].id)
+				 
 				}
 				this.$scope.setData({
 					getQuestionTypes: this.getQuestionTypes
 				})
 			}
 		},
+		 
+		watch: {
+			text(v) {
+				getApp().globalData.form_text = v
+			},
+			title(v) {
+				getApp().globalData.form_title = v
+			},
+			picture(v) {
+				getApp().globalData.form_picture = v
+			},
+			 
+		},
+		onShareAppMessage(){
+			console.log()
+			
+			return{
+				title:'',
+				imageUrl:'',
+				url:'/pages/global/form'
+			}
+		},
 		onShow() {
-			this.title = null
-			this.text = null
-			this.picture = [];
+			
+			let data = getApp().globalData
+			this.title = data.form_title
+			this.text = data.form_text
+			this.picture = data.form_picture
+		 
+			 
 			if (uni.getStorageSync('PersonInfo')) {
 				this.$store.commit('InfoStep')
 			}
@@ -367,6 +399,8 @@
 				})
 			} else {
 				this.getQuestionTypes = uni.getStorageSync('getQuestionTypes').data
+			// getApp().globalData.form_ids = uni.getStorageSync('getQuestionTypes').data
+			// this.getQuestionTypes =getApp().globalData.form_ids
 				let _this = this
 				this.getQuestionTypes.forEach((element, key) => {
 					this.getQuestionTypes[key].hover = false

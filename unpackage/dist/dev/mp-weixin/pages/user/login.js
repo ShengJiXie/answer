@@ -150,6 +150,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -162,6 +166,12 @@ var _default =
 
   },
   methods: {
+    to: function to(path) {
+      console.log('11111111110000');
+      uni.navigateTo({
+        url: "/pages/".concat(path, "/").concat(path) });
+
+    },
     userPhone: function userPhone(e) {
       this.$api.ApiPost({
         type: 100,

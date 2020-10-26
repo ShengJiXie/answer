@@ -173,6 +173,15 @@ var _default =
       title: '加载中...' });
 
   },
+  onShareAppMessage: function onShareAppMessage() {
+    console.log();
+
+    return {
+      title: '',
+      imageUrl: '',
+      url: '/pages/user/article' };
+
+  },
   methods: {
     init: function init(option) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _this;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
                 _this = _this2;_context.next = 3;return (

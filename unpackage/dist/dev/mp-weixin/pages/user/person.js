@@ -638,6 +638,15 @@ var _default =
     } },
 
   onShow: function onShow() {
+    //进入我的页面清空提问的全局变量（标题、详情、图片）
+    getApp().globalData.form_title = '';
+    getApp().globalData.form_text = '';
+    getApp().globalData.form_picture = [];
+
+
+
+
+
     if (uni.getStorageSync('PersonInfo')) {
       this.$store.commit('InfoStep');
       this.$api.ApiPost({
@@ -649,6 +658,15 @@ var _default =
 
     }
     this.api();
+  },
+  onShareAppMessage: function onShareAppMessage() {
+    console.log();
+
+    return {
+      title: '',
+      imageUrl: '',
+      url: '/pages/user/person' };
+
   },
   mounted: function mounted() {
 

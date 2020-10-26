@@ -249,6 +249,25 @@ var _default =
       datsd: [] };
 
   },
+  onShow: function onShow() {
+    this.init();
+    //进入我的页面清空提问的全局变量（标题、详情、图片）
+    getApp().globalData.form_title = '';
+    getApp().globalData.form_text = '';
+    getApp().globalData.form_picture = [];
+
+
+
+
+
+  },
+  onShareAppMessage: function onShareAppMessage() {
+    return {
+      title: '',
+      imageUrl: '',
+      url: '/pages/user/home' };
+
+  },
   methods: {
     rightClick: function rightClick() {
       uni.showToast({
@@ -346,11 +365,7 @@ var _default =
                 _this3.$scope.setData({
                   tab: _this.tab });case 17:case "end":return _context.stop();}}}, _callee);}))();
 
-    } },
-
-  onShow: function onShow() {
-    this.init();
-  } };exports.default = _default;
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

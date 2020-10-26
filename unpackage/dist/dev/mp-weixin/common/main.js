@@ -107,7 +107,12 @@ var _default =
   },
   onShow: function onShow() {
 
-  } };exports.default = _default;
+  },
+  /*全局变量，解决支付提问数据显示异常问题。*/
+  globalData: {
+    form_title: '',
+    form_text: '',
+    form_picture: [] } };exports.default = _default;
 
 /***/ }),
 /* 8 */

@@ -2556,13 +2556,11 @@ Dep.SharedObject.targetStack = [];
 function pushTarget (target) {
   Dep.SharedObject.targetStack.push(target);
   Dep.SharedObject.target = target;
-  Dep.target = target;
 }
 
 function popTarget () {
   Dep.SharedObject.targetStack.pop();
   Dep.SharedObject.target = Dep.SharedObject.targetStack[Dep.SharedObject.targetStack.length - 1];
-  Dep.target = Dep.SharedObject.target;
 }
 
 /*  */
@@ -7403,14 +7401,13 @@ function cloneWithData(vm) {
   }, ret);
 
   // vue-composition-api
-  var compositionApiState = vm.__composition_api_state__ || vm.__secret_vfa_state__;
-  var rawBindings = compositionApiState && compositionApiState.rawBindings;
+  var rawBindings = vm.__secret_vfa_state__ && vm.__secret_vfa_state__.rawBindings;
   if (rawBindings) {
     Object.keys(rawBindings).forEach(function (key) {
       ret[key] = vm[key];
     });
   }
-
+  
   //TODO 需要把无用数据处理掉，比如 list=>l0 则 list 需要移除，否则多传输一份数据
   Object.assign(ret, vm.$mp.data || {});
   if (
@@ -7882,9 +7879,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/HBuilderProjects/obj/pages.json ***!
-  \************************************************************************/
+/*!****************************************************************!*\
+  !*** D:/QYF-WorkSpace/Git_Pro/HQ_vue/qa_uniapp_new/pages.json ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8025,9 +8022,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 11 */
-/*!****************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/HBuilderProjects/obj/store/index.js ***!
-  \****************************************************************************/
+/*!********************************************************************!*\
+  !*** D:/QYF-WorkSpace/Git_Pro/HQ_vue/qa_uniapp_new/store/index.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9188,9 +9185,9 @@ var index = {
 
 /***/ }),
 /* 13 */
-/*!*******************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/HBuilderProjects/obj/common/request.js ***!
-  \*******************************************************************************/
+/*!***********************************************************************!*\
+  !*** D:/QYF-WorkSpace/Git_Pro/HQ_vue/qa_uniapp_new/common/request.js ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9249,9 +9246,9 @@ request;exports.default = _default;
 
 /***/ }),
 /* 14 */
-/*!***************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/HBuilderProjects/obj/common/api.js ***!
-  \***************************************************************************/
+/*!*******************************************************************!*\
+  !*** D:/QYF-WorkSpace/Git_Pro/HQ_vue/qa_uniapp_new/common/api.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

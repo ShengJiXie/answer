@@ -42,7 +42,8 @@
 	text-align: center;
 	left: 0;
 }
-.user_login_footer text {
+.user_login_footer view {
+	display: inline-block;
 	color: #B8C4CE;
 	font-size: 12px;
 }

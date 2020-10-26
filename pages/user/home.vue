@@ -36,7 +36,7 @@
 
 				<view v-for="(item,key) in  tab" :key="item[0]" :class="key===index?'user_home_classification_item user_home_classification_item_hover':'user_home_classification_item'"
 				 @click="home_Tabclick(key)">
-					<text>{{item.news_type}}</text>
+					<text class="class_text">{{item.news_type}}</text>
 				</view>
 			</view>
 			<view class="user_home_icon" @click="rightClick">
@@ -92,6 +92,25 @@
 				noticeList: [], //公告数组
 				textList: [], //文章数组
 				datsd: []
+			}
+		},
+		onShow() {
+			this.init();
+			//进入我的页面清空提问的全局变量（标题、详情、图片）
+			getApp().globalData.form_title = ''
+			getApp().globalData.form_text = ''
+			getApp().globalData.form_picture = []
+ 			 
+			
+			
+			
+			
+		},
+		onShareAppMessage(){
+			return{
+				title:'',
+				imageUrl:'',
+				url:'/pages/user/home'
 			}
 		},
 		methods: {
@@ -193,9 +212,6 @@
 				})
 			}
 		},
-		onShow() {
-			this.init();
-		}
 	}
 </script>
 
@@ -294,16 +310,22 @@
 			overflow: hidden;
 
 			.user_home_classification_item {
-				width: 20%;
+				// width: 10%;
 				height: 40px;
 				font-size: 14px;
-				padding: 0px 5px;
+				
 				text-align: center;
+		 
+			}
+			
+			.user_home_classification_item .class_text {
+				padding: 0px 10px  ;
 			}
 
 			.user_home_classification_item_hover {
 				background: url(../../static/images/user/user_home_classification_item_hover.png) no-repeat;
 				background-size: 100%;
+				padding: 0 18px; 
 				color: white;
 			}
 		}
@@ -348,18 +370,18 @@
 			counter-reset: sectioncounter;
 
 			.user_home_content_main_item_text::before {
-				content: counter(sectioncounter);
+				// content: counter(sectioncounter);
 				counter-increment: sectioncounter;
 				position: relative;
 				top: -5px;
 				color: #989898;
 				left: -20px;
+				font-size: 14px;
 			}
 
 			.user_home_content_main_item {
-				width: 90%;
+				width: 88%;
 				margin: 10px auto;
-				margin-right: 7%;
 				display: flex;
 				padding: 10px;
 				border-radius: 10px;
@@ -368,7 +390,6 @@
 
 				.user_home_content_main_item_img {
 					width: 20%;
-
 					image {
 						width: 85px;
 						height: 75px;
@@ -377,12 +398,12 @@
 				}
 
 				.user_home_content_main_item_text {
-					width: 60%;
-					padding-left: 20%;
-
+					margin-top: 42rpx;
+					width: 70%;
+					padding-left: 12%; 
+					padding-top: 5rpx;
 					.user_home_content_main_item_text_one {
-						font-weight: bold;
-						font-size: 13px;
+						font-size: 16px;
 						display: -webkit-box;
 						margin-top: -25px;
 						width: 100%;

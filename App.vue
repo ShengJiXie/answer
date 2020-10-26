@@ -7,8 +7,15 @@
 		},
 		onShow: function() {
 		
+		},
+		/*全局变量，解决支付提问数据显示异常问题。*/
+		globalData: {
+			form_title:'',
+			form_text:'',
+			form_picture: [],
+		 
 		}
-
+		
 
 	}
 </script>
