@@ -362,7 +362,7 @@
 				_this.scout = res.data.pay_money;
 			})
 			if (this.$store.state.type === -1) {
-				uni.navigateTo({
+				uni.navigateBack({
 					url: '/pages/user/login'
 				})
 			} else {

@@ -32,7 +32,7 @@
 		<!-- 公告结束 -->
 		<!-- 分类栏 -->
 		<view class="user_home_classification">
-			<view class="user_home_classification_main">
+			<view class="user_home_classification_main" :style="{'width':(tab.length*20)+'%'}">
 
 				<view v-for="(item,key) in  tab" :key="item[0]" :class="key===index?'user_home_classification_item user_home_classification_item_hover':'user_home_classification_item'"
 				 @click="home_Tabclick(key)">
