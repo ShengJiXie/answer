@@ -304,18 +304,15 @@
 		background: white;
 
 		.user_home_classification_main {
-			width: 200%;
 			padding-right: 32px;
 			display: flex;
 			overflow: hidden;
 
 			.user_home_classification_item {
-				// width: 10%;
-				height: 40px;
+				width: 15%;
+				height: 50px;
 				font-size: 14px;
-				
 				text-align: center;
-		 
 			}
 			
 			.user_home_classification_item .class_text {
@@ -325,7 +322,7 @@
 			.user_home_classification_item_hover {
 				background: url(../../static/images/user/user_home_classification_item_hover.png) no-repeat;
 				background-size: 100%;
-				padding: 0 18px; 
+				padding: 0 5px; 
 				color: white;
 			}
 		}

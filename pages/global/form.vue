@@ -394,7 +394,7 @@
 				_this.scout = res.data.pay_money;
 			})
 			if (this.$store.state.type === -1) {
-				uni.navigateBack({
+				uni.redirectTo({
 					url: '/pages/user/login'
 				})
 			} else {
