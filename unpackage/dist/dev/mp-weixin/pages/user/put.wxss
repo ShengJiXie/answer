@@ -1,24 +1,29 @@
+.van-field__input--right {
+  text-align: right;
+  font-size: 17px !important;
+}
 .user_put .form {
   padding: 0 1%;
   width: 98%;
 }
 .user_put .form .form_header .form_text {
+  font-size: 17px;
   background: white;
   padding: 20px 20px 0 20px;
 }
 .user_put .form .form_header .form_text .van-cell__title {
-  font-size: 14px !important;
+  font-size: 17px !important;
 }
 .user_put .form .form_center {
   background: white;
   padding: 20px 20px 0 35px;
 }
 .user_put .form .form_center .form_center_header {
-  font-size: 14px;
+  font-size: 17px;
   padding: 10px 0;
 }
 .user_put .form .form_center textarea {
-  font-size: 13px;
+  font-size: 17px;
 }
 .user_put .form .user_put_button {
   width: 80%;

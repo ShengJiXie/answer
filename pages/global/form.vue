@@ -18,8 +18,8 @@
 							</view>
 						</view>
 					</van-cell-group> -->
-					<view class="user_form_content">
-						<van-field :value="text" @change="textChange" type="textarea" placeholder="写输入您的问题,保持文字简练,表达清晰" :autosize="{minHeight:'100px'}"
+					<view class="user_form_content" style="font-size: 60px;">
+						<van-field :value="text" @change="textChange"  type="textarea" placeholder="写输入您的问题,保持文字简练,表达清晰" :autosize="{minHeight:'100px'}"
 						 v-if="person_store.type==0" :border="false" />
 						<!-- <textarea  v-if="person_store.type==0" v-model="text" placeholder="写输入您的问题,保持文字简练,表达清晰"></textarea> -->
 						<!-- <textarea @blur="bindTextAreaBlur" v-else placeholder="写输入您的问题,保持文字简练,表达清晰"></textarea> -->
@@ -421,6 +421,9 @@
 </script>
 
 <style lang="less">
+	.van-field__input--textarea {
+		font-size: 17px !important;
+	}
 	.user_form {
 		width: 90%;
 		margin: 10px auto;
@@ -437,14 +440,12 @@
 			.user_form_title {
 				border-bottom: 1px solid #dcdcdc;
 				padding: 10px;
-
+					
 				input {
-					font-size: 16px;
+					font-size: 19px;
 					font-weight: bold;
 				}
 			}
-
-
 		}
 
 		.user_article_button {
@@ -455,7 +456,8 @@
 			border-radius: 15px !important;
 		}
 	}
-
+		
+		 
 	// 转接专家窗口
 	.user_person_zj {
 		width: 95%;

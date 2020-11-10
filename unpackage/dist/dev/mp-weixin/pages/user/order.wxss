@@ -22,6 +22,9 @@ page {
   opacity: 0.98;
   border-radius: 5px;
 }
+.user_order .user_order_main .user_order_main_item .user_order_main_item_header {
+  font-size: 15px;
+}
 .user_order .user_order_main .user_order_main_item .user_order_main_item_header .van-cell {
   background: #F3F3F3 !important;
 }
@@ -32,7 +35,7 @@ page {
 }
 .user_order .user_order_main .user_order_main_item .user_order_main_item_center .user_order_main_item_center_item {
   color: #9F9F9F;
-  font-size: 13px;
+  font-size: 15px;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -56,14 +59,14 @@ page {
 }
 .user_order .user_order_footer {
   position: fixed;
-  bottom: 40px;
-  right: 15px;
-  width: 70px;
+  bottom: 60px;
+  right: 30px;
+  width: 80px;
   text-align: center;
 }
 .user_order .user_order_footer text {
   display: block;
   color: #1569E4;
-  font-size: 15px;
+  font-size: 16px;
 }
 

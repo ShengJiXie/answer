@@ -20,6 +20,7 @@
 		{
 			"path": "pages/user/person",
 			"style": {
+				 
 				"navigationBarTitleText": "个人中心",
 				"backgroundColor": "#F4F6F8",
 				"usingComponents": {

@@ -7,7 +7,7 @@
 					<van-cell-group>
 						<van-cell title="预约类型" v-if="id===0" :value="type" size="large" @click="typeAlert" />
 						<van-field label="预约类型" v-else disabled :value="type" input-align="right" />
-						<van-field label="预约姓名" :disabled="id!=0" :value="name" id='name' placeholder="请输入姓名" input-align="right" @change="onChanges" />
+						<van-field label="预约姓名"  :disabled="id!=0" :value="name" id='name' placeholder="请输入姓名" input-align="right" @change="onChanges" />
 						<van-field label="联系电话" :disabled="id!=0" :value="phone" id='phone' type='number' placeholder="请输入联系电话" @change="onChanges"
 						 input-align="right" />
 						<van-cell title="预约时间" v-if="id===0" :value="time" size="large" @click="showAlert" />
@@ -27,8 +27,8 @@
 				<view class="form_center_header">
 					<text>预约内容:</text>
 				</view>
-				<textarea placeholder="请输入预约内容..." maxlength="200" :disabled="id!=0" id="desc" :value='desc' @input="onChanges"></textarea>
-				<text style="display: block;text-align: right;font-size: 11px;color:#2C2C2C;padding: 5px 0;">200字以内</text>
+				<textarea style="font-size: 17px;" placeholder="请输入预约内容..." maxlength="200" :disabled="id!=0" id="desc" :value='desc' @input="onChanges"></textarea>
+				<text style="display: block;text-align: right;font-size: 14px;color:#2C2C2C;padding: 5px 0;">200字以内</text>
 			</view>
 			<button type="default" class="user_put_button" form-type="submit" v-if='id===0' @click="formSubmit">提交</button>
 			<button type="default" class="user_put_button" form-type="submit" v-else @click="removes">取消预约</button>
@@ -214,6 +214,10 @@
 </script>
 
 <style lang="less">
+	.van-field__input--right {
+		text-align: right;
+		font-size: 17px !important;
+	}
 	.user_put {
 		.form {
 			padding: 0 1%;
@@ -221,11 +225,12 @@
 
 			.form_header {
 				.form_text {
+					font-size: 17px;
 					background: white;
 					padding: 20px 20px 0 20px;
 
 					.van-cell__title {
-						font-size: 14px !important;
+						font-size: 17px !important;
 					}
 				}
 			}
@@ -235,12 +240,12 @@
 				padding: 20px 20px 0 35px;
 
 				.form_center_header {
-					font-size: 14px;
+					font-size: 17px;
 					padding: 10px 0;
 				}
 
 				textarea {
-					font-size: 13px;
+					font-size: 17px;
 				}
 			}
 

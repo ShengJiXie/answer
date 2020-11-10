@@ -1,3 +1,6 @@
+.van-field__input--textarea {
+  font-size: 17px !important;
+}
 .user_form {
   width: 90%;
   margin: 10px auto;
@@ -16,7 +19,7 @@
   padding: 10px;
 }
 .user_form .user_form_main .user_form_title input {
-  font-size: 16px;
+  font-size: 19px;
   font-weight: bold;
 }
 .user_form .user_article_button {

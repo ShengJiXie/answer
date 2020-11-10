@@ -90,6 +90,7 @@
 				border-radius: 5px;
 
 				.user_order_main_item_header {
+					font-size: 15px;
 					.van-cell {
 						background: #F3F3F3 !important;
 					}
@@ -102,7 +103,7 @@
 
 					.user_order_main_item_center_item {
 						color: #9F9F9F;
-						font-size: 13px;
+						font-size: 15px;
 						display: flex;
 						height: 40px;
 						line-height: 40px;
@@ -131,15 +132,15 @@
 
 		.user_order_footer {
 			position: fixed;
-			bottom: 40px;
-			right: 15px;
-			width: 70px;
+			bottom: 60px;
+			right: 30px;
+			width: 80px;
 			text-align: center;
 
 			text {
 				display: block;
 				color: #1569E4;
-				font-size: 15px;
+				font-size: 16px;
 			}
 		}
 	}
