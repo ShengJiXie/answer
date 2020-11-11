@@ -5,8 +5,11 @@
 .user_person .user_person_header .user_person_header_main {
   height: 130px;
   width: 90%;
-  box-shadow: 0px 25px 17px 0px rgba(51, 133, 253, 0.23);
-  border-radius: 15px;
+  -webkit-box-shadow: 0px 25px 17px 0px rgba(51, 133, 253, 0.23);
+          box-shadow: 0px 25px 17px 0px rgba(51, 133, 253, 0.23);
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#1977FF), to(#408DFC));
   background: -webkit-linear-gradient(top, #1977FF, #408DFC);
   background: linear-gradient(180deg, #1977FF, #408DFC);
   margin: 0 auto;
@@ -26,7 +29,8 @@
 .user_person .user_person_header .user_person_header_main .user_person_header_main_item .user_person_header_main_left image {
   width: 60px;
   height: 60px;
-  border-radius: 50px;
+  -webkit-border-radius: 50px;
+          border-radius: 50px;
   background: white;
 }
 .user_person .user_person_header .user_person_header_main .user_person_header_main_item .user_person_header_main_center {
@@ -46,12 +50,15 @@
   letter-spacing: 1px;
   text-align: center;
   background: white;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  -webkit-border-top-left-radius: 10px;
+          border-top-left-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+          border-bottom-left-radius: 10px;
 }
 .user_person .user_person_header .user_person_header_footer {
   width: 80%;
-  border-radius: 20px;
+  -webkit-border-radius: 20px;
+          border-radius: 20px;
   background: white;
   height: 45px;
   margin: 0 auto;
@@ -81,7 +88,8 @@
 .user_person .user_person_header .user_person_header_footer .user_person_header_footer_right .user_person_header_footer_right_button {
   width: 80%;
   margin: 0 auto;
-  border-radius: 20px;
+  -webkit-border-radius: 20px;
+          border-radius: 20px;
   color: white;
   background: #4188f9;
   text-align: center;
@@ -109,8 +117,10 @@
 .user_person .user_person_header .user_person_header_footer_two .van-row van-col view {
   width: 100%;
   height: 100%;
-  box-shadow: 0px 10px 23px -5px rgba(21, 21, 21, 0.1);
-  border-radius: 12px;
+  -webkit-box-shadow: 0px 10px 23px -5px rgba(21, 21, 21, 0.1);
+          box-shadow: 0px 10px 23px -5px rgba(21, 21, 21, 0.1);
+  -webkit-border-radius: 12px;
+          border-radius: 12px;
   display: grid;
   text-align: center;
   color: white;
@@ -153,8 +163,10 @@
   width: 95%;
   background: white;
   padding: 20px 2.5%;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  -webkit-border-bottom-left-radius: 20px;
+          border-bottom-left-radius: 20px;
+  -webkit-border-bottom-right-radius: 20px;
+          border-bottom-right-radius: 20px;
   border-bottom: 1px solid white;
 }
 .user_person .user_person_Tab .user_person_Tab_frist_button .user_person_Tab_view {
@@ -170,7 +182,8 @@
   text-align: center;
   background: #ECECEC;
   color: black;
-  border-radius: 15px;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
 }
 .user_person .user_person_Tab .user_person_Tab_frist_button .user_person_Tab_view .user_person_Tab_frist_button_item text {
   font-size: 13px;
@@ -185,8 +198,10 @@
 .user_person .user_person_center .user_person_center_item {
   width: 80%;
   margin: 10px auto;
-  box-shadow: 0px 7px 19px 0px rgba(215, 215, 215, 0.82);
-  border-radius: 8px;
+  -webkit-box-shadow: 0px 7px 19px 0px rgba(215, 215, 215, 0.82);
+          box-shadow: 0px 7px 19px 0px rgba(215, 215, 215, 0.82);
+  -webkit-border-radius: 8px;
+          border-radius: 8px;
   background: white;
   padding: 10px 20px 20px 20px;
   display: grid;
@@ -304,7 +319,8 @@
   width: 15%;
 }
 .user_person .user_person_zj .user_person_zj_center .img image {
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
   width: 50px;
   height: 50px;
 }

@@ -8,7 +8,8 @@ page {
 .user_family .user_family_center .user_family_center_item {
   width: 90%;
   margin: 10px auto;
-  border-radius: 10px;
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
   background: #f3f8ff;
   height: 80px;
 }
@@ -42,7 +43,8 @@ page {
 .user_family .user_family_form .user_family_form_text {
   display: grid;
   background: white !important;
-  border-radius: 1px;
+  -webkit-border-radius: 1px;
+          border-radius: 1px;
   color: #9A9A9A;
   padding: 10px;
 }
@@ -78,7 +80,8 @@ page {
   margin: 20px auto;
   color: white !important;
   background: #5480FF !important;
-  border-radius: 20px !important;
+  -webkit-border-radius: 20px !important;
+          border-radius: 20px !important;
 }
 .user_family .user_family_form_radio {
   padding: 10px 10px;
@@ -87,7 +90,8 @@ page {
   display: flex;
   background: white;
   border-bottom: 1px solid #EDEDED;
-  border-radius: 5px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
 }
 .user_family .user_family_form_radio .user_family_form_radio_item {
   display: -webkit-box;
@@ -99,7 +103,8 @@ page {
   width: 58px;
   height: 24px;
   background: #F9F9F9;
-  border-radius: 1px;
+  -webkit-border-radius: 1px;
+          border-radius: 1px;
   margin: 0 5px;
   text-align: center;
   color: #9A9A9A;

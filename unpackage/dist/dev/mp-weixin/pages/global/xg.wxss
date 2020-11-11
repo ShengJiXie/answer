@@ -5,7 +5,8 @@
   display: flex;
   background: white;
   border-bottom: 1px solid #EDEDED;
-  border-radius: 5px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
 }
 .globalForm .user_family_form_radio text {
   color: #646566;
@@ -25,7 +26,8 @@
   margin: 20px auto;
   color: white !important;
   background: #5480FF !important;
-  border-radius: 20px !important;
+  -webkit-border-radius: 20px !important;
+          border-radius: 20px !important;
 }
 .globalForm .picker {
   color: gray;

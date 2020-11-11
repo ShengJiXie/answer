@@ -30,7 +30,8 @@
   height: 40px;
 }
 .user_info .forms .van-icon--image image {
-  border-radius: 65px;
+  -webkit-border-radius: 65px;
+          border-radius: 65px;
 }
 .user_info .forms .upload_img {
   width: 100%;
@@ -47,7 +48,8 @@
 .user_info .forms .upload_img image {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
 }
 .user_info .forms .user_info_item {
   border: none;
@@ -59,6 +61,7 @@
   padding: 10px 0;
 }
 .user_info .forms .van-uploader__upload {
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
 }
 

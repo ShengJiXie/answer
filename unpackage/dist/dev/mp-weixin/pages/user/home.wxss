@@ -8,7 +8,8 @@
 }
 .user_home_header swiper swiper-item image {
   width: 90%;
-  border-radius: 20px;
+  -webkit-border-radius: 20px;
+          border-radius: 20px;
   height: 100%;
   position: relative;
   left: 5%;
@@ -145,7 +146,8 @@
   display: -webkit-flex;
   display: flex;
   padding: 10px;
-  border-radius: 10px;
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
   padding-left: 15px;
   background: white;
 }
@@ -155,7 +157,8 @@
 .user_home_content .user_home_content_main .user_home_content_main_item .user_home_content_main_item_img image {
   width: 85px;
   height: 75px;
-  border-radius: 5px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
 }
 .user_home_content .user_home_content_main .user_home_content_main_item .user_home_content_main_item_text {
   margin-top: 42rpx;

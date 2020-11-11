@@ -43,6 +43,7 @@
   margin: 20px auto;
   color: white !important;
   background: #5480FF !important;
-  border-radius: 20px !important;
+  -webkit-border-radius: 20px !important;
+          border-radius: 20px !important;
 }
 

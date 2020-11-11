@@ -249,6 +249,11 @@ const ApiPost = obj => {
 				request('api/updateTel', 'updateTel', obj.date, 'POST').then(respone => {
 					resolve(respone)
 				})
+			}else if (obj.type === 20201110) {
+				// 绑定手机号
+				request('api/getHotTel', 'getHotTel', obj.date, 'GET').then(respone => {
+					resolve(respone)
+				})
 			}
 
 			setTimeout(function() {

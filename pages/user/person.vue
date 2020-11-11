@@ -198,7 +198,11 @@
 			<van-cell title="我的档案" url="/pages/user/archives" icon="../../../../static/images/user/person_my.png" is-link />
 			<van-cell title="家人档案" url="/pages/user/family" icon="../../../../static/images/user/person_here.png" is-link />
 		</view>
+	
 		<view class="user_person_cell_help" v-if="person_store.type==1||person_store.type==0">
+			<view style="position: relative;">				 <van-cell title="联系客服"  icon="../../../../static/images/user/wx.png" is-link />				 <button  style="position:absolute; width:100%; height:100%; left:0; top:0; opacity:0; z-index:2" open-type='contact' session-from='' hover-class='none'>				 </button>			</view>
+			<van-cell title="电话客服" icon="../../../../static/images/user/tel.png" :value="hotTel" is-link @click="toTel"/>
+			  
 			<van-cell title="最新问题" icon="../../../../static/images/user/helps.png" v-if='person_store.type==1' link-type='switchTab'
 			 url="/pages/global/form" value="更多问题" is-link />
 			<van-cell title="最新问题" icon="../../../../static/images/user/helps.png" v-if='person_store.type==0' link-type='navigateTo'
@@ -293,9 +297,24 @@
 				stats: false,
 				userInfo: [], //用户信息
 				expert: [], //专家列表
+				hotTel: '4000886616'
 			};
 		},
 		methods: {
+		    toTel(){
+					console.log(this.hotTel);
+					uni.makePhoneCall({
+						'phoneNumber': this.hotTel
+					})
+			},
+			getHotTel(){
+				this.$api.ApiPost({
+					type: 20201110,
+					date: {}
+				}).then(res => {
+					this.hotTel = res.data.hot_tel;
+				})
+			},
 			tabClick(v) {
 				this.type = v
 			},
@@ -407,10 +426,6 @@
 			getApp().globalData.form_text = ''
 			getApp().globalData.form_picture = []
 			 
-			 
-			
-			
-			
 			if (uni.getStorageSync('PersonInfo')) {
 				this.$store.commit('InfoStep')
 				this.$api.ApiPost({
@@ -422,6 +437,8 @@
 				})
 			}
 			this.api()
+			
+			this.getHotTel();
 		},
 		onShareAppMessage(){
 			console.log()
@@ -603,6 +620,7 @@
 				}
 			}
 		}
+		
 
 		// 更多问题
 		.user_person_cell_help {

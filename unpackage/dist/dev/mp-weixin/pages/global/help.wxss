@@ -3,12 +3,14 @@
   margin: 10px auto;
 }
 .user_form .user_form_main {
-  box-shadow: 33px 57px 188px 0px rgba(21, 21, 21, 0.1);
+  -webkit-box-shadow: 33px 57px 188px 0px rgba(21, 21, 21, 0.1);
+          box-shadow: 33px 57px 188px 0px rgba(21, 21, 21, 0.1);
   display: block;
   background: white;
   width: 90%;
   height: 95%;
-  border-radius: 5px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
   padding: 2.5% 5%;
 }
 .user_form .user_form_main .user_helpArticle {
@@ -25,7 +27,8 @@
 .user_form .user_form_main .user_helpArticle .user_helpArticle_avatar image {
   width: 30px;
   height: 30px;
-  border-radius: 50%;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
   margin-right: 5px;
 }
 .user_form .user_form_main .user_helpArticle .user_helpArticle_avatar text {
@@ -79,6 +82,7 @@
   margin: 20px auto;
   color: white !important;
   background: #5480FF !important;
-  border-radius: 15px !important;
+  -webkit-border-radius: 15px !important;
+          border-radius: 15px !important;
 }
 
