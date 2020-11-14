@@ -200,7 +200,7 @@
 		</view>
 	
 		<view class="user_person_cell_help" v-if="person_store.type==1||person_store.type==0">
-			<view style="position: relative;">				 <van-cell title="联系客服"  icon="../../../../static/images/user/wx.png" is-link />				 <button  style="position:absolute; width:100%; height:100%; left:0; top:0; opacity:0; z-index:2" open-type='contact' session-from='' hover-class='none'>				 </button>			</view>
+			<view style="position: relative;">				 <van-cell title="在线客服"  icon="../../../../static/images/user/wx.png" is-link />				 <button  style="position:absolute; width:100%; height:100%; left:0; top:0; opacity:0; z-index:2" open-type='contact' session-from='' hover-class='none'>				 </button>			</view>
 			<van-cell title="电话客服" icon="../../../../static/images/user/tel.png" :value="hotTel" is-link @click="toTel"/>
 			  
 			<van-cell title="最新问题" icon="../../../../static/images/user/helps.png" v-if='person_store.type==1' link-type='switchTab'
@@ -625,10 +625,20 @@
 		// 更多问题
 		.user_person_cell_help {
 			.van-cell {
-				padding: 15px 20px;
+				padding: 23px;
 
-				.van-cell__left-icon-wrap {
-					margin-top: -3px;
+				.van-cell__title {
+					font-size: 16px;
+					font-family: siyuan;
+					font-weight: 400;
+
+					color: #000000;
+				}
+
+				.van-icon--image {
+					width: 24px;
+					height: 18px;
+					margin-right: 10px;
 				}
 			}
 		}

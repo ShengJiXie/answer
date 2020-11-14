@@ -309,7 +309,7 @@
 			overflow: hidden;
 
 			.user_home_classification_item {
-				width: 9%;
+				width: 20%;
 				height: 50px;
 				font-size: 15px;
 				text-align: center;

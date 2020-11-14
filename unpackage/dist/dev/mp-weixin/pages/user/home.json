@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "健康社区",
+  "navigationBarTitleText": "健康助手",
   "backgroundColor": "#F4F6F8",
   "usingComponents": {
     "van-empty": "/wxcomponents/vant/dist/empty/index",

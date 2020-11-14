@@ -151,10 +151,18 @@
   margin-right: 10px;
 }
 .user_person .user_person_cell_help .van-cell {
-  padding: 15px 20px;
+  padding: 23px;
 }
-.user_person .user_person_cell_help .van-cell .van-cell__left-icon-wrap {
-  margin-top: -3px;
+.user_person .user_person_cell_help .van-cell .van-cell__title {
+  font-size: 16px;
+  font-family: siyuan;
+  font-weight: 400;
+  color: #000000;
+}
+.user_person .user_person_cell_help .van-cell .van-icon--image {
+  width: 24px;
+  height: 18px;
+  margin-right: 10px;
 }
 .user_person .user_person_Tab .van-ellipsis {
   font-size: 15px;
