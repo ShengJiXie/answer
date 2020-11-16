@@ -16,7 +16,7 @@
 					</van-cell-group>
 				</view>
 				<van-popup :show="typeshow" position="bottom">
-					<van-picker :columns="columns" :disabled="id!=0" default-index="2" @change="onChange" />
+					<van-picker :columns="columns" :disabled="id!=0" default-index="1" @change="onChange" />
 				</van-popup>
 				<van-popup :show="show" position="bottom">
 					<van-datetime-picker type="datetime" title="选择预约时间" @cancel="showAlert" @confirm="onTure" :value="currentDate"
@@ -49,15 +49,28 @@
 				desc: '',
 				typeshow: false,
 				statetype: false,
-				columns: ['体检预约', '挂号预约'],
-				type: '体检预约',
-				id: 0
+				columns: [],
+				type: '请选择',
+				id: 0,
+				subTypes: [],
+				sub_type: -1
 			}
 		},
 		methods: {
 			onChange(event) {
+				let that = this;
 				this.type = event.detail.value
 				this.typeAlert();
+				
+				this.subTypes.forEach(function (item){
+					console.log(item);
+					if(item.sub_type == that.type){
+						that.sub_type = item.id;
+						return;
+					}
+				});
+				
+				
 			},
 			typeAlert() {
 				this.typeshow ? this.typeshow = false : this.typeshow = true
@@ -141,7 +154,7 @@
 			},
 			// 表单提交
 			formSubmit() {
-				if (this.name && this.phone && this.desc) {
+				if (this.sub_type != -1 && this.name && this.phone && this.desc) {
 					uni.showLoading({
 						title: '正在拼命预约'
 					})
@@ -149,7 +162,7 @@
 						type: 21,
 						date: {
 							member_id: this.$store.state.member_id,
-							sub_type: this.type == "体检预约" ? 0 : 1,
+							sub_type: this.sub_type,
 							name: this.name,
 							tel: this.phone,
 							sub_time: this.time,
@@ -200,14 +213,30 @@
 				}).then(res => {
 					console.log(res)
 					this.name = res.data.name,
-						this.phone = res.data.tel,
-						this.time = res.data.sub_time,
-						this.desc = res.data.sub_text,
-						this.type = this.columns[res.data.sub_type]
+					this.phone = res.data.tel,
+					this.time = res.data.sub_time,
+					this.desc = res.data.sub_text,
+					//this.type = this.columns[res.data.sub_type]
+					this.type = res.data.typeName
 					this.statetype = true
 				})
 			} else {
+				let that = this;
 				this.statetype = true
+				
+				this.$api.ApiPost({
+					type: 20201116,
+					date: {}
+				}).then(res => {
+					console.log(res)
+					if(res.data){
+						that.subTypes = res.data;
+						res.data.forEach(function (item){
+							console.log(item);
+							that.columns.push(item.sub_type);
+						});
+					}
+				})
 			}
 		}
 	}

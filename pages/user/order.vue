@@ -3,7 +3,7 @@
 		<view class="user_order_main">
 			<view class="user_order_main_item" v-for="item in list" :key='item[0]' @click="$store.commit('GlobalUrl','/pages/user/put?id='+item.subscribe_id)">
 				<view class="user_order_main_item_header">
-					<van-cell :title="item.sub_type===0?'预约类型：体检预约':'预约类型：挂号预约'" :icon="item.sub_type===0?'../../../../static/images/user/order_user.png':'../../../../static/images/user/order_order.png'"
+					<van-cell :title="item.typeName" :icon="item.sub_type===0?'../../../../static/images/user/order_user.png':'../../../../static/images/user/order_order.png'"
 					 is-link />
 				</view>
 				<view class="user_order_main_item_center">

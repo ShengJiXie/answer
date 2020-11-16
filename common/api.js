@@ -250,8 +250,13 @@ const ApiPost = obj => {
 					resolve(respone)
 				})
 			}else if (obj.type === 20201110) {
-				// 绑定手机号
+				// 绑定热线电话
 				request('api/getHotTel', 'getHotTel', obj.date, 'GET').then(respone => {
+					resolve(respone)
+				})
+			}else if (obj.type === 20201116) {
+				// 获取预约分类列表
+				request('api/getSubsList', 'getSubsList', obj.date, 'GET').then(respone => {
 					resolve(respone)
 				})
 			}
