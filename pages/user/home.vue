@@ -316,7 +316,10 @@
 			}
 			
 			.user_home_classification_item .class_text {
-				padding: 0px 10px  ;
+				// padding: 0px 10px;
+				// padding-right: 10px;
+				// padding-right: 1%;
+				// margin-right: 10px;
 			}
 
 			.user_home_classification_item_hover {
